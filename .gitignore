@@ -1,0 +1,11 @@
+.asscache
+.classpath
+.idea/
+.project
+grailsw
+grailsw.bat
+Careerfly-grailsPlugins.iml
+Careerfly.iml
+target/
+wrapper/
+test/
