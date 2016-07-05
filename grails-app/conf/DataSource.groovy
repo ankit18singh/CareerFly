@@ -27,13 +27,13 @@ environments {
     test {
         dataSource {
             dbCreate = "update"
-            url = "jdbc:mysql://localhost:3306/careerfly_d"
+            url = "jdbc:mysql://localhost:3306/careerfly_t"
         }
     }
     production {
         dataSource {
             dbCreate = "update"
-            url = "jdbc:mysql://localhost:3306/careerfly_d"
+            url = "jdbc:mysql://localhost:3306/careerfly_p"
             properties {
                // See http://grails.org/doc/latest/guide/conf.html#dataSource for documentation
                jmxEnabled = true
