@@ -1,5 +1,5 @@
-package com.careerFly.social
-import com.careerFly.user.User
+package com.careerfly.social
+import com.careerfly.user.User
 
 class Comment {
 

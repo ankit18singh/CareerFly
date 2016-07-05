@@ -1,7 +1,7 @@
-package com.careerFly.social
-import com.careerFly.user.User
-import com.careerFly.file.StoredFile
-import com.careerFly.taggable.Tag
+package com.careerfly.social
+import com.careerfly.user.User
+import com.careerfly.file.StoredFile
+import com.careerfly.taggable.Tag
 
 class Discussion {
 

@@ -1,4 +1,4 @@
-package com.careerFly.taggable
+package com.careerfly.taggable
 
 class Tag {
 

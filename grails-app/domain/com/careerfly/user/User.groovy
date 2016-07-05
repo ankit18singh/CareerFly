@@ -1,4 +1,4 @@
-package com.careerFly.user
+package com.careerfly.user
 
 class User {
 

@@ -1,4 +1,4 @@
-package com.careerFly.file
+package com.careerfly.file
 
 class StoredFile {
 
