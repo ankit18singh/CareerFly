@@ -12,7 +12,10 @@ class Discussion {
     Long downVotes
     User author
     static hasMany = [tags: Tag]
+    Set tags
     StoredFile file
+    Date dateCreated
+    Date lastUpdated
 
     static constraints = {
     }

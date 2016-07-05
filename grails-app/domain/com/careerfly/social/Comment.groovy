@@ -12,6 +12,8 @@ class Comment {
     }
     CommentEntity entity
     Long entityID
+    Date dateCreated
+    Date lastUpdated
 
     static constraints = {
     }
