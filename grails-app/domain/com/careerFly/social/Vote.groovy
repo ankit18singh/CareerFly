@@ -1,21 +1,23 @@
 package com.careerFly.social
 import com.careerFly.user.User
 
-class Comment {
+class Vote {
 
-    String body
-    Long upVotes
-    Long downVotes
     User author
-    CommentEntity entity
+    VoteEntity entity
+    VoteType type
     Long entityID
-
     static constraints = {
     }
 }
-class CommentEntity {
-    enum entity{
-        DISCUSSION, COMMENT, QUESTION
-    }
 
+class VoteEntity{
+    enum entity{
+        DISCUSSION, COMMENT
+    }
+}
+class VoteType{
+    enum type{
+        UP, DOWN
+    }
 }

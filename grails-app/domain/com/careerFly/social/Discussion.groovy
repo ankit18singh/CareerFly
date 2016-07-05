@@ -1,4 +1,7 @@
 package com.careerFly.social
+import com.careerFly.user.User
+import com.careerFly.file.StoredFile
+import com.careerFly.taggable.Tag
 
 class Discussion {
 
@@ -7,9 +10,9 @@ class Discussion {
     String link
     Long upVotes
     Long downVotes
-    //User author
-    Set tags
-    //StoredFile file
+    User author
+    static hasMany = [tags: Tag]
+    StoredFile file
 
     static constraints = {
     }
