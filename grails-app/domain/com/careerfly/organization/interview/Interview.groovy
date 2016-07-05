@@ -9,8 +9,11 @@ class Interview {
     User candidate
     String jobPosition
     String qualification
-    static Set hasMany = [workExperience: String, technologies: Tag, tools: Tag, skills: Tag, rounds: InterviewRound]
+    static hasMany = [workExperience: String, technologies: Tag, tools: Tag, skills: Tag, rounds: InterviewRound]
+    Set workExperience, technologies, tools, skills, rounds
     Result result
+    Date dateCreated
+    Date lastUpdated
 
     static constraints = {
         jobPosition(matches: "[a-z,A-Z, ]+")

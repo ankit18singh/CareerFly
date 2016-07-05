@@ -5,9 +5,12 @@ import com.careerfly.user.User
 class InterviewRound {
     User candidate
     String title
-    static Set hasMany = [dos: String, donts: String]
+    static hasMany = [dos: String, donts: String]
+    Set dos, donts
     String experience
     int duration
+    Date dateCreated
+    Date lastUpdated
 
     static constraints = {
         title(matches: "[a-z,A-Z,0-9, ]+")
