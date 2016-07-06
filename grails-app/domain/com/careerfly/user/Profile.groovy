@@ -7,13 +7,15 @@ import com.careerfly.taggable.Tag
 class Profile {
 
     User user
-    List skills
-    List interests
+    Set skills
+    Set interests
     static hasMany = [skills : Tag, interests : Tag]
     School hsc
     School ssc
     College graduation
     College postGraduation
+    Date dateCreated
+    Date lastUpdated
 
     static constraints = {
     }

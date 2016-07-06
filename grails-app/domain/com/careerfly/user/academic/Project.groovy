@@ -8,7 +8,17 @@ class Project {
     Date certificateDate
     User candidate
     String discription
+    Set technologies
+    Date dateCreated
+    Date lastUpdated
+
     static hasMany = [technologies : Tag]
+
     static constraints = {
+        title(blank: false)
+        certificateDate(blank: false)
+        discription(blank: false)
+        technologies(blank: false)
+
     }
 }

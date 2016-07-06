@@ -6,6 +6,11 @@ class Certification {
     String title
     Date certificationDate
     User candidate
+    Date dateCreated
+    Date lastUpdated
+
     static constraints = {
+        title(blank: false)
+        certificationDate(blank: false)
     }
 }
