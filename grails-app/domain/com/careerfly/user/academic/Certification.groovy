@@ -4,13 +4,13 @@ import com.careerfly.user.User
 
 class Certification {
     String title
-    Date certificationDate
     User candidate
+    Date certificationDate
     Date dateCreated
     Date lastUpdated
 
     static constraints = {
-        title(blank: false)
-        certificationDate(blank: false)
+        title (blank: false)
+        certificationDate (nullable: false)
     }
 }

@@ -1,6 +1,7 @@
 package com.careerfly.user
 
 class User {
+
     String firstName
     String lastName
     String email
@@ -10,12 +11,18 @@ class User {
     Date lastUpdated
 
     static constraints = {
-        firstName(blank: false, matches: "[a-zA-Z]+")
-        lastName(blank: false, matches: "[a-zA-Z]+")
-        email(email: true,unique: true)
-        password(blank: false , matches: "[a-zA-Z0-9]+")
+        firstName (blank: false, matches: "[a-zA-Z]+")
+        lastName (blank: false, matches: "[a-zA-Z]+")
+        email (email: true, unique: true)
+        password (blank: false)
     }
 }
+
 enum Gender {
-    MALE, FEMALE
+    MALE(1), FEMALE(2)
+    final int id
+
+    Gender(int id) {
+        this.id = id
+    }
 }
