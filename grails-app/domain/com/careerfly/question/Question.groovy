@@ -4,11 +4,10 @@ import com.careerfly.taggable.Tag
 import com.careerfly.user.User
 
 class Question {
+
+    User author
     String title
     String body
-    static hasMany = [tags: Tag]
-    Set tags
-    User author
     String answer
     String choice1
     String choice2
@@ -16,10 +15,14 @@ class Question {
     String choice4
     Date dateCreated
     Date lastUpdated
+    Set tags
+    static hasMany = [tags: Tag]
+
+    static mapping = {
+        body type: "text"
+    }
 
     static constraints = {
-        title(matches: "[a-z,A-Z,0-9, ]+")
-        body(matches: "[a-z,A-Z,0-9, ]+")
-
     }
+
 }
