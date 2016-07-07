@@ -19,5 +19,5 @@ class Comment {
     }
 }
 enum CommentEntity {
-    DISCUSSION, COMMENT, QUESTION
+    DISCUSSION(1), COMMENT(2), QUESTION(3)
 }

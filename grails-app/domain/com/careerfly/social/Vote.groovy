@@ -13,8 +13,8 @@ class Vote {
     }
 }
 enum VoteType {
-    UP, DOWN
+    UP(1), DOWN(2)
 }
 enum VoteEntity {
-    DISCUSSION, COMMENT
+    DISCUSSION(1), COMMENT(2)
 }
