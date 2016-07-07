@@ -1,6 +1,9 @@
 package com.careerfly.social
+
 import com.careerfly.user.User
+
 import com.careerfly.file.StoredFile
+
 import com.careerfly.taggable.Tag
 
 class Discussion {
@@ -18,5 +21,7 @@ class Discussion {
     Date lastUpdated
 
     static constraints = {
+        upVotes (minSize: 0)
+        downVotes (minSize: 0)
     }
 }
