@@ -14,11 +14,11 @@ class Discussion {
     Long upVotes
     Long downVotes
     User author
-    static hasMany = [tags: Tag]
     Set tags
     StoredFile file
     Date dateCreated
     Date lastUpdated
+    static hasMany = [tags: Tag]
 
     static constraints = {
         upVotes (minSize: 0)
