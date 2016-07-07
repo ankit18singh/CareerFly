@@ -19,5 +19,11 @@ class Comment {
     }
 }
 enum CommentEntity {
+
     DISCUSSION(1), COMMENT(2), QUESTION(3)
+    String id
+
+    CommentEntity(String id){
+        this.id = id
+    }
 }
