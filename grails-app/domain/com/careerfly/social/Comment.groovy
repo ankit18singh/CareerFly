@@ -14,8 +14,8 @@ class Comment {
     Date lastUpdated
 
     static constraints = {
-        upVotes (minSize: 0)
-        downVotes (minSize: 0)
+        upVotes (min: 0l)
+        downVotes (min: 0l)
     }
 }
 enum CommentEntity {
