@@ -88,6 +88,7 @@ grails.hibernate.osiv.readonly = false
 environments {
     development {
         grails.logging.jul.usebridge = true
+        grails.config.locations = ["file:grails-app/conf/LocalConfig.groovy"]
     }
     production {
         grails.logging.jul.usebridge = false
