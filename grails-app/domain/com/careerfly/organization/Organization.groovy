@@ -1,14 +1,15 @@
-package com.careerfly.file
+package com.careerfly.organization
 
-class StoredFile {
+import com.careerfly.geo.Address
+
+abstract class Organization {
 
     String name
-    String path
+    Address address
     Date dateCreated
     Date lastUpdated
 
     static constraints = {
         name (blank: false)
-        path (blank: false)
     }
 }

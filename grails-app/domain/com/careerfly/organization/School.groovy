@@ -1,6 +1,6 @@
 package com.careerfly.organization
 
-class Company extends Organization {
+class School extends Organization {
 
     static constraints = {
     }
