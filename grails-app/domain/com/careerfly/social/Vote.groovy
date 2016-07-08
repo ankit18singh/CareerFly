@@ -15,18 +15,18 @@ class Vote {
 enum VoteType {
 
     UP(1), DOWN(2)
-    String id
+    int id
 
-    VoteType(String id){
+    VoteType(int id){
         this.id = id
     }
 }
 enum VoteEntity {
 
     DISCUSSION(1), COMMENT(2)
-    String id
+    int id
 
-    VoteEntity(String id){
+    VoteEntity(int id){
         this.id = id
     }
 }

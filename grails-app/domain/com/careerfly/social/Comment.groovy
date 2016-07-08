@@ -21,9 +21,9 @@ class Comment {
 enum CommentEntity {
 
     DISCUSSION(1), COMMENT(2), QUESTION(3)
-    String id
+    int id
 
-    CommentEntity(String id){
+    CommentEntity(int id){
         this.id = id
     }
 }
