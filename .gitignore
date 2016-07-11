@@ -8,4 +8,5 @@ Careerfly-grailsPlugins.iml
 Careerfly.iml
 target/
 wrapper/
+grails-app/conf/LocalConfig.groovy
 test/
