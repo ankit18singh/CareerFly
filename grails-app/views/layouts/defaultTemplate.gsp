@@ -21,13 +21,7 @@
 </head>
 
 <body>
-<nav class="navbar navbar-inverse navbar-static-top navbar-fixed-top">
-    <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-            <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">+</a>
-        </div>
-</nav>
+
 
 <div id="wrapper">
 
@@ -68,7 +62,7 @@
                 <div class="col-lg-12">
 
                     <div class="container-fluid">
-                        
+                        <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">+</a>
                     </div>
                 </div>
             </div>
