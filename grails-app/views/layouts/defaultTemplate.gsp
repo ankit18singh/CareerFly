@@ -63,6 +63,7 @@
 
                     <div class="container-fluid">
                         <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">+</a>
+                        <g:pageProperty name="page.body"/>
                     </div>
                 </div>
             </div>
