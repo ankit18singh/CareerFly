@@ -31,25 +31,25 @@
             <li class="sidebar-brand">
             </li>
             <li>
-                <a href="#">
+                <g:link controller="home" action="index">
                     <i class="fa fa-home" aria-hidden="true"></i>&nbsp;&nbsp; Home
-                </a>
+                </g:link>
             </li>
             <li>
-                <a href="#">
-                    <i class="fa fa-user" aria-hidden="true"></i>&nbsp;&nbsp;Profile</a>
+                <g:link controller="profile" action="index">
+                    <i class="fa fa-user" aria-hidden="true"></i>&nbsp;&nbsp;Profile</g:link>
             </li>
             <li>
-                <a href="#">
-                    <i class="fa fa-book" aria-hidden="true"></i>&nbsp;&nbsp;Interview</a>
+                <g:link controller="question" action="index">
+                    <i class="fa fa-book" aria-hidden="true"></i>&nbsp;&nbsp;Interview</g:link>
             </li>
             <li>
-                <a href="#">
-                    <i class="fa fa-comment" aria-hidden="true"></i>&nbsp;&nbsp;Discussion</a>
+                <g:link controller="discuss" action="index">
+                    <i class="fa fa-comment" aria-hidden="true"></i>&nbsp;&nbsp;Discussion</g:link>
             </li>
             <li>
-                <a href="#">
-                    <i class="fa fa-cog" aria-hidden="true"></i>&nbsp;&nbsp;Settings</a>
+                <g:link controller="settings" action="index">
+                    <i class="fa fa-cog" aria-hidden="true"></i>&nbsp;&nbsp;Settings</g:link>
             </li>
         </ul>
     </div>
@@ -63,7 +63,11 @@
 
                     <div class="container-fluid">
                         <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">+</a>
+
+                        <div id="body" class="container">
                         <g:pageProperty name="page.body"/>
+                        </div>
+
                     </div>
                 </div>
             </div>
