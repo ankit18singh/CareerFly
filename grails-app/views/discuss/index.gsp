@@ -4,7 +4,7 @@
   Date: 19/7/16
   Time: 11:57 PM
 --%>
-<g:applyLayout name="defaultTemplate">
+<g:applyLayout name="main">
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
