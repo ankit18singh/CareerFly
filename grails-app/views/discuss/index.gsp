@@ -25,7 +25,8 @@
                             <g:each in="${viewAll}" var="tab">
                                 <tr>
                                     <td>${tab.id}</td>
-                                    <td><g:link controller="discuss" action="forum">${tab.title}</g:link></td>
+                                    <td><g:link controller="discuss"
+                                                action="forum" id="${tab.id}">${tab.title}</g:link></td>
                                     <td></td>
                                 </tr>
                             </g:each>

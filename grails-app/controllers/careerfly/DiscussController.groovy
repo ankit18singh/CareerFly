@@ -34,8 +34,8 @@ class DiscussController {
     }
 
 
-    def forum() {
-
+    def forum(Long id) {
+        println "id -->$id"
         Discussion dd = Discussion.get(params.id)
         println "id--> $params.id"
         render(view: 'forum', model:[Current: dd])
