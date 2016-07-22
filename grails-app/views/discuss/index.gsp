@@ -20,7 +20,7 @@
         <div class="container">
         <div class="row">
             <div class="col-sm-10">
-                    <table class="table table-bordered table-responsive">
+                    <table class="table">
                         <tbody>
                             <g:each in="${viewAll}" var="tab">
                                 <tr>

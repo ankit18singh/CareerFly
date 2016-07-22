@@ -29,27 +29,28 @@
     <div id="sidebar-wrapper">
         <ul class="sidebar-nav">
             <li class="sidebar-brand">
+                <a href="#" id="collapse-sidebar"><i class="fa fa-fw fa-angle-double-left"></i></a>
             </li>
             <li>
                 <g:link controller="home" action="index">
-                    <i class="fa fa-home" aria-hidden="true"></i>&nbsp;&nbsp; Home
+                    <i class="fa fa-fw fa-home" aria-hidden="true"></i><span class="text">Home</span>
                 </g:link>
             </li>
             <li>
                 <g:link controller="profile" action="index">
-                    <i class="fa fa-user" aria-hidden="true"></i>&nbsp;&nbsp;Profile</g:link>
+                    <i class="fa fa-fw fa-user" aria-hidden="true"></i><span class="text">Profile</span></g:link>
             </li>
             <li>
                 <g:link controller="question" action="index">
-                    <i class="fa fa-book" aria-hidden="true"></i>&nbsp;&nbsp;Interview</g:link>
+                    <i class="fa fa-fw fa-book" aria-hidden="true"></i><span class="text">Interview</span></g:link>
             </li>
             <li>
                 <g:link controller="discuss" action="index">
-                    <i class="fa fa-comment" aria-hidden="true"></i>&nbsp;&nbsp;Discussion</g:link>
+                    <i class="fa fa-fw fa-comment" aria-hidden="true"></i><span class="text">Discussion</span></g:link>
             </li>
             <li>
                 <g:link controller="settings" action="index">
-                    <i class="fa fa-cog" aria-hidden="true"></i>&nbsp;&nbsp;Settings</g:link>
+                    <i class="fa fa-fw fa-cog" aria-hidden="true"></i><span class="text">Settings</span></g:link>
             </li>
         </ul>
     </div>
@@ -62,8 +63,6 @@
                 <div class="col-lg-12">
 
                     <div class="container-fluid">
-                        <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">+</a>
-
                         <div id="body" class="container">
                             <g:pageProperty name="page.body"/>
                         </div>
@@ -78,18 +77,15 @@
 </div>
 <!-- /#wrapper -->
 
-<!-- jQuery -->
-<script src="js/jquery.js"></script>
-
-<!-- Bootstrap Core JavaScript -->
-<script src="js/bootstrap.min.js"></script>
-
-<!-- Menu Toggle Script -->
 <script>
-    $("#menu-toggle").click(function(e) {
-        e.preventDefault();
-        $("#wrapper").toggleClass("toggled");
+
+
+    $("#collapse-sidebar").on("click", function() {
+        $('body').toggleClass("sidebar-collapsed");
+        $(this).find(".fa").toggleClass("fa-angle-double-left fa-angle-double-right");
+       // $(this).toggleClass("text-right text-center")
     });
+
 </script>
 
 </body>

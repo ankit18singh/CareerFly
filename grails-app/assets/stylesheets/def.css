@@ -64,8 +64,10 @@
 }
 
 .sidebar-nav li {
-    text-indent: 20px;
-    line-height: 40px;
+    /*text-indent: 20px;
+    line-height: 40px;*/
+    padding: 20px 20px;
+    font-size: 15px;
 }
 
 .sidebar-nav li a {
@@ -76,8 +78,7 @@
 
 .sidebar-nav li a:hover {
     text-decoration: none;
-    color: #fff;
-    background: rgba(255,255,255,0.2);
+    color: #3232ff;
 }
 
 .sidebar-nav li a:active,
@@ -127,6 +128,19 @@
         margin-right: 0;
     }
 }
-.navbar{
-    margin-bottom: 0;
+body.sidebar-collapsed #sidebar-wrapper {
+    width: 60px
+}
+body.sidebar-collapsed #sidebar-wrapper .text {
+    display: none;
+}
+body.sidebar-collapsed #sidebar-wrapper .fa {
+    font-size: 25px;
+}
+body.sidebar-collapsed #wrapper {
+   padding-left: 60px;
+}
+.forum_area{
+    width: 80%;
+    margin-left: 0;
 }
