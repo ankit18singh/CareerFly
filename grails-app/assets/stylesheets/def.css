@@ -1,0 +1,17 @@
+body {
+    overflow-x: hidden;
+}
+.well {
+    width: 70%;
+    height: 60%;
+    text-align: center;
+    padding-top: 5%;
+}
+.top-pad,button {
+    padding-top: 4%;
+}
+.try {
+    position:absolute;
+    right:0;
+    top:0;
+}
