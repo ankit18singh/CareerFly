@@ -20,7 +20,7 @@
         margin-bottom:26px;
         text-align: center;
     }
-    .col-md-6{
+    .box {
         background-color: #f5f5f5;
         height:450px;
         border-radius: 4px;
@@ -42,9 +42,6 @@
     .form-control{
         width: 95%;
     }
-    /*.buttonregister{*/
-        /*margin-left: 263px;*/
-    /*}*/
 
 </style>
 
@@ -54,7 +51,7 @@
 <div class="container-fluid">
     <h1>CareerFly</h1>
 
-        <div class="col-md-6 col-md-offset-3 col-xs-4">
+        <div class=" box col-md-6 col-md-offset-3 col-xs-4 col-sm-4">
                 <h3>SignUp</h3>
                 <h6>Create Account</h6>
                 <div>

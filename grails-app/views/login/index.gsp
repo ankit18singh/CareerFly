@@ -63,7 +63,6 @@
 <div class="container-fluid">
     <h1>CareerFly</h1>
         <div class="col-md-offset-5 col-md-3 col-xs-4">
-
             <div>
                 <h3>Login</h3>
                 <h6>Access Your Account</h6>
