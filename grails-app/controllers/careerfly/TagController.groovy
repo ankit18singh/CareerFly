@@ -4,7 +4,9 @@ import org.hibernate.engine.jdbc.spi.SqlExceptionHelper
 
 class TagController {
 
-    def index() { }
+    def index() {
+        [modelIns: new Tag()]
+    }
     def save() {
 
         int i;
@@ -18,14 +20,19 @@ class TagController {
                try {
                    tagging.save();
                }
-
                catch (org.springframework.dao.DuplicateKeyException e ){
 
                    print("duplicate value")
+                       flash.error = "duplicate value"
+                       render(view: "index", model: [modelIns: tagging])
+                       return
                }
-                catch(org.springframework.dao.DataIntegrityViolationException e1){
+               catch(org.springframework.dao.DataIntegrityViolationException e1){
 
                     print("field is empty")
+                   flash.error = "field is Empty "
+                   render(view: "index", model: [modelIns: tagging])
+                   return
 
                 }
 

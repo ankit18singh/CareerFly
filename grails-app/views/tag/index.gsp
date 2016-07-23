@@ -17,22 +17,34 @@
 </head>
 
 <body>
+<g:if test="${flash.error}" >
+    <div class="alert alert-danger" style = "display: block">
+        ${flash.error}
+    </div>
+</g:if>
 <p><br/><br/></p>
 <div class="container">
     <g:form method="post" controller="tag" action="save">
-    <input type="text" name="token"class="form-control" id="tokenfield" />
-        <p><br/></p>
-    <input type="submit" value="create" placeholder="Enter discussion tags.......!" class="button button-success"/>
-    <asset:javascript src="bootstrap-tokenfield.min.js"/>
-    <script>
+        <div class="form-group ${hasErrors(bean: modelIns, field: 'name' , 'has-error')}">
+              <div class="col-sm-2">
+                  <label for="tokenfield" class="control-label">Tags</label>
+              </div>
+              <div class="col-sm-8">
+                  <input type="text" name="token"class="form-control" placeholder="Enter discussion tags.......!" id="tokenfield" />
+                  <g:renderErrors bean="${modelIns}" field="name"/>
+              </div>
+        </div>
+      <input type="submit" value="create"  class="button button-success"/>
+      <asset:javascript src="bootstrap-tokenfield.min.js"/>
+       <script>
         $('#tokenfield').tokenfield({
             autocomplete: {
-                source: ['red','blue','green','yellow','violet','brown','purple','black','white'],
-                delay: 100
+              source: ['red','blue','green','yellow','violet','brown','purple','black','white'],
+              delay: 100
             },
             showAutocompleteOnFocus: true
-        });
-    </script>
+          })
+       </script>
     </g:form>
 </div>
 </body>
