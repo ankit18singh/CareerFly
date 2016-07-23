@@ -4,8 +4,8 @@
 .project
 grailsw
 grailsw.bat
-Careerfly-grailsPlugins.iml
-Careerfly.iml
+CareerFly-grailsPlugins.iml
+CareerFly.iml
 target/
 wrapper/
 grails-app/conf/LocalConfig.groovy

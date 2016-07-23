@@ -20,8 +20,9 @@
 <p><br/><br/></p>
 <div class="container">
     <g:form method="post" controller="tag" action="save">
-    <input type="text" name="token"class="form-control" id="tokenfield" value="red,green,blue" />
-    <input type="submit" value="create"/>
+    <input type="text" name="token"class="form-control" id="tokenfield" />
+        <p><br/></p>
+    <input type="submit" value="create" placeholder="Enter discussion tags.......!" class="button button-success"/>
     <asset:javascript src="bootstrap-tokenfield.min.js"/>
     <script>
         $('#tokenfield').tokenfield({

@@ -7,5 +7,6 @@ class Tag {
     Date lastUpdated
 
     static constraints = {
+       name nullable: true;
     }
 }
