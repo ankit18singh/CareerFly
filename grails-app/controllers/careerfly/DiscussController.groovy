@@ -41,4 +41,30 @@ class DiscussController {
         render(view: 'forum', model:[Current: dd])
     }
 
+    def edit() {
+        [discussionEdit: Discussion.get(params.id)]
+    }
+
+    def update() {
+
+        Discussion updated = Discussion.get(params.id)
+
+        println "id--> $params.id"
+
+        updated.title = params.newtitle
+        updated.body = params.newbody
+        updated.link = params.newlink
+        updated.tags = params.newtag
+
+        updated.save(flush: true)
+        redirect(action: "forum", id: updated.id)
+    }
+
+    def delete() {
+
+        Discussion del = Discussion.get(params.id)
+        del.delete(flush: true)
+        redirect(action: "index")
+    }
+
 }

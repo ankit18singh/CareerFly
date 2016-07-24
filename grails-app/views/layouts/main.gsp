@@ -11,8 +11,7 @@
     <title></title>
     <asset:stylesheet src="bootstrap.min.css"/>
     <asset:stylesheet src="def.css"/>
-    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
-    <asset:stylesheet src="font-awesome.min.css"/>
+    <asset:stylesheet src="font-awesome/css/font-awesome.min.css"/>
     <asset:javascript src="jquery.min.js"/>
     <asset:javascript src="bootstrap.min.js"/>
     <meta charset="utf-8">
@@ -30,6 +29,9 @@
         <ul class="sidebar-nav">
             <li class="sidebar-brand">
                 <a href="#" id="collapse-sidebar"><i class="fa fa-fw fa-angle-double-left"></i></a>
+            </li>
+            <li class="text">
+                <asset:image src="dp.png" class="img-circle" height="80px"/>
             </li>
             <li>
                 <g:link controller="home" action="index">
@@ -59,16 +61,10 @@
     <!-- Page Content -->
     <div id="page-content-wrapper">
         <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-12">
-
                     <div class="container-fluid">
-                        <div id="body" class="container">
+                        <div id="body">
                             <g:pageProperty name="page.body"/>
                         </div>
-
-                    </div>
-                </div>
             </div>
         </div>
     </div>

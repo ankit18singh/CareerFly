@@ -29,7 +29,6 @@
     width: 0;
     height: 100%;
     margin-left: -250px;
-    overflow-y: auto;
     background: #191919;
     -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
@@ -139,8 +138,4 @@ body.sidebar-collapsed #sidebar-wrapper .fa {
 }
 body.sidebar-collapsed #wrapper {
    padding-left: 60px;
-}
-.forum_area{
-    width: 80%;
-    margin-left: 0;
 }
