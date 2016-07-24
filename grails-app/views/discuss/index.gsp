@@ -10,8 +10,6 @@
 <head>
     <title></title>
     <asset:stylesheet src="discussion.css"/>
-    <asset:stylesheet src="sweetalert.css"/>
-    <asset:javascript src="sweetalert.min.js"/>
 </head>
 
 <body>
