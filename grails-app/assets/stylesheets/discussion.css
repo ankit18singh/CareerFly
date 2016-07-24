@@ -25,7 +25,7 @@
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
     border-radius: 3px;
-    color:#D9230F;
+    color: #3232ff;
 }
 
 .search-query:focus + button {
@@ -63,4 +63,13 @@ a:link {
 .dp #dp{
     height: 100px;
     margin-top: 20px;
+}
+.fa-bookmark{
+    color: #f4d817;
+}
+.fa-plus-square-o{
+    color: #3232ff;
+}
+.viewFeeds{
+    padding: 30px;
 }

@@ -10,10 +10,13 @@
 <head>
     <title></title>
     <asset:stylesheet src="discussion.css"/>
+    <asset:stylesheet src="sweetalert.css"/>
+    <asset:javascript src="sweetalert.min.js"/>
 </head>
 
 <body>
     <content tag="body">
+
                 <div class="row">
                     <div class="form-group col-sm-11">
                         <div class="input-group col-md-12">
@@ -30,9 +33,7 @@
                            data-toggle="modal" data-target="#newDiscModal"></i>
                     </div>
                 </div>
-
                 <hr>
-                <div class="viewFeeds">
 
                     <div class="row">
                         <div class="form-group">
@@ -46,6 +47,8 @@
                         </div>
                     </div>
                     <hr id="hrCol">
+
+                <div class="viewFeeds">
                     <g:each in="${viewAll}" var="feeds" status="i">
                         <div class="row">
                             <div class="col-sm-1"><i class="fa fa-bookmark fa-4x" aria-hidden="true"><span

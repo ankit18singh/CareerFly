@@ -30,7 +30,7 @@
             <li class="sidebar-brand">
                 <a href="#" id="collapse-sidebar"><i class="fa fa-fw fa-angle-double-left"></i></a>
             </li>
-            <li class="text">
+            <li>
                 <asset:image src="dp.png" class="img-circle" height="80px"/>
             </li>
             <li>
