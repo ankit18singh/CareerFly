@@ -1,7 +1,6 @@
 package careerfly
 
 import com.careerfly.social.Discussion
-
 import java.text.SimpleDateFormat
 
 class DiscussController {
@@ -17,27 +16,23 @@ class DiscussController {
     def save(String newtitle, String newbody, String newlink) {
 
         Date dt = new Date()
-
-        SimpleDateFormat sdf =
-                new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
-
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
         String currentTime = sdf.format(dt)
+        //println currentTime
 
-        println currentTime
-
-        Discussion disc= new Discussion([title: newtitle, body: newbody, link: newlink, author: 1, file: 1, upVotes:
-                0, downVotes: 0,dateCreated: currentTime, lastUpdated: currentTime])
+        Discussion disc= new Discussion([title: newtitle, body: newbody, link: newlink, author: 1, file: 1,
+                                         upVotes: 0, downVotes: 0,dateCreated: currentTime, lastUpdated: currentTime])
         disc.save()
-        println "disc--> $disc.id"
+        //println "disc--> $disc.id"
 
         redirect(action: 'forum', id: disc.id)
     }
 
 
     def forum(Long id) {
-        println "id -->$id"
+        //println "id -->$id"
         Discussion dd = Discussion.get(params.id)
-        println "id--> $params.id"
+        //println "id--> $params.id"
         render(view: 'forum', model:[Current: dd])
     }
 
@@ -49,7 +44,7 @@ class DiscussController {
 
         Discussion updated = Discussion.get(params.id)
 
-        println "id--> $params.id"
+        //println "id--> $params.id"
 
         updated.title = params.newtitle
         updated.body = params.newbody
