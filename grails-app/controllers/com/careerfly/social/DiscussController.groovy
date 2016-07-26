@@ -1,4 +1,4 @@
-package careerfly
+package com.careerfly.social
 
 import com.careerfly.social.Discussion
 import java.text.SimpleDateFormat
