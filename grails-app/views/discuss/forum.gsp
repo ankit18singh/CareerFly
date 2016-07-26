@@ -11,7 +11,8 @@
     <head>
         <title></title>
         <asset:stylesheet src="discussion.css"/>
-        <ckeditor:resources/>
+        <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
+        <script>tinymce.init({ selector:'textarea' });</script>
     </head>
 
     <body>
@@ -114,18 +115,8 @@
                 <div class="col-sm-2 col-md-2">
 
                 </div>
-                <div class="col-sm-10 col-md-10">
-                    <div class="editor">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-sm-11 col-md-11">
-                                    <ckeditor:editor name="myeditor" height="200px" width="80%">
-                                        ${initialValue}
-                                    </ckeditor:editor>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <div class="col-sm-10 col-md-10 editor">
+                    <g:textArea name="editorArea"/>
                 </div>
             </div>
 
