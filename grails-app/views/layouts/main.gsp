@@ -68,6 +68,10 @@
         <div id="page-content-wrapper">
             <div class="container-fluid">
                 <div class="container-fluid">
+                    <div class="page-header">
+                        <g:pageProperty name="page.heading"/>
+                    </div>
+
                     <div id="body">
                         <g:pageProperty name="page.body"/>
                     </div>

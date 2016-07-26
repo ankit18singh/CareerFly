@@ -14,5 +14,13 @@ class InterviewRound {
     static hasMany = [dos: String, donts: String]
 
     static constraints = {
+        title(blank: false)
+        duration(minSize: 0, nullable: false)
+    }
+
+    static mapping = {
+        experience type: 'text'
+        dos type: 'text'
+        donts type: 'text'
     }
 }

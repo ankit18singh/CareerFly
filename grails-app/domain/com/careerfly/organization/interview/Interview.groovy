@@ -18,9 +18,11 @@ class Interview {
 
     static constraints = {
     }
+
 }
 
 enum Result {
+
     ACCEPT(1),
     ON_HOLD(2),
     REJECT(3),
