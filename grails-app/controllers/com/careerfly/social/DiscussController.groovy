@@ -1,6 +1,7 @@
 package com.careerfly.social
 
-import com.careerfly.social.Discussion
+import com.careerfly.user.User
+
 import java.text.SimpleDateFormat
 
 class DiscussController {
@@ -27,7 +28,6 @@ class DiscussController {
     }
 
     def forum(Long id) {
-
         //println "id -->$id"
         Discussion forumInstance = Discussion.get(params.id)
         //println "id--> $params.id"
@@ -61,4 +61,19 @@ class DiscussController {
         redirect(action: "index")
     }
 
+    def upVote() {
+        Discussion discussionInstance = Discussion.get(params.id)
+
+        Vote voteInstance = new Vote()
+        voteInstance.author = User.get(session.loggedInUser)
+        voteInstance.entity = VoteEntity.DISCUSSION
+        voteInstance.type = VoteType.UP
+        voteInstance.entityID = discussionInstance.id // params.id
+        voteInstance.save()
+
+        discussionInstance.upVotes++
+        discussionInstance.save()
+
+        redirect(action: "forum", id: discussionInstance.id)
+    }
 }
