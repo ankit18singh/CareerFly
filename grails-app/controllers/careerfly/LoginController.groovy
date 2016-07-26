@@ -10,7 +10,7 @@ class LoginController {
 
         if(session.loggedInUser){
 
-            redirect(controller: "basicProfile" , action: "index")
+            redirect(controller: "Profile" , action: "index")
 
             return false
 
@@ -34,7 +34,7 @@ class LoginController {
 
                 session.loggedInUser = u.id
 
-                redirect(controller: "BasicProfile", action: "index" )
+                redirect(controller: "Profile", action: "index" )
 
             } else {
 
