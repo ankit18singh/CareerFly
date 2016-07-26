@@ -77,10 +77,11 @@ class DiscussController {
 
         // If there is already existing up vote instance for the current user and for the given discussion
         if (voteInstance) {
-            // Means we have to remvoe the up vote
+            // Means we have to remove the up vote
             voteInstance.delete()
 
             discussionInstance.upVotes--
+
         } else {
             voteInstance = new Vote()
             voteInstance.author = loggedInUserInstance
@@ -90,9 +91,48 @@ class DiscussController {
             voteInstance.save()
 
             discussionInstance.upVotes++
+
         }
 
         // Below are common lines for both if/else condition
+        println discussionInstance.upVotes
+
+        discussionInstance.save()
+        redirect(action: "forum", id: discussionInstance.id)
+    }
+    def downVote() {
+        Discussion discussionInstance = Discussion.get(params.id)
+        if (!discussionInstance) {
+            flash.message = "No discussion found"
+            redirect(action: "index")
+            return
+        }
+
+        User loggedInUserInstance = User.get(session.loggedInUser)
+
+        Vote voteInstance = Vote.createCriteria().get {
+            eq("author", loggedInUserInstance)
+            eq("entity", VoteEntity.DISCUSSION)
+            eq("entityID", discussionInstance.id)
+            eq("type", VoteType.UP)
+        }
+        if(voteInstance) {
+            voteInstance.delete()
+
+            discussionInstance.downVotes--
+
+        }
+        else {
+            voteInstance = new Vote()
+            voteInstance.author = loggedInUserInstance
+            voteInstance.entity = VoteEntity.DISCUSSION
+            voteInstance.type = VoteType.DOWN
+            voteInstance.entityID = discussionInstance.id
+            voteInstance.save()
+
+            discussionInstance.downVotes++
+        }
+        println discussionInstance.downVotes
         discussionInstance.save()
         redirect(action: "forum", id: discussionInstance.id)
     }

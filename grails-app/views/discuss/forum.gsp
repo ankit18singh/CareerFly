@@ -70,8 +70,9 @@
                                         <i class="fa fa-thumbs-up" aria-hidden="true"></i></a>
                                 </div>
                                 <div class="col-sm-1 col-md-1">
-                                    <button class="btn btn-default"><span class="badge">${forumInstanceModel.downVotes}</span>
-                                        <i class="fa fa-thumbs-down" aria-hidden="true"></i></button>
+                                    <a href="/discuss/downVote/${forumInstanceModel.id}" class="btn btn-default"><span
+                                            class="badge">${forumInstanceModel.downVotes}</span>
+                                        <i class="fa fa-thumbs-down" aria-hidden="true"></i></a>
                                 </div>
 
                                 <div class="col-sm-8 col-md-8">
