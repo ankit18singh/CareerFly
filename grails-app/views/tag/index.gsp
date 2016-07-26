@@ -16,9 +16,13 @@
     <asset:javascript src="bootstrap.min.js"/>
     <style>
         .alert{
-           width: 83%;
+           width: 98%;
            padding: 10px;
            border-radius: 10px;
+        }
+        .btn{
+            width: 90%;
+            border-radius: 10px;
         }
         .form-horizontal .control-label {
             text-align: left;
@@ -35,33 +39,29 @@
 <div class="container">
     <g:if test="${flash.error}" >
         <div class="alert alert-danger" style = "display: block">
-           ${flash.error}
+            <center>${flash.error}</center>
         </div>
     </g:if>
     <g:form method="post" controller="tag" action="save"  class="form-horizontal">
            <div class="form-group">
-                    <label for="tokenfield" class="col-sm-1 control-label">Tag</label>
+               <label for="tokenfield" class="col-sm-1 control-label">Tag</label>
                     <div class="col-sm-9">
                         <input type="text" name="token"class="form-control" placeholder="Enter discussion tags.......!" id="tokenfield" />
                     </div>
-           </div>
-
-            <div class="form-group">
-                <div class="col-sm-offset-2 col-sm-10">
-                    <button type="submit" class="btn btn-success">Create</button>
-                     <asset:javascript src="bootstrap-tokenfield.min.js"/>
-                     <script>
-                           $('#tokenfield').tokenfield({
-                           autocomplete: {
-                              source: ['red','blue','green','yellow','violet','brown','purple','black','white'],
-                              delay: 100
-                           },
-                               showAutocompleteOnFocus: true
-                            })
-                      </script>
+                    <div class=" col-sm-2">
+                            <button type="submit" class="btn btn-success"> ADD </button>
+                             <asset:javascript src="bootstrap-tokenfield.min.js"/>
+                             <script>
+                                   $('#tokenfield').tokenfield({
+                                   autocomplete: {
+                                      source: ['red','blue','green','yellow','violet','brown','purple','black','white'],
+                                      delay: 100
+                                   },
+                                       showAutocompleteOnFocus: true
+                                    })
+                              </script>
                     </div>
-                </div>
-          </div>
+             </div>
     </g:form>
 </div>
 </body>

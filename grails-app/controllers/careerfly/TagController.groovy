@@ -1,4 +1,6 @@
 package careerfly
+
+import com.careerfly.social.Discussion
 import com.careerfly.taggable.Tag
 import org.hibernate.engine.jdbc.spi.SqlExceptionHelper
 
@@ -18,7 +20,7 @@ class TagController {
             //empty input
             print("field is empty")
             flash.error = "Tag Field should not be Empty....! "
-            redirect(view: "index")
+            redirect(view: "index" ,model : [LastValue : params.token] )
             return
         }
 
@@ -27,7 +29,7 @@ class TagController {
                  if(tags[i].equalsIgnoreCase(tags[j])) {
                     //repeated values are found
                     print(" ")
-                    flash.error = "Entered Tags are not Duplicate ....!Try again"
+                    flash.error = "${tags[j]} is repeated . ."
                     redirect(view: "index")
                     return
                 }
@@ -39,17 +41,12 @@ class TagController {
         for(i=0; i<tags.length; i++){
             if(Tag.findByName(tags[i])){
                //discussion_tag mapping
-                /*print("//discussion_tag mapping ");
-                flash.error = "discussion_tag mapping ";
-                redirect(view: "index")
-                */
+
             }
             else{
                 Tag tagging = new Tag([dateCreated: date, lastUpdated: date, name: tags[i]]);
                 tagging.save();
-                /*flash.error = "values are saved";
-                redirect(view: "index")
-                return*/
+                //discussion_tag mapping
             }
         }
 

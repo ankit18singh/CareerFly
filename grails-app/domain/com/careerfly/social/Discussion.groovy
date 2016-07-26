@@ -19,6 +19,9 @@ class Discussion {
     Date dateCreated
     Date lastUpdated
     static hasMany = [tags: Tag]
+   // static mapping = {
+    //    table 'Discussion'
+    //}
 
     static constraints = {
         upVotes (min: 0l)
