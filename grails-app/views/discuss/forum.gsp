@@ -47,7 +47,7 @@
                             <div class="row">
                                 <div class="col-sm-12 col-md-12">
                                     <h2>${forumInstanceModel.title}</h2>
-                                    <div class="well">${forumInstanceModel.body}</div>
+                                    <div class="well">${raw(forumInstanceModel.body)}</div>
                                 </div>
                             </div>
                             <div class="row">

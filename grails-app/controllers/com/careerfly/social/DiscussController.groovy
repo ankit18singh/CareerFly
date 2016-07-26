@@ -12,17 +12,9 @@ class DiscussController {
     }
 
     def save(String newtitle, String newbody, String newlink) {
-
-        Date dt = new Date()
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
-        String currentTime = sdf.format(dt)
-        //println currentTime
-
         Discussion discussionInstance= new Discussion([title: newtitle, body: newbody, link: newlink, author: 1,
-                                                       file: 1, upVotes: 0, downVotes: 0,dateCreated: currentTime,
-                                                       lastUpdated: currentTime])
+                                                       file: 1])
         discussionInstance.save()
-        //println "disc--> $disc.id"
 
         redirect(action: 'forum', id: discussionInstance.id)
     }
@@ -55,14 +47,25 @@ class DiscussController {
     }
 
     def delete() {
+        Discussion discussionInstance = Discussion.get(params.id)
+        if (!discussionInstance) {
+            flash.message = "No discussion found"
+            redirect(action: "index")
+            return
+        }
 
-        Discussion deleteInstance = Discussion.get(params.id)
-        deleteInstance.delete(flush: true)
+        discussionInstance.delete(flush: true)
         redirect(action: "index")
     }
 
     def upVote() {
         Discussion discussionInstance = Discussion.get(params.id)
+        if (!discussionInstance) {
+            flash.message = "No discussion found"
+            redirect(action: "index")
+            return
+        }
+
         User loggedInUserInstance = User.get(session.loggedInUser)
 
         Vote voteInstance = Vote.createCriteria().get {
