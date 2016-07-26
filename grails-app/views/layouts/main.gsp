@@ -46,7 +46,7 @@
                     </g:link>
                 </li>
                 <li>
-                    <g:link controller="question" action="index">
+                    <g:link controller="interview" action="index">
                         <i class="fa fa-fw fa-book" aria-hidden="true"></i><span class="text">Interview</span>
                     </g:link>
                 </li>

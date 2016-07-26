@@ -69,16 +69,9 @@ class InterviewController {
     }
 
     def show() {
+        Interview interviewInstance = Interview.get(params.id)
 
-        List getCompany = Company.findAllById(session.getCompany.id)
-        List getCity = City.findAllById(session.getCity.id)
-        List getTech = Tag.findAllById(session.techTag.id)
-        List getTool = Tag.findAllById(session.toolTag.id)
-        List getSkill = Tag.findAllById(session.skillTag.id)
-        List findUser = User.findAllById(session.loggedInUser)
-        List getInterview = Interview.findAllByIdAndCandidate(session.getInterview.id, findUser)
-
-        [getCompany: getCompany, getCity: getCity, getTech: getTech, getTool: getTool, getSkill: getSkill, getInterview: getInterview]
+        [interviewInstance: interviewInstance]
     }
 
     def edit() {

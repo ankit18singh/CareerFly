@@ -25,49 +25,38 @@
 
     <content tag="body">
         <dl class="list-group-item dl-horizontal">
-            <g:each in="${getCompany}" var="disp" id="${disp.id}">
-                <dt>Company Name:</dt>
-                <dd>${disp.name}</dd><br>
-            </g:each>
+            <dt>Company Name:</dt>
+            <dd>${interviewInstance.company.name}</dd><br>
 
-            <g:each in="${getCity}" var="view" id="${view.id}">
-                <dt>Company Headquarter:</dt>
-                <dd>${view.name}</dd><br>
-            </g:each>
+            <dt>Job Position:</dt>
+            <dd>${interviewInstance.jobPosition}</dd><br>
 
-            <g:each in="${getInterview}" var="show" id="${show.id}">
-                    <dt>Job Position:</dt>
-                    <dd>${show.jobPosition}</dd><br>
+            <dt>Qualification:</dt>
+            <dd>${interviewInstance.qualification}</dd><br>
 
-                    <dt>Qualification:</dt>
-                    <dd>${show.qualification}</dd><br>
-
-                    <dt>Work Experience:</dt>
-                    <g:each in="${show.workExperience}">
-                        <dd>
-                            <li>${it}</li>
-                        </dd>
-                    </g:each>
-                    <br>
-            </g:each>
-
-            <g:each in="${getTech}" var="tech" id="${tech.id}">
-                <dt>Technologies:</dt>
-                <g:each in="${tech.name.split(",")}">
-                    <dd>
-                        <li>${it}</li>
-                    </dd>
-                </g:each>
+            <dt>Work Experience:</dt>
+            <g:each in="${interviewInstance.workExperience}">
+                <dd>
+                    <li>${it}</li>
+                </dd>
             </g:each>
             <br>
-            <g:each in="${getTool}" var="tool" id="${tool.id}">
-                <dt>Tools:</dt>
-                <g:each in="${tool.name.split(",")}">
-                    <dd>
-                        <li>${it}</li>
-                    </dd>
-                </g:each>
+
+            <dt>Technologies:</dt>
+            <g:each in="${interviewInstance.technologies}">
+                <dd>
+                    <li>${it.name}</li>
+                </dd>
             </g:each>
+
+            <br>
+            <dt>Tools:</dt>
+            <g:each in="${interviewInstance.tools}">
+                <dd>
+                    <li>${it.name}</li>
+                </dd>
+            </g:each>
+
             <br>
             <g:each in="${getSkill}" var="skill" id="${skill.id}">
                 <dt>Skills:</dt>
@@ -90,7 +79,7 @@
         <g:link name="btnEdit" controller="interview" action="edit" class="btn btn-primary btnProp">Edit</g:link>
 
         <g:link name="btnDelete" controller="interview" action="delete" class="btn btn-primary btnProp"
-                id="${getInterview.id}">Delete</g:link>
+                id="${interviewInstance.id}">Delete</g:link>
 
         <g:link name="btnRound" controller="interviewRound" action="index"
                 class="btn btn-primary btnRound">Interview Round</g:link>
