@@ -1,4 +1,4 @@
-package careerfly
+package com.careerfly.organization.interview
 
 import com.careerfly.geo.Address
 import com.careerfly.geo.City
@@ -9,7 +9,7 @@ import com.careerfly.organization.interview.Result
 import com.careerfly.taggable.Tag
 import com.careerfly.user.User
 
-class InterviewExpController {
+class InterviewController {
 
     def index() { }
 

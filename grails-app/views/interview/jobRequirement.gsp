@@ -19,7 +19,7 @@
 
     <content tag="body">
 
-        <g:form name="requirement" controller="interviewExp" action="save" class="form-group">
+        <g:form name="requirement" controller="interview" action="save" class="form-group">
             <div class="form-group">
                 <label for="jobPosition">Job Position:</label>
                 <g:textField name="jobPosition" placeholder="Enter Job Position for which you were Interviewed"
@@ -65,7 +65,7 @@
                           noSelection="['':'Select the Status of Placement']" class="form-control"/>
             </div>
 
-            <g:link name="prevBtn" controller="interviewExp" action="index" class="btn btn-primary btnProp">Previous</g:link>
+            <g:link name="prevBtn" controller="interview" action="index" class="btn btn-primary btnProp">Previous</g:link>
 
             <g:submitButton name="submit" value="Submit" class="btn btn-primary btnProp"></g:submitButton>
         </g:form>

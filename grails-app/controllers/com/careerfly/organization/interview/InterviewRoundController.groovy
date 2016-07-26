@@ -1,4 +1,4 @@
-package careerfly
+package com.careerfly.organization.interview
 
 import com.careerfly.organization.interview.Interview
 import com.careerfly.organization.interview.InterviewRound

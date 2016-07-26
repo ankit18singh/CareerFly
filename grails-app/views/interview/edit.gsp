@@ -19,7 +19,7 @@
 
     <content tag="body">
 
-        <g:form name="editInterview" controller="interviewExp" action="update" class="form-group">
+        <g:form name="editInterview" controller="interview" action="update" class="form-group">
 
             <g:each in="${getCompany}" var="company" id="${company.id}">
                 <input type="hidden" name="companyID" value="${company.id}">

@@ -87,9 +87,9 @@
             </g:each>
         </dl><br>
 
-        <g:link name="btnEdit" controller="interviewExp" action="edit" class="btn btn-primary btnProp">Edit</g:link>
+        <g:link name="btnEdit" controller="interview" action="edit" class="btn btn-primary btnProp">Edit</g:link>
 
-        <g:link name="btnDelete" controller="interviewExp" action="delete" class="btn btn-primary btnProp"
+        <g:link name="btnDelete" controller="interview" action="delete" class="btn btn-primary btnProp"
                 id="${getInterview.id}">Delete</g:link>
 
         <g:link name="btnRound" controller="interviewRound" action="index"

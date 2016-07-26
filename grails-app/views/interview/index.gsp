@@ -19,7 +19,7 @@
 
     <content tag="body">
 
-        <g:form name="company" controller="interviewExp" action="jobRequirement" class="form-group">
+        <g:form name="company" controller="interview" action="jobRequirement" class="form-group">
             <div class="form-group">
                 <label for="name">Name:</label>
                 <g:textField name="name" placeholder="Enter Name of the Company" class="form-control"/>
