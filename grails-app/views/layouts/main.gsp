@@ -63,6 +63,9 @@
                 <div class="col-lg-12">
 
                     <div class="container-fluid">
+                        <div class="page-header">
+                            <g:pageProperty name="page.heading"/>
+                        </div>
                         <div id="body" class="container">
                             <g:pageProperty name="page.body"/>
                         </div>
