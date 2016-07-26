@@ -11,7 +11,7 @@
     <head>
         <title></title>
         <asset:stylesheet src="discussion.css"/>
-        <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
+        <asset:javascript src="tinymce/tinymce.min.js" />
         <script>tinymce.init({ selector:'textarea' });</script>
     </head>
 
