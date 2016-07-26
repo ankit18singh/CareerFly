@@ -63,17 +63,34 @@ class DiscussController {
 
     def upVote() {
         Discussion discussionInstance = Discussion.get(params.id)
+        User loggedInUserInstance = User.get(session.loggedInUser)
 
-        Vote voteInstance = new Vote()
-        voteInstance.author = User.get(session.loggedInUser)
-        voteInstance.entity = VoteEntity.DISCUSSION
-        voteInstance.type = VoteType.UP
-        voteInstance.entityID = discussionInstance.id // params.id
-        voteInstance.save()
+        Vote voteInstance = Vote.createCriteria().get {
+            eq("author", loggedInUserInstance)
+            eq("entity", VoteEntity.DISCUSSION)
+            eq("entityID", discussionInstance.id)
+            eq("type", VoteType.UP)
+        }
 
-        discussionInstance.upVotes++
+        // If there is already existing up vote instance for the current user and for the given discussion
+        if (voteInstance) {
+            // Means we have to remvoe the up vote
+            voteInstance.delete()
+
+            discussionInstance.upVotes--
+        } else {
+            voteInstance = new Vote()
+            voteInstance.author = loggedInUserInstance
+            voteInstance.entity = VoteEntity.DISCUSSION
+            voteInstance.type = VoteType.UP
+            voteInstance.entityID = discussionInstance.id // params.id
+            voteInstance.save()
+
+            discussionInstance.upVotes++
+        }
+
+        // Below are common lines for both if/else condition
         discussionInstance.save()
-
         redirect(action: "forum", id: discussionInstance.id)
     }
 }
