@@ -6,11 +6,8 @@ import java.text.SimpleDateFormat
 class DiscussController {
 
     def index() {
+
         [viewAll: Discussion.list()]
-    }
-
-    def create(){
-
     }
 
     def save(String newtitle, String newbody, String newlink) {
@@ -20,45 +17,47 @@ class DiscussController {
         String currentTime = sdf.format(dt)
         //println currentTime
 
-        Discussion disc= new Discussion([title: newtitle, body: newbody, link: newlink, author: 1, file: 1,
-                                         upVotes: 0, downVotes: 0,dateCreated: currentTime, lastUpdated: currentTime])
-        disc.save()
+        Discussion discussionInstance= new Discussion([title: newtitle, body: newbody, link: newlink, author: 1,
+                                                       file: 1, upVotes: 0, downVotes: 0,dateCreated: currentTime,
+                                                       lastUpdated: currentTime])
+        discussionInstance.save()
         //println "disc--> $disc.id"
 
-        redirect(action: 'forum', id: disc.id)
+        redirect(action: 'forum', id: discussionInstance.id)
     }
 
-
     def forum(Long id) {
+
         //println "id -->$id"
-        Discussion dd = Discussion.get(params.id)
+        Discussion forumInstance = Discussion.get(params.id)
         //println "id--> $params.id"
-        render(view: 'forum', model:[Current: dd])
+        render(view: 'forum', model:[forumInstanceModel: forumInstance])
     }
 
     def edit() {
+
         [discussionEdit: Discussion.get(params.id)]
     }
 
-    def update() {
+    def update(String newtitle, String newbody, String newlink) {
 
-        Discussion updated = Discussion.get(params.id)
+        Discussion updatedInstance = Discussion.get(params.id)
 
         //println "id--> $params.id"
 
-        updated.title = params.newtitle
-        updated.body = params.newbody
-        updated.link = params.newlink
-        updated.tags = params.newtag
+        updatedInstance.title = newtitle
+        updatedInstance.body = newbody
+        updatedInstance.link = newlink
+        //updatedInstance.tags = newtag
 
-        updated.save(flush: true)
-        redirect(action: "forum", id: updated.id)
+        updatedInstance.save(flush: true)
+        redirect(action: "forum", id: updatedInstance.id)
     }
 
     def delete() {
 
-        Discussion del = Discussion.get(params.id)
-        del.delete(flush: true)
+        Discussion deleteInstance = Discussion.get(params.id)
+        deleteInstance.delete(flush: true)
         redirect(action: "index")
     }
 

@@ -42,33 +42,33 @@
                 </div>
                 <div class="col-sm-10 col-md-10">
                     <div class="forum_area">
-                        <g:if test="${Current}">
+                        <g:if test="${forumInstanceModel}">
                             <div class="row">
                                 <div class="col-sm-12 col-md-12">
-                                    <h2>${Current.title}</h2>
-                                    <div class="well">${Current.body}</div>
+                                    <h2>${forumInstanceModel.title}</h2>
+                                    <div class="well">${forumInstanceModel.body}</div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-sm-12 col-md-12">
-                                    <small>${Current.tags}</small>
+                                    <small>${forumInstanceModel.tags}</small>
                                 </div>
                             </div>
 
 
                             <div class="row">
                                 <div class="col-sm-12 col-md-12">
-                                    <p>Source: <a href="${Current.link}" target="_blank">${Current.link}</a> </p>
+                                    <p>Source: <a href="${forumInstanceModel.link}" target="_blank">${forumInstanceModel.link}</a> </p>
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="col-sm-1 col-md-1">
-                                    <button class="btn btn-default"><span class="badge">${Current.upVotes}</span>
+                                    <button class="btn btn-default"><span class="badge">${forumInstanceModel.upVotes}</span>
                                         <i class="fa fa-thumbs-up" aria-hidden="true"></i></button>
                                 </div>
                                 <div class="col-sm-1 col-md-1">
-                                    <button class="btn btn-default"><span class="badge">${Current.downVotes}</span>
+                                    <button class="btn btn-default"><span class="badge">${forumInstanceModel.downVotes}</span>
                                         <i class="fa fa-thumbs-down" aria-hidden="true"></i></button>
                                 </div>
 
@@ -76,12 +76,12 @@
                                     %{--<button type="button" class="btn delete">popup</button>--}%
                                 </div>
                                 <div class="col-sm-1 col-md-1">
-                                    <g:link controller="discuss" action="edit" id="${Current.id}"
+                                    <g:link controller="discuss" action="edit" id="${forumInstanceModel.id}"
                                     ><i class="fa fa-pencil fa-2x" aria-hidden="true"></i></g:link>
                                 </div>
 
                                 <div class="col-sm-1 col-md-1">
-                                    <g:link controller="discuss" action="delete" id="${Current.id}"
+                                    <g:link controller="discuss" action="delete" id="${forumInstanceModel.id}"
                                     ><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i></g:link>
                                 </div>
                             </div>
@@ -187,8 +187,8 @@
             </div>
 
 
-            %{--<script type="text/javascript">
-                $(".delete").click(function(){
+            <script type="text/javascript">
+                $(".fa-trash-o").click(function(){
                     swal({   title: "Are you sure?",
                                 text: "You will not be able to recover this Discussion!",
                                 type: "warning",   showCancelButton: true,
@@ -204,7 +204,7 @@
                                 }
                             });
                 });
-            </script>--}%
+            </script>
 
         </content>
     </body>
