@@ -53,12 +53,12 @@ class DiscussController {
             redirect(action: "index")
             return
         }
-
         discussionInstance.delete(flush: true)
         redirect(action: "index")
     }
 
     def upVote() {
+
         Discussion discussionInstance = Discussion.get(params.id)
         if (!discussionInstance) {
             flash.message = "No discussion found"
@@ -108,23 +108,23 @@ class DiscussController {
             return
         }
 
-        User loggedInUserInstance = User.get(session.loggedInUser)
+        User loggedInUserInstance1 = User.get(session.loggedInUser)
 
         Vote voteInstance = Vote.createCriteria().get {
-            eq("author", loggedInUserInstance)
+            eq("author", loggedInUserInstance1)
             eq("entity", VoteEntity.DISCUSSION)
             eq("entityID", discussionInstance.id)
-            eq("type", VoteType.UP)
+            eq("type", VoteType.DOWN)
         }
         if(voteInstance) {
             voteInstance.delete()
 
             discussionInstance.downVotes--
-
         }
+
         else {
             voteInstance = new Vote()
-            voteInstance.author = loggedInUserInstance
+            voteInstance.author = loggedInUserInstance1
             voteInstance.entity = VoteEntity.DISCUSSION
             voteInstance.type = VoteType.DOWN
             voteInstance.entityID = discussionInstance.id
@@ -137,3 +137,4 @@ class DiscussController {
         redirect(action: "forum", id: discussionInstance.id)
     }
 }
+
