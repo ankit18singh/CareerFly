@@ -62,22 +62,25 @@
                     </g:if>
                 </div>
                 <div>
-                    <g:form method="post" class="form-horizontal" action="register" controller="save">
+                    <g:form method="post" class="form-horizontal" action="register" controller="signup">
                             <div class="form-group ${hasErrors(bean: Register, field: 'firstname', 'has-error')}">
                                 <g:textField name="firstname" placeholder="FirstName" class="form-control"
-                                             value="${Register.firstName}"></g:textField>
+                                             value="${Register.firstName}" autofocus="firstname"></g:textField>
                                 <g:renderErrors bean="${Register}" field="firstname" />
                             </div>
+
                             <div class="form-group ${hasErrors(bean: Register, field: 'lastname', 'has-error')}">
                                 <g:textField name="lastname" placeholder="LastName" class="form-control"
                                              value="${Register.lastName}"></g:textField>
                                 <g:renderErrors bean="${Register}" field="lastname" />
                             </div>
+
                             <div class="form-group ${hasErrors(bean: Register, field: 'email', 'has-error')}">
                             <g:textField name="email" placeholder="Email" class="form-control"
                                          value="${Register.email}"></g:textField>
                             <g:renderErrors bean="${Register}" field="email" />
                             </div>
+
                             <div class="form-group">
                             <g:passwordField name="password" placeholder="Password" class="form-control"></g:passwordField>
                             </div>
