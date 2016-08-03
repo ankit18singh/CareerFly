@@ -11,25 +11,28 @@ class UserController {
     }
     def signup () {
 
-        User userInstance = new User([gender:params.Gender,email:params.email,firstName: params.firstName,
-                                    lastName:params.lastName,password:params.confirmpassword])
+            User userInstance = new User([gender: params.Gender, email: params.email, firstName: params.firstName,
+                                          lastName: params.lastName, password: params.confirmpassword])
 
-        if (params.password!= params.confirmpassword) {
-            flash.message = "password MisMatch"
+
+            if (params.password != params.confirmpassword) {
+            flash.message = "Password MisMatch"
             render(view: 'index', model: [user: userInstance])
-        }
+            }
 
-        userInstance.save()
-        if (userInstance.hasErrors()) {
+            userInstance.save()
+
+            if (userInstance.hasErrors()) {
             render(view: 'index', model: [user: userInstance])
             return
-        }
-        else if (params.password==params.confirmpassword) {
-            println "Hello"
-            //userInstance.save()
+            }
+
+            else if (params.password == params.confirmpassword) {
             flash.message = "You are Successfully Registered"
-            redirect (action: "index",controller: "Login")
-        }
+            redirect(action: "index", controller: "Login")
+            }
+
+
 
     }
 }

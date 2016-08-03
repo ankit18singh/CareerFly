@@ -25,7 +25,7 @@
     }
     .col-md-3{
         background-color: #f5f5f5;
-        height:289px;
+        height:300px;
         border-radius: 4px;
         border: 1px solid #000000;
 
