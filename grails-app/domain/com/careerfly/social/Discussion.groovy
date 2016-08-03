@@ -11,8 +11,8 @@ class Discussion {
     String title
     String body
     String link
-    Long upVotes
-    Long downVotes
+    Long upVotes = 0
+    Long downVotes = 0
     User author
     Set tags
     StoredFile file

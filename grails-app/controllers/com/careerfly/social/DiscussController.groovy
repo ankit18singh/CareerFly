@@ -1,6 +1,7 @@
 package com.careerfly.social
 
-import com.careerfly.social.Discussion
+import com.careerfly.user.User
+
 import java.text.SimpleDateFormat
 
 class DiscussController {
@@ -11,23 +12,14 @@ class DiscussController {
     }
 
     def save(String newtitle, String newbody, String newlink) {
-
-        Date dt = new Date()
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
-        String currentTime = sdf.format(dt)
-        //println currentTime
-
         Discussion discussionInstance= new Discussion([title: newtitle, body: newbody, link: newlink, author: 1,
-                                                       file: 1, upVotes: 0, downVotes: 0,dateCreated: currentTime,
-                                                       lastUpdated: currentTime])
+                                                       file: 1])
         discussionInstance.save()
-        //println "disc--> $disc.id"
 
         redirect(action: 'forum', id: discussionInstance.id)
     }
 
     def forum(Long id) {
-
         //println "id -->$id"
         Discussion forumInstance = Discussion.get(params.id)
         //println "id--> $params.id"
@@ -55,10 +47,94 @@ class DiscussController {
     }
 
     def delete() {
-
-        Discussion deleteInstance = Discussion.get(params.id)
-        deleteInstance.delete(flush: true)
+        Discussion discussionInstance = Discussion.get(params.id)
+        if (!discussionInstance) {
+            flash.message = "No discussion found"
+            redirect(action: "index")
+            return
+        }
+        discussionInstance.delete(flush: true)
         redirect(action: "index")
     }
 
+    def upVote() {
+
+        Discussion discussionInstance = Discussion.get(params.id)
+        if (!discussionInstance) {
+            flash.message = "No discussion found"
+            redirect(action: "index")
+            return
+        }
+
+        User loggedInUserInstance = User.get(session.loggedInUser)
+
+        Vote voteInstance = Vote.createCriteria().get {
+            eq("author", loggedInUserInstance)
+            eq("entity", VoteEntity.DISCUSSION)
+            eq("entityID", discussionInstance.id)
+            eq("type", VoteType.UP)
+        }
+
+        // If there is already existing up vote instance for the current user and for the given discussion
+        if (voteInstance) {
+            // Means we have to remove the up vote
+            voteInstance.delete()
+
+            discussionInstance.upVotes--
+
+        } else {
+            voteInstance = new Vote()
+            voteInstance.author = loggedInUserInstance
+            voteInstance.entity = VoteEntity.DISCUSSION
+            voteInstance.type = VoteType.UP
+            voteInstance.entityID = discussionInstance.id // params.id
+            voteInstance.save()
+
+            discussionInstance.upVotes++
+
+        }
+
+        // Below are common lines for both if/else condition
+        println discussionInstance.upVotes
+
+        discussionInstance.save()
+        redirect(action: "forum", id: discussionInstance.id)
+    }
+    def downVote() {
+        Discussion discussionInstance = Discussion.get(params.id)
+        if (!discussionInstance) {
+            flash.message = "No discussion found"
+            redirect(action: "index")
+            return
+        }
+
+        User loggedInUserInstance1 = User.get(session.loggedInUser)
+
+        Vote voteInstance = Vote.createCriteria().get {
+            eq("author", loggedInUserInstance1)
+            eq("entity", VoteEntity.DISCUSSION)
+            eq("entityID", discussionInstance.id)
+            eq("type", VoteType.DOWN)
+        }
+        if(voteInstance) {
+            voteInstance.delete()
+
+            discussionInstance.downVotes--
+        }
+
+        else {
+            voteInstance = new Vote()
+            voteInstance.author = loggedInUserInstance1
+            voteInstance.entity = VoteEntity.DISCUSSION
+            voteInstance.type = VoteType.DOWN
+            voteInstance.entityID = discussionInstance.id
+            voteInstance.save()
+
+            discussionInstance.downVotes++
+        }
+        println discussionInstance.downVotes
+        discussionInstance.save()
+        redirect(action: "forum", id: discussionInstance.id)
+    }
 }
+
