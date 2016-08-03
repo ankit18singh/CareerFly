@@ -16,20 +16,27 @@ class UserController {
 
 
             if (params.password != params.confirmpassword) {
+
             flash.message = "Password MisMatch"
+
             render(view: 'index', model: [user: userInstance])
             }
 
             userInstance.save()
 
             if (userInstance.hasErrors()) {
+
             render(view: 'index', model: [user: userInstance])
+
             return
             }
 
             else if (params.password == params.confirmpassword) {
+
             flash.message = "You are Successfully Registered"
+
             redirect(action: "index", controller: "Login")
+
             }
 
 
