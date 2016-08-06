@@ -20,17 +20,16 @@ class Interview {
     static constraints = {
     }
 
-}
+    enum Result {
 
-enum Result {
+        ACCEPT(1),
+        ON_HOLD(2),
+        REJECT(3),
+        DECLINE(4)
+        int id
 
-    ACCEPT(1),
-    ON_HOLD(2),
-    REJECT(3),
-    DECLINE(4)
-    int id
-
-    Result(int id) {
-        this.id =id
+        Result(int id) {
+            this.id = id
+        }
     }
 }
