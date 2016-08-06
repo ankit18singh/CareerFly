@@ -21,113 +21,166 @@ class InterviewController {
 
     def save() {
 
-        session.caompany = session.company
-        session.loggedInUser = session.loggedInUser
-
         println params
 
+        Interview interviewInstance = new Interview()
+
         Set workExperience = params.workExperience.split(";")
-        Set technologies = params.technologies.split(";")
+        Set tech = params.technologies.split(";")
         Set tools = params.tools.split(";")
         Set skills = params.skills.split(";")
 
-        City loco = new City([name: session.company.address])
-        loco.save()
+        City cityInstance = new City([name: session.company.address])
+        cityInstance.save()
 
-        Address adds = new Address([city: loco])
-        adds.save()
+        Address addressInstance = new Address([city: cityInstance])
+        addressInstance.save()
 
-        Company ins = new Company([name: session.company.name, address: adds])
-        ins.save()
+        Company companyInstance = new Company([name: session.company.name, address: addressInstance])
+        companyInstance.save()
 
-        Tag techTag = new Tag([name: technologies])
-        techTag.save()
+        tech.each {
+            Tag techInstance = Tag.findByName(it)
+            if (!techInstance) {
+                techInstance = new Tag(name: it)
+                techInstance.save()
+            }
+            println techInstance
+            println techInstance.errors
+            interviewInstance.technologies.add(techInstance)
+        }
 
-        Tag toolTag = new Tag([name: tools])
-        toolTag.save()
+        tools.each {
+            Tag toolInstance = Tag.findByName(it)
+            if (!toolInstance) {
+                toolInstance = new Tag(name: it)
+                toolInstance.save()
+            }
+            interviewInstance.tools.add(toolInstance)
+        }
 
-        Tag skillTag = new Tag([name: skills])
-        skillTag.save()
+        skills.each {
+            Tag skillInstance = Tag.findByName(it)
+            if (!skillInstance) {
+                skillInstance = new Tag(name: it)
+                skillInstance.save()
+            }
+            interviewInstance.skills.add(skillInstance)
+        }
 
-        Map getDetails = [company: ins, candidate: session.loggedInUser, jobPosition: params.jobPosition,
+        Map getDetails = [company: companyInstance, candidate: session.loggedInUser, jobPosition: params.jobPosition,
                           qualification: params.qualification, result:params.result, workExperience: workExperience,
-                          tools: toolTag, technologies: techTag, skills: skillTag, rounds: params.rounds]
+                          technologies: interviewInstance.technologies, tools: interviewInstance.tools,
+                          skills: interviewInstance.skills, rounds: params.rounds]
+
         println getDetails
 
-        Interview addDetails = new Interview(getDetails)
-        addDetails.save(flush: true)
+        interviewInstance = new Interview(getDetails)
+        interviewInstance.save(flush: true)
+        println interviewInstance
 
-        session.getCompany = ins
-        session.getCity = loco
-        session.getAddress = adds
-        session.techTag = techTag
-        session.toolTag = toolTag
-        session.skillTag = skillTag
-        session.getInterview = addDetails
-        session.intRound = addDetails
-        redirect(action: 'show')
+        redirect(action: 'show', id: interviewInstance.id)
     }
 
     def show() {
-        Interview interviewInstance = Interview.get(params.id)
 
+        Interview interviewInstance = Interview.get(params.id)
         [interviewInstance: interviewInstance]
     }
 
     def edit() {
-        [getCompany: session.getCompany, getCity: session.getCity, getTech: session.techTag, getTool: session.toolTag,
-         getSkill: session.skillTag, getInterview: session.getInterview]
+
+        Interview interviewInstance = Interview.get(params.id)
+
+        if (interviewInstance.candidate.id != session.loggedInUser) {
+            flash.message = "You are not allowed to edit this interview"
+            redirect(action: "index")
+            return
+        }
+
+        [interviewInstance: interviewInstance]
     }
 
     def update() {
+        
         println params
+        Interview interviewInstance = Interview.get(params.id)
 
-        session.cityID = params.cityID
-        session.companyID = params.companyID
-        session.interviewID = params.interviewID
-        session.techID = params.techID
-        session.toolID = params.toolID
-        session.skillID = params.skillID
+        if (interviewInstance.candidate.id != session.loggedInUser) {
+            redirect(action: "index")
+            return
+        }
 
-        City updateCity = City.get(session.cityID)
+
+        println "here 1111"
+        println params.cityID
+        City updateCity = City.get(params.cityID)
         updateCity.name = params.companyAddress
         updateCity.save(flush: true)
         println updateCity
         println updateCity.errors
-
-        Company updateOrg = Company.get(session.companyID)
+        println "here 2222"
+        println params.companyID
+        Company updateOrg = Company.get(params.companyID)
         updateOrg.name = params.companyName
         updateOrg.save(flush: true)
         println updateOrg
         println updateOrg.errors
+        println "here 3333"
+        interviewInstance.jobPosition = params.jobPosition
+        println "here 4444"
+        interviewInstance.qualification = params.qualification
+        println "here 5555"
+        interviewInstance.result = params.result
+        println "here 6666"
+        interviewInstance.workExperience = params.workExperience.split(";")
+        println "here 7777"
+        interviewInstance.addToRounds([rounds: params.rounds])
+        println "here 8888"
+        interviewInstance.save(flush: true)
+        if (interviewInstance.hasErrors()) {
+            println interviewInstance.errors
+        }
+        else {
+            println "NO"
+        }
+        println interviewInstance.errors
+        println "here 9999"
+        println interviewInstance
+        println "here 0000"
+        Set tech = params.technologies.split(";")
+        println tech + "!!!!!!!!!!!!!!!!!!"
+        Set tools = params.tools.split(";")
+        println tools + "@@@@@@@@@@@@@@@@@"
+        Set skills = params.skills.split(";")
+        println skills + "################"
+        /*tech.each {
+            Tag techInstance = Tag.findByName(it)
+            if (!techInstance) {
+                techInstance = Tag.get(interviewInstance.technologies.id)
+                techInstance.save(flush: true)
+            }
+            println techInstance
+            println techInstance.errors
+        }
+        println "here!!!!!!!!!!"
+        tools.each {
+            Tag toolInstance = Tag.findByName(it)
+            if (!toolInstance) {
+                toolInstance = Tag.get(interviewInstance.tools.id)
+                toolInstance.save(flush: true)
+            }
+        }
+        println "here!!!!!!!!!!"
+        skills.each {
+            Tag skillInstance = Tag.findByName(it)
+            if (!skillInstance) {
+                skillInstance = Tag.get(interviewInstance.skills.id)
+                skillInstance.save(flush: true)
+            }
+        }*/
+        println "here!!!!!!!!!!"
 
-        Interview updateInterview = Interview.get(session.interviewID)
-        updateInterview.jobPosition = params.jobPosition
-        updateInterview.qualification = params.qualification
-        updateInterview.result = params.result
-        updateInterview.rounds = params.rounds
-        updateInterview.workExperience = params.workExperience.split(";")
-        updateInterview.save(flush: true)
-        println updateInterview
-        println updateInterview.errors
-
-        Tag updateTech = Tag.get(session.techID)
-        updateTech.name = params.technologies.split(";")
-        updateTech.save(flush: true)
-        println updateTech
-        println updateTech.errors
-
-        Tag updateTool = Tag.get(session.toolID)
-        updateTool.name = params.tools.split(";")
-        updateTool.save(flush: true)
-        println updateTool
-        println updateTool.errors
-
-        Tag updateSkill = Tag.get(session.skillID)
-        updateSkill.name = params.skills.split(";")
-        updateSkill.save(flush: true)
-        println updateSkill
-        println updateSkill.errors
     }
 
     def delete() {

@@ -13,7 +13,8 @@ class Interview {
     Result result
     Date dateCreated
     Date lastUpdated
-    Set workExperience, technologies, tools, skills, rounds
+    Set workExperience, rounds
+    Set<Tag> technologies = [], tools = [], skills = []
     static hasMany = [workExperience: String, technologies: Tag, tools: Tag, skills: Tag, rounds: InterviewRound]
 
     static constraints = {

@@ -10,11 +10,6 @@
 <head>
     <title></title>
     <meta name="layout" content="main">
-    %{--<style>
-        .btnRound {
-            width: 126px;
-        }
-    </style>--}%
 </head>
 
 <body>
@@ -24,6 +19,8 @@
     </content>
 
     <content tag="body">
+
+        <input type="hidden" name="id" value="${interviewInstance}">
         <dl class="list-group-item dl-horizontal">
             <dt>Company Name:</dt>
             <dd>${interviewInstance.company.name}</dd><br>
@@ -48,35 +45,35 @@
                     <li>${it.name}</li>
                 </dd>
             </g:each>
-
             <br>
+
             <dt>Tools:</dt>
             <g:each in="${interviewInstance.tools}">
                 <dd>
                     <li>${it.name}</li>
                 </dd>
             </g:each>
-
             <br>
-            <g:each in="${getSkill}" var="skill" id="${skill.id}">
-                <dt>Skills:</dt>
-                <g:each in="${skill.name.split(",")}">
-                    <dd>
-                        <li>${it}</li>
-                    </dd>
-                </g:each>
+
+            <dt>Skills:</dt>
+            <g:each in="${interviewInstance.skills}">
+                <dd>
+                    <li>${it.name}</li>
+                </dd>
             </g:each>
             <br>
-            <g:each in="${getInterview}" var="show" id="${show.id}">
+
+            <g:each in="${interviewInstance}" var="show" id="${show.id}">
                 <dt>Result:</dt>
                 <dd>${show.result}</dd>
                 <br>
                 <dt>Rounds:</dt>
-                <dd>${show.rounds}</dd>
+                <dd>${show.rounds.id}</dd>
             </g:each>
         </dl><br>
 
-        <g:link name="btnEdit" controller="interview" action="edit" class="btn btn-primary btnProp">Edit</g:link>
+        <g:link name="btnEdit" controller="interview" action="edit" class="btn btn-primary btnProp"
+                id="${interviewInstance.id}">Edit</g:link>
 
         <g:link name="btnDelete" controller="interview" action="delete" class="btn btn-primary btnProp"
                 id="${interviewInstance.id}">Delete</g:link>
