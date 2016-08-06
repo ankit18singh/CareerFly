@@ -81,6 +81,7 @@ class DiscussController {
             voteInstance.delete()
 
             discussionInstance.upVotes--
+            discussionInstance.downVotes++
 
         } else {
             voteInstance = new Vote()
@@ -91,6 +92,9 @@ class DiscussController {
             voteInstance.save()
 
             discussionInstance.upVotes++
+            if(discussionInstance.downVotes!=0) {
+                discussionInstance.downVotes--
+            }
 
         }
 
@@ -120,6 +124,7 @@ class DiscussController {
             voteInstance.delete()
 
             discussionInstance.downVotes--
+            discussionInstance.upVotes++
         }
 
         else {
@@ -131,6 +136,9 @@ class DiscussController {
             voteInstance.save()
 
             discussionInstance.downVotes++
+            if(discussionInstance.upVotes!=0) {
+                discussionInstance.upVotes--
+            }
         }
         println discussionInstance.downVotes
         discussionInstance.save()
