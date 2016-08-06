@@ -20,7 +20,7 @@
 
     <content tag="body">
 
-        <g:each in="${showDetails}" var="show" id="${show.id}">
+        <g:each in="${roundInstance}" var="show" id="${show.id}">
             <dl class="list-group-item dl-horizontal">
                 <dt>Round Number:</dt>
                 <dd>${session.rc}</dd><br>
@@ -55,10 +55,11 @@
         </g:each>
         <br>
 
-        <g:link name="btnEdit" controller="interviewRound" action="edit" class="btn btn-primary btnProp">Edit</g:link>
+        <g:link name="btnEdit" controller="interviewRound" action="edit" class="btn btn-primary btnProp"
+                id="${roundInstance.id}">Edit</g:link>
 
         <g:link name="btnDelete" controller="interviewRound" action="delete" class="btn btn-primary btnProp"
-                id="${showDetails.id}">Delete</g:link>
+                id="${roundInstance.id}">Delete</g:link>
 
     </content>
 

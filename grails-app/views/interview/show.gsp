@@ -78,8 +78,8 @@
         <g:link name="btnDelete" controller="interview" action="delete" class="btn btn-primary btnProp"
                 id="${interviewInstance.id}">Delete</g:link>
 
-        <g:link name="btnRound" controller="interviewRound" action="index"
-                class="btn btn-primary btnRound">Interview Round</g:link>
+        <g:link name="btnRound" controller="interviewRound" action="index" class="btn btn-primary btnRound"
+                id="${interviewInstance.id}">Interview Round</g:link>
         <br>
     </content>
 

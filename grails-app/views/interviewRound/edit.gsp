@@ -21,8 +21,8 @@ Time: 1:59 PM
 
         <g:form name="edit" controller="interviewRound" action="update" method="post" class="form-group">
             <h3>Round: ${session.rc}</h3>
-
-            <g:each in="${editDetails}" var="edit" id="edit.id">
+            <input type="hidden" name="id" value="${roundInstance.id}">
+            <g:each in="${roundInstance}" var="edit" id="edit.id">
                 <div class="form-group">
                     <input type="hidden" name="id" value="${edit.id}">
                     <label for="title">Round Name:</label>
@@ -55,6 +55,7 @@ Time: 1:59 PM
                 </div>
 
                 <g:submitButton name="submit" value="Done" class="btn btn-primary btnProp"></g:submitButton>
+
                 <g:link name="cancel" controller="interviewRound" action="show"
                         class="btn btn-primary btnProp">Cancel</g:link>
             </g:each>

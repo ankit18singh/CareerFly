@@ -8,9 +8,7 @@ class InterviewRoundController {
 
     def index() {
 
-        session.loggedInUser = session.loggedInUser
-
-        def roundCount = InterviewRound.executeQuery("select count(id) from InterviewRound where candidate = ${session.loggedInUser} ")
+        def roundCount = InterviewRound.executeQuery("select count(id) from InterviewRound where candidate = ${session.loggedInUser}")
 
         if(roundCount == 0) {
             roundCount = 1
@@ -18,8 +16,9 @@ class InterviewRoundController {
         else {
             roundCount = roundCount.get(0) + 1
         }
+
         session.rc = roundCount
-        [roundCount: roundCount, errUser: new InterviewRound()]
+        [roundCount: roundCount, interviewInstance: params.id, errUser: new InterviewRound()]
     }
 
     def save() {
@@ -32,62 +31,66 @@ class InterviewRoundController {
         Map getDetails = [candidate: session.loggedInUser, title: params.title, experience: params.experience,
                           duration: params.duration, dos: dos, donts: donts]
 
-        InterviewRound saveDetails = new InterviewRound(getDetails)
-        saveDetails.save(flush: true)
+        InterviewRound roundInstance = new InterviewRound(getDetails)
+        roundInstance.save(flush: true)
+        println roundInstance
 
-        session.getID = saveDetails
-
-        if(saveDetails.hasErrors()) {
-            render (view: "index", model:[errUser: saveDetails])
+        if(roundInstance.hasErrors()) {
+            render (view: "index", model:[errUser: roundInstance])
             return
         }
 
-        Interview saveRound = Interview.get(session.intRound.id)
-        List getID = InterviewRound.findAllById(session.getID.id)
-
-        saveRound.rounds = getID
-        saveRound.save(flush: true)
-
-        session.userDetails = saveDetails
-        redirect(action: "show")
+        redirect(action: "show", id: roundInstance.id)
     }
 
     def show() {
 
-        session.rc = session.rc
-        List findUser = User.findAllById(session.loggedInUser)
-        List fetchDetails = InterviewRound.findAllByIdAndCandidate(session.userDetails.id, findUser)
-        session.user = fetchDetails
-        [showDetails: fetchDetails, rc: session.rc]
+        InterviewRound roundInstance = InterviewRound.get(params.id)
+        [roundInstance: roundInstance]
     }
 
     def edit() {
-        [editDetails: session.userDetails, rc: session.rc]
+
+        InterviewRound roundInstance = InterviewRound.get(params.id)
+
+        if (roundInstance.candidate.id != session.loggedInUser) {
+            flash.message = "You are not allowed to edit this interview"
+            redirect(action: "index")
+            return
+        }
+
+        [roundInstance: roundInstance]
     }
 
     def update() {
 
-        session.getID = params.id
-        InterviewRound updateDetails = InterviewRound.get(session.getID)
-        updateDetails.title = params.title
-        updateDetails.experience = params.experience
-        updateDetails.duration = params.duration.toInteger()
+        InterviewRound roundInstance = InterviewRound.get(params.id)
+        
+        if (roundInstance.candidate.id != session.loggedInUser) {
+            redirect(action: 'index')
+            return
+        }
 
         Set dos = params.dos.split(";")
         Set donts = params.donts.split(";")
 
-        updateDetails.dos = dos
-        updateDetails.donts = donts
-        updateDetails.save(flush: true)
+        roundInstance.title = params.title
+        roundInstance.experience = params.experience
+        roundInstance.duration = params.duration.toInteger()
+        roundInstance.dos = dos
+        roundInstance.donts = donts
+
+        roundInstance.save(flush: true)
+        println roundInstance
         println "updated"
-        redirect(action: 'show')
+
+        redirect(action: 'show', id: roundInstance.id)
     }
 
     def delete() {
 
-        session.userDetails = session.userDetails
-        InterviewRound deleteDetails = InterviewRound.get(session.userDetails.id)
-        deleteDetails.delete(flush: true)
+        InterviewRound roundInstance = InterviewRound.get(params.id)
+        roundInstance.delete(flush: true)
         redirect(action: 'index')
     }
 }

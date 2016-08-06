@@ -95,6 +95,9 @@
 
             <g:submitButton name="submit" value="Submit" class="btn btn-primary btnProp"></g:submitButton>
 
+            <g:link name="cancel" controller="interview" action="show"
+                    class="btn btn-primary btnProp">Cancel</g:link>
+
         </g:form>
 
             %{--<g:each in="${getCompany}" var="company" id="${company.id}">

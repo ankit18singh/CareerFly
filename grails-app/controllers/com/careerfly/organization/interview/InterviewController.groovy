@@ -138,12 +138,6 @@ class InterviewController {
         interviewInstance.addToRounds([rounds: params.rounds])
         println "here 8888"
         interviewInstance.save(flush: true)
-        if (interviewInstance.hasErrors()) {
-            println interviewInstance.errors
-        }
-        else {
-            println "NO"
-        }
         println interviewInstance.errors
         println "here 9999"
         println interviewInstance
@@ -185,26 +179,17 @@ class InterviewController {
 
     def delete() {
 
-        Interview deleteInterview = Interview.get(session.getInterview.id)
-        deleteInterview.delete(flush: true)
+        Interview interviewInstance = Interview.get(params.id)
+        interviewInstance.delete(flush: true)
 
-        Company deleteCompany = Company.get(session.getCompany.id)
-        deleteCompany.delete(flush: true)
+        Company companyInstance = Company.get(interviewInstance.company.id)
+        companyInstance.delete(flush: true)
 
-        Address deleteAddress = Address.get(session.getAddress.id)
-        deleteAddress.delete(flush: true)
+        Address addressInstance = Address.get(companyInstance.address.id)
+        addressInstance.delete(flush: true)
 
-        City deleteCity = City.get(session.getCity.id)
-        deleteCity.delete(flush: true)
-
-        Tag deleteTech = Tag.get(session.techTag.id)
-        deleteTech.delete(flush: true)
-
-        Tag deleteTool = Tag.get(session.toolTag.id)
-        deleteTool.delete(flush: true)
-
-        Tag deleteSkill = Tag.get(session.skillTag.id)
-        deleteSkill.delete(flush: true)
+        City cityInstance = City.get(addressInstance.city.id)
+        cityInstance.delete(flush: true)
 
         redirect(action: 'index')
     }

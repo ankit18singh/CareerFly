@@ -22,7 +22,7 @@
 
         <g:form controller="interviewRound" action="save" name="interviewExp" method="post" class="form-group">
             <h3>Round: ${roundCount}</h3>
-
+            <input type="hidden" name="id" value="${interviewInstance}">
             <div class="form-group ${hasErrors(bean: errUser, field: 'title', 'has-error')}">
                 <label for="title">Round Name:</label>
                 <g:textField name="title" placeholder="Enter the Name of Round" class="form-control"
