@@ -34,9 +34,7 @@ class ProfileController {
             println ">>>>>>>hellllooo"
             return
         }
-
-        if (params.firstName)
-
+        
         println updateInstance.firstName
         flash.message = "updated successfully"
         redirect(action: 'index')
