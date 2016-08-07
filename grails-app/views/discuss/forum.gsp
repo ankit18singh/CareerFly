@@ -10,19 +10,13 @@
 <html>
     <head>
         <title></title>
-        <asset:stylesheet src="discussion.css"/>
-        <asset:javascript src="tinymce/tinymce.min.js" />
-        <script>
-            tinymce.init({ selector:'textarea',
-                            menubar: false,
-                            statusbar: false
-                        });
-        </script>
     </head>
 
     <body>
         <content tag="body">
-
+            <g:if test="${flash.message}">
+                <div class="alert alert-success" role="status">${flash.message}</div>
+            </g:if>
             <div class="row">
                 <div class="col-sm-2 col-md-2 dp text-center">
                     <asset:image src="dp.png" id="dp" class="img-circle"/>
@@ -63,16 +57,18 @@
 
                                 <div class="col-sm-8 col-md-8">
                                     %{--<button type="button" class="btn delete">popup</button>--}%
-                                </div>
-                                <div class="col-sm-1 col-md-1">
-                                    <g:link controller="discuss" action="edit" id="${forumInstanceModel.id}"
-                                    ><i class="fa fa-pencil fa-2x" aria-hidden="true"></i></g:link>
+                                    <p>Posted by: ${forumInstanceModel.author}</p>
                                 </div>
 
-                                <div class="col-sm-1 col-md-1">
-                                    <g:link controller="discuss" action="delete" id="${forumInstanceModel.id}"
-                                    ><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i></g:link>
-                                </div>
+                                    <div class="col-sm-1 col-md-1">
+                                        <g:link controller="discuss" action="edit" id="${forumInstanceModel.id}"
+                                        ><i class="fa fa-pencil fa-2x" aria-hidden="true"></i></g:link>
+                                    </div>
+
+                                    <div class="col-sm-1 col-md-1">
+                                        <g:link controller="discuss" action="delete" id="${forumInstanceModel.id}"
+                                        ><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i></g:link>
+                                    </div>
                             </div>
                         </g:if>
                     </div>
@@ -80,6 +76,7 @@
             </div>
 
             <hr id="hrCol">
+
 
             <div class="row">
                 <div class="col-sm-2 col-md-2">
@@ -89,7 +86,7 @@
                     <div class="comments bg-success">
                         <div class="row">
                             <div class="col-sm-12">
-
+                                %{--commentbox--}%
                             </div>
                         </div>
                     </div>
@@ -99,26 +96,27 @@
 
             <hr id="hrCol">
 
-            <div class="row">
-                <div class="col-sm-2 col-md-2">
+            <g:form controller="discuss" action="comment" method="post" id="${forumInstanceModel.id}" class="form-horizontal">
+                <div class="row">
+                    <div class="col-sm-2 col-md-2">
 
+                    </div>
+                    <div class="col-sm-10 col-md-10 editor">
+                        <g:textArea name="discussionComment"/>
+                    </div>
                 </div>
-                <div class="col-sm-10 col-md-10 editor">
-                    <g:textArea name="editorArea"/>
+
+                <div class="row">
+                    <div class="col-sm-2 col-md-2">
+
+                    </div>
+                    <div class="col-sm-10 col-md-10">
+                        <g:submitButton name="save" class="btn btn-success pull-right"></g:submitButton>
+                    </div>
                 </div>
-            </div>
+            </g:form>
 
-            <div class="row">
-                <div class="col-sm-2 col-md-2">
-
-                </div>
-                <div class="col-sm-10 col-md-10">
-                    <g:submitButton name="save" class="btn btn-success pull-right"></g:submitButton>
-                </div>
-            </div>
-
-
-            <script type="text/javascript">
+            %{--<script type="text/javascript">
                 $(".fa-trash-o").click(function(){
                     swal({   title: "Are you sure?",
                                 text: "You will not be able to recover this Discussion!",
@@ -135,7 +133,7 @@
                                 }
                             });
                 });
-            </script>
+            </script>--}%
 
         </content>
     </body>

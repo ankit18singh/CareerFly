@@ -9,7 +9,6 @@
 <html>
     <head>
         <title></title>
-        <asset:stylesheet src="discussion.css"/>
     </head>
 
     <body>
@@ -38,7 +37,7 @@
                         <div class="col-sm-7">
                             <g:link controller="discuss" action="forum" id="${feeds.id}">
                                 <h4>${feeds.title}<br>
-                                    <small>${feeds.body}</small>
+                                    <small>${raw(feeds.body)}</small>
                                 </h4>
                             </g:link>
                         </div>

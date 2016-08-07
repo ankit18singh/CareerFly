@@ -16,6 +16,13 @@
         <asset:javascript src="jquery.min.js"/>
         <asset:javascript src="sweetalert.min.js"/>
         <asset:javascript src="bootstrap.min.js"/>
+        <asset:javascript src="tinymce/tinymce.min.js"/>
+        <script>
+            tinymce.init({ selector:'textarea',
+                menubar: false,
+                statusbar: false
+            });
+        </script>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <g:layoutHead/>
@@ -142,9 +149,7 @@
 
                         <div class="form-group">
                             <div class="col-sm-8 col-md-12">
-                                <g:textArea name="newbody" class="form-control"
-                                            placeholder="Add Description of your Discussion here.."
-                                            style="height: 300px" required="required"/>
+                                <g:textArea name="newbody" style="height: 300px"/>
                             </div>
                         </div>
 
