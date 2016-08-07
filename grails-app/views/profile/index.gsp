@@ -38,14 +38,16 @@
                     <div class="form-group ${hasErrors(bean: userData, field: 'lastName', 'has-error')}">
                         <label for="lastName" class="col-lg-4 control-label"> LastName: </label>
                         <div class="col-lg-5">
-                            <input type="text" class="form-control" name="lastName" id="lastName" value="${userData.lastName}" required>
+                            <input type="text" class="form-control" name="lastName" id="lastName"
+                                   value="${userData.lastName}" required>
                             <g:renderErrors bean="${userData}" field="lastName" />
                         </div>
                     </div>
                     <div class="form-group ${hasErrors(bean: userData, field: 'password', 'has-error')}">
                         <label for="password" class="col-lg-4 control-label"> Password </label>
                         <div class="col-lg-2">
-                            <input type="password" class="form-control" name="password" id="password" value="${userData.password}" required>
+                            <input type="password" class="form-control" name="password" id="password"
+                                   value="${userData.password}" required>
                             <g:renderErrors bean="${userData}" field="password" />
                         </div>
                     </div>
