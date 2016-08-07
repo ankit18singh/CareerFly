@@ -23,10 +23,9 @@ class ProfileController {
         println updateInstance.lastName
         updateInstance.firstName = params.firstName
         updateInstance.lastName = params.lastName
-        println params.firstName
-        println updateInstance.firstName
+        //println params.firstName
+        //println updateInstance.firstName
         updateInstance.password = params.password
-        println ">>>>>>>>"
         updateInstance.save(flush: true)
 
         if (updateInstance.hasErrors()) {
