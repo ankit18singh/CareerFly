@@ -12,23 +12,31 @@ class DiscussController {
     }
 
     def save(String newtitle, String newbody, String newlink) {
-        Discussion discussionInstance= new Discussion([title: newtitle, body: newbody, link: newlink, author: 1,
-                                                       file: 1])
-        discussionInstance.save()
 
-        redirect(action: 'forum', id: discussionInstance.id)
+        User userInstance = User.get(session.loggedInUser)
+
+        Discussion discussionInstance= new Discussion([title: newtitle, body: newbody, link: newlink, author: userInstance,
+                                                       file: 1])
+        discussionInstance.save()/*
+        println "author id--> $discussionInstance.author"*/
+        redirect(action: 'forum', id: discussionInstance.id, author: discussionInstance.author)
     }
 
     def forum(Long id) {
         //println "id -->$id"
         Discussion forumInstance = Discussion.get(params.id)
-        //println "id--> $params.id"
+        User loggedInUserInstance = User.get(session.loggedInUser)
+        println "comment --> ${commentInstance.body}"
+        //println "author id--> $params.author"
         render(view: 'forum', model:[forumInstanceModel: forumInstance])
+
     }
 
     def edit() {
 
-        [discussionEdit: Discussion.get(params.id)]
+       /* Discussion discussionInstance = Discussion.get(params.author)
+        println "author id--> ${discussionInstance}"
+       */ [discussionEdit: Discussion.get(params.id)]
     }
 
     def update(String newtitle, String newbody, String newlink) {
@@ -135,6 +143,34 @@ class DiscussController {
         println discussionInstance.downVotes
         discussionInstance.save()
         redirect(action: "forum", id: discussionInstance.id)
+
     }
+
+    def comment(Long id) {
+
+        Discussion discussionInstance = Discussion.get(params.id)
+        println "id--> ${discussionInstance.id}"
+        println "user --> $session.loggedInUser"
+        User loggedInUserInstance3 = User.get(session.loggedInUser)
+
+        Comment commentInstance = new Comment()
+        commentInstance.author = loggedInUserInstance3
+        println "author--> $commentInstance.author"
+        commentInstance.body = params.discussionComment
+        println "cmmnt --> $commentInstance.body"
+        commentInstance.entity = CommentEntity.DISCUSSION
+        println "entity--> $commentInstance.entity"
+        commentInstance.entityID = discussionInstance.id
+        println "Entity--> $commentInstance.entityID"
+        commentInstance.upVotes = 0l
+        println "upvote--> $commentInstance.upVotes"
+        commentInstance.downVotes = 0l
+        println "downvote--> $commentInstance.downVotes"
+        commentInstance.save()
+        println "conclusion--> $commentInstance"
+
+        redirect(action: "forum")
+    }
+
 }
 
