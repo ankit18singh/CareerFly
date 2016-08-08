@@ -77,22 +77,44 @@
 
             <hr id="hrCol">
 
+            <g:if test="${CommentInstanceModel}">
+                <g:each in="${CommentInstanceModel}">
 
-            <div class="row">
-                <div class="col-sm-2 col-md-2">
+                    <div class="row">
+                        <div class="col-sm-2 col-md-2">
 
-                </div>
-                <div class="col-sm-10 col-md-10">
-                    <div class="comments bg-success">
-                        <div class="row">
-                            <div class="col-sm-12">
-                                %{--commentbox--}% aksjdo
+                        </div>
+                        <div class="col-sm-10 col-md-10">
+                            <div class="comments bg-success">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <p>${raw(CommentInstanceModel.body)}</p>
+                                    </div>
+                                </div>
                             </div>
+
                         </div>
                     </div>
+                </g:each>
+            </g:if>
+            <g:else>
 
+                <div class="row">
+                    <div class="col-sm-2 col-md-2">
+
+                    </div>
+                    <div class="col-sm-10 col-md-10">
+                        <div class="comments bg-success">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    No Comments.
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
-            </div>
+            </g:else>
 
             <hr id="hrCol">
 

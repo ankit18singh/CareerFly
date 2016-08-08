@@ -27,8 +27,19 @@ class DiscussController {
         Discussion forumInstance = Discussion.get(params.id)
         //User loggedInUserInstance = User.get(session.loggedInUser)
         //println "comment --> ${commentInstance.body}"
-        //println "author id--> $params.author"
-        render(view: 'forum', model:[forumInstanceModel: forumInstance])
+        println "author id--> $forumInstance.id"
+        List commentInstance1 = Comment.createCriteria().list {
+            eq("entityID", forumInstance.id)
+        }
+        println "Abc-- > $commentInstance1"
+        if(!commentInstance1){
+            println "empty"
+            render(view: 'forum', model:[forumInstanceModel: forumInstance])
+        }
+        else{
+            println "fetched--> $commentInstance1.body"
+            render(view:"forum", model:[forumInstanceModel: forumInstance, CommentInstanceModel: commentInstance1])
+        }
 
     }
 
