@@ -86,7 +86,7 @@
                     <div class="comments bg-success">
                         <div class="row">
                             <div class="col-sm-12">
-                                %{--commentbox--}%
+                                %{--commentbox--}% aksjdo
                             </div>
                         </div>
                     </div>

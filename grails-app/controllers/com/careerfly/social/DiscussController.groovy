@@ -25,8 +25,8 @@ class DiscussController {
     def forum(Long id) {
         //println "id -->$id"
         Discussion forumInstance = Discussion.get(params.id)
-        User loggedInUserInstance = User.get(session.loggedInUser)
-        println "comment --> ${commentInstance.body}"
+        //User loggedInUserInstance = User.get(session.loggedInUser)
+        //println "comment --> ${commentInstance.body}"
         //println "author id--> $params.author"
         render(view: 'forum', model:[forumInstanceModel: forumInstance])
 
@@ -169,7 +169,7 @@ class DiscussController {
         commentInstance.save()
         println "conclusion--> $commentInstance"
 
-        redirect(action: "forum")
+        redirect(action: "forum", id: discussionInstance.id)
     }
 
 }
