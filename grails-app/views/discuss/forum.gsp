@@ -78,7 +78,7 @@
             <hr id="hrCol">
 
             <g:if test="${CommentInstanceModel}">
-                <g:each in="${CommentInstanceModel}">
+                <g:each in="${CommentInstanceModel}" var="comment">
 
                     <div class="row">
                         <div class="col-sm-2 col-md-2">
@@ -88,7 +88,7 @@
                             <div class="comments bg-success">
                                 <div class="row">
                                     <div class="col-sm-12">
-                                        <p>${raw(CommentInstanceModel.body)}</p>
+                                        <p>${raw(comment.body)}</p>
                                     </div>
                                 </div>
                             </div>

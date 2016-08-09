@@ -25,13 +25,13 @@ class DiscussController {
     def forum(Long id) {
         //println "id -->$id"
         Discussion forumInstance = Discussion.get(params.id)
-        //User loggedInUserInstance = User.get(session.loggedInUser)
+        User loggedInUserInstance = User.get(session.loggedInUser)
         //println "comment --> ${commentInstance.body}"
         println "author id--> $forumInstance.id"
         List commentInstance1 = Comment.createCriteria().list {
             eq("entityID", forumInstance.id)
         }
-        println "Abc-- > $commentInstance1"
+        println "comment author-- > $commentInstance1.author"
         if(!commentInstance1){
             println "empty"
             render(view: 'forum', model:[forumInstanceModel: forumInstance])
