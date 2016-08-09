@@ -24,4 +24,5 @@ class Discussion {
         upVotes (min: 0l)
         downVotes (min: 0l)
     }
+
 }
