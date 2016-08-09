@@ -31,6 +31,7 @@ class DiscussController {
         println "author id--> $forumInstance.id"
         List commentInstance1 = Comment.createCriteria().list {
             eq("entityID", forumInstance.id)
+            order("dateCreated","desc")
         }
         println "comment author-- > $commentInstance1.author"
         if(!commentInstance1){

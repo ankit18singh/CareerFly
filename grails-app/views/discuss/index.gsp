@@ -35,12 +35,23 @@
                                 class="badge">${i+1}</span></i>
                         </div>
                         <div class="col-sm-7">
-                            <g:link controller="discuss" action="forum" id="${feeds.id}">
-                                <h4>${feeds.title}<br>
-                                    <small>${raw(feeds.body)}</small>
-                                </h4>
-                            </g:link>
+                            <div class="media">
+                                <div class="media-left">
+                                    <a href="#">
+                                        <asset:image class="media-class img-circle" src="dp.png"
+                                                     width="64px"/>
+                                    </a>
+                                </div>
+                                <div class="media-body">
+                                    <g:link controller="discuss" action="forum" id="${feeds.id}">
+                                        <h4 class="media-heading"> ${feeds.title}<br/>
+                                            <small>${raw(feeds.body)}</small>
+                                        </h4>
+                                    </g:link>
+                                </div>
+                            </div>
                         </div>
+
 
                     </div>
 

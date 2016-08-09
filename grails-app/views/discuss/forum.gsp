@@ -75,6 +75,27 @@
                     </div>
                 </div>
             </div>
+            <hr id="hrCol">
+
+            <g:form controller="discuss" action="comment" method="post" id="${forumInstanceModel.id}" class="form-horizontal">
+                <div class="row">
+                    <div class="col-sm-2 col-md-2">
+
+                    </div>
+                    <div class="col-sm-10 col-md-10 editor">
+                        <g:textArea name="discussionComment"/>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-2 col-md-2">
+
+                    </div>
+                    <div class="col-sm-10 col-md-10">
+                        <g:submitButton name="save" class="btn btn-success pull-right"></g:submitButton>
+                    </div>
+                </div>
+            </g:form>
 
             <hr id="hrCol">
 
@@ -129,27 +150,6 @@
                 </div>
             </g:else>
 
-            <hr id="hrCol">
-
-            <g:form controller="discuss" action="comment" method="post" id="${forumInstanceModel.id}" class="form-horizontal">
-                <div class="row">
-                    <div class="col-sm-2 col-md-2">
-
-                    </div>
-                    <div class="col-sm-10 col-md-10 editor">
-                        <g:textArea name="discussionComment"/>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-sm-2 col-md-2">
-
-                    </div>
-                    <div class="col-sm-10 col-md-10">
-                        <g:submitButton name="save" class="btn btn-success pull-right"></g:submitButton>
-                    </div>
-                </div>
-            </g:form>
 
             %{--<script type="text/javascript">
                 $(".fa-trash-o").click(function(){
