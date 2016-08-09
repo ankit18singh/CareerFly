@@ -25,6 +25,7 @@
                             <div class="form-group">
                                 <div class="col-sm-10">
                                     <g:hiddenField name="id" value="${discussionEdit.id}"/>
+                                    <g:textField name="author" value="${discussionEdit.author}"/>
                                 </div>
                             </div>
 

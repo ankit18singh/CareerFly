@@ -29,7 +29,7 @@
     width: 0;
     height: 100%;
     margin-left: -250px;
-    background: rgba(0, 0, 0, 0.76);
+    background: #282B32;
     -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
     -o-transition: all 0.5s ease;
@@ -72,12 +72,12 @@
 .sidebar-nav li a {
     display: block;
     text-decoration: none;
-    color: #b4b4b4;
+    color: #ffffff;
 }
 
 .sidebar-nav li a:hover {
     text-decoration: none;
-    color: #3232ff;
+    color: #86B73D;
 }
 
 .sidebar-nav li a:active,
@@ -92,7 +92,7 @@
 }
 
 .sidebar-nav > .sidebar-brand a {
-    color: #999999;
+    color: #86B73D;
 }
 
 .sidebar-nav > .sidebar-brand a:hover {
@@ -141,4 +141,102 @@ body.sidebar-collapsed #sidebar-wrapper img {
 }
 body.sidebar-collapsed #wrapper {
    padding-left: 60px;
+}
+body.sidebar-collapsed .sidebar-nav > li{
+    width: 30px;
+}
+
+.navbar{
+    margin-bottom: 0;
+}
+
+.row .search-query {
+    padding-right: 3px;
+    padding-right: 4px \9;
+    padding-left: 3px;
+    padding-left: 4px \9;
+    /* IE7-8 doesn't have border-radius, so don't indent the padding */
+
+    margin-bottom: 0;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+
+.row .search{
+    border: 0;
+    background: none;
+    /** belows styles are working good */
+    padding: 2px 5px;
+    margin-top: 2px;
+    position: relative;
+    left: -28px;
+    /* IE7-8 doesn't have border-radius, so don't indent the padding */
+    margin-bottom: 0;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    color: #86B73D;
+}
+
+.search-query:focus + button {
+    z-index: 3;
+}
+.badge{
+    position:absolute;
+    left: 10px;
+}
+#hrCol{
+    border-color: transparent;
+}
+a:link {
+    text-decoration: none;
+}
+.modal .row{
+    margin: 0;
+}
+.btn .badge{
+    position: relative;
+    left: -5px;
+}
+.fa-pencil{
+    align: right;
+
+}
+.fa-trash-o{
+    align:right;
+}
+
+.dp{
+    padding:0;
+}
+
+.dp #dp{
+    height: 100px;
+    margin-top: 20px;
+}
+.fa-bookmark{
+    color: #f4d817;
+}
+.fa-plus-square-o{
+    color: #86B73D;
+}
+.viewFeeds{
+    padding: 30px;
+}
+a{
+    color:#86B73D;
+}
+.navbar-form{
+    width: 1050px;
+}
+#page-content-wrapper > .container-fluid{
+    margin-top: 100px;
+}
+.navbar{
+    background: #282B32;
+}
+
+.dummy{
+    margin-top:50px;
 }

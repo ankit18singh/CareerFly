@@ -10,33 +10,13 @@
 <html>
     <head>
         <title></title>
-        <asset:stylesheet src="discussion.css"/>
-        <asset:javascript src="tinymce/tinymce.min.js" />
-        <script>tinymce.init({ selector:'textarea' });</script>
     </head>
 
     <body>
         <content tag="body">
-
-            <div class="row">
-                <div class="form-group col-sm-11">
-                    <div class="input-group col-md-12">
-                        <input type="text" class="  search-query form-control" placeholder="Search" />
-                        <span class="input-group-btn">
-                            <button class="btn btn-danger search" type="button">
-                                <i class="fa fa-search" aria-hidden="true"></i>
-                            </button>
-                        </span>
-                    </div>
-                </div>
-                <div class="col-sm-1 text-center">
-                    <i class="fa fa-plus-square-o fa-3x" aria-hidden="true" title="Create New Discussion"
-                       data-toggle="modal" data-target="#newDiscModal"></i>
-                </div>
-            </div>
-
-            <hr>
-
+            <g:if test="${flash.message}">
+                <div class="alert alert-success" role="status">${flash.message}</div>
+            </g:if>
             <div class="row">
                 <div class="col-sm-2 col-md-2 dp text-center">
                     <asset:image src="dp.png" id="dp" class="img-circle"/>
@@ -77,110 +57,101 @@
 
                                 <div class="col-sm-8 col-md-8">
                                     %{--<button type="button" class="btn delete">popup</button>--}%
-                                </div>
-                                <div class="col-sm-1 col-md-1">
-                                    <g:link controller="discuss" action="edit" id="${forumInstanceModel.id}"
-                                    ><i class="fa fa-pencil fa-2x" aria-hidden="true"></i></g:link>
+                                    <p>Posted by: ${userNameModel.firstName +" "+
+                                        userNameModel.lastName}</p>
                                 </div>
 
-                                <div class="col-sm-1 col-md-1">
-                                    <g:link controller="discuss" action="delete" id="${forumInstanceModel.id}"
-                                    ><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i></g:link>
-                                </div>
+                                    <div class="col-sm-1 col-md-1">
+                                        <g:link controller="discuss" action="edit" id="${forumInstanceModel.id}"
+                                        ><i class="fa fa-pencil fa-2x" aria-hidden="true"></i></g:link>
+                                    </div>
+
+                                    <div class="col-sm-1 col-md-1">
+                                        <g:link controller="discuss" action="delete" id="${forumInstanceModel.id}"
+                                        ><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i></g:link>
+                                    </div>
                             </div>
                         </g:if>
                     </div>
                 </div>
             </div>
-
             <hr id="hrCol">
 
-            <div class="row">
-                <div class="col-sm-2 col-md-2">
+            <g:form controller="discuss" action="comment" method="post" id="${forumInstanceModel.id}" class="form-horizontal">
+                <div class="row">
+                    <div class="col-sm-2 col-md-2">
 
-                </div>
-                <div class="col-sm-10 col-md-10">
-                    <div class="comments bg-success">
-                        <div class="row">
-                            <div class="col-sm-12">
-
-                            </div>
-                        </div>
                     </div>
-
+                    <div class="col-sm-10 col-md-10 editor">
+                        <g:textArea name="discussionComment"/>
+                    </div>
                 </div>
-            </div>
+
+                <div class="row">
+                    <div class="col-sm-2 col-md-2">
+
+                    </div>
+                    <div class="col-sm-10 col-md-10">
+                        <g:submitButton name="save" class="btn btn-success pull-right"></g:submitButton>
+                    </div>
+                </div>
+            </g:form>
 
             <hr id="hrCol">
 
-            <div class="row">
-                <div class="col-sm-2 col-md-2">
+            <g:if test="${CommentInstanceModel}">
+                <g:each in="${CommentInstanceModel}" var="comment">
 
-                </div>
-                <div class="col-sm-10 col-md-10 editor">
-                    <g:textArea name="editorArea"/>
-                </div>
-            </div>
+                    <div class="row">
+                        <div class="col-sm-2 col-md-2">
 
-
-            <!--Modal code-->
-            <div id="newDiscModal" class="modal fade" role="dialog">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            <h4 class="modal-title">Create Discussion</h4>
                         </div>
-                        <div class="modal-body">
-                            <g:form controller="discuss" action="save" method="post" class="form-horizontal">
+                        <div class="col-sm-10 col-md-10">
+                            <div class="comments bg-success">
                                 <div class="row">
-                                    <div class="form-group">
-                                        <div class="col-sm-8 col-md-12">
-                                            <g:textField name="newtitle" class="form-control" placeholder="Title of your Discussion"/>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <div class="col-sm-8 col-md-12">
-                                            <g:textArea name="newbody" class="form-control"
-                                                        placeholder="Add Description of your Discussion here.." style="height: 300px"/>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <div class="col-sm-8 col-md-12">
-                                            <g:textField name="newlink" class="form-control" placeholder="Paste URL here.."/>
-                                        </div>
-                                    </div>
-
-
-                                    <div class="form-group">
-                                        <div class="col-sm-8 col-md-12">
-                                            <g:textField name="newtag" class="form-control" placeholder="Enter tags.."/>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <div class="col-sm-8 col-md-12">
-                                            <input type="file" name="newfile" class="form-control" id="newfile"/>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <div class="col-sm-8 col-md-12">
-                                            <g:submitButton name="Submit" class="btn btn-lg btn-success pull-right"
-                                                            id="sub"/>
+                                    <div class="col-sm-12">
+                                        <div class="media">
+                                            <div class="media-left">
+                                                <a href="#">
+                                                    <asset:image class="media-class img-circle" src="dp.png"
+                                                                 width="64px"/>
+                                                </a>
+                                            </div>
+                                            <div class="media-body">
+                                                <h4 class="media-heading"> ${userNameModel.firstName +" "+
+                                                userNameModel.lastName}</h4>
+                                                <p>${raw(comment.body)}</p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </g:form>
+                            </div>
+                            <hr/>
                         </div>
                     </div>
+                </g:each>
+            </g:if>
+            <g:else>
+
+                <div class="row">
+                    <div class="col-sm-2 col-md-2">
+
+                    </div>
+                    <div class="col-sm-10 col-md-10">
+                        <div class="comment">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <p>Post a comment.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
-            </div>
+            </g:else>
 
 
-            <script type="text/javascript">
+            %{--<script type="text/javascript">
                 $(".fa-trash-o").click(function(){
                     swal({   title: "Are you sure?",
                                 text: "You will not be able to recover this Discussion!",
@@ -197,7 +168,7 @@
                                 }
                             });
                 });
-            </script>
+            </script>--}%
 
         </content>
     </body>

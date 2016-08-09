@@ -16,48 +16,99 @@
         <asset:javascript src="jquery.min.js"/>
         <asset:javascript src="sweetalert.min.js"/>
         <asset:javascript src="bootstrap.min.js"/>
+        <asset:javascript src="tinymce/tinymce.min.js"/>
+        <script>
+            tinymce.init({ selector:'textarea',
+                menubar: false,
+                statusbar: false
+            });
+        </script>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <g:layoutHead/>
     </head>
 
 <body>
-
+    <header>
+        <nav class="navbar navbar-inverse navbar-static-top navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#search"
+                        aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="#" id="collapse-sidebar" class="navbar-brand"><i class="fa fa-fw fa-angle-double-left"></i></a>
+                <a href="#" class="navbar-brand">Careerfly</a>
+            </div>
+            <div class="collapse navbar-collapse" id="search">
+                <ul class="nav navbar-nav pull-right">
+                    <li>
+                        <form class="navbar-form navbar-right">
+                            <div class="row">
+                                <div class="form-group col-sm-10 col-md-10">
+                                    <div class="input-group col-md-12">
+                                        <input type="text" class="  search-query form-control" placeholder="Search" />
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-danger search" type="button">
+                                                <i class="fa fa-search" aria-hidden="true"></i>
+                                            </button>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-sm-1 text-center pull-right">
+                                    <i class="fa fa-plus-square-o fa-3x" aria-hidden="true" title="Create New Discussion"
+                                       data-toggle="modal" data-target="#newDiscModal"></i>
+                                </div>
+                            </div>
+                        </form>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    </header>
 
     <div id="wrapper">
 
         <!-- Sidebar -->
         <div id="sidebar-wrapper">
             <ul class="sidebar-nav">
-                <li class="sidebar-brand">
-                    <a href="#" id="collapse-sidebar"><i class="fa fa-fw fa-angle-double-left"></i></a>
+                <li class="dummy">
+
                 </li>
                 <li>
                     <asset:image src="dp.png" class="img-circle" height="80px"/>
                 </li>
                 <li>
                     <g:link controller="home" action="index">
-                        <i class="fa fa-fw fa-home" aria-hidden="true"></i><span class="text">Home</span>
+                        <i class="fa fa-fw fa-home" aria-hidden="true" title="Home"></i><span class="text">Home</span>
                     </g:link>
                 </li>
                 <li>
                     <g:link controller="profile" action="index">
-                        <i class="fa fa-fw fa-user" aria-hidden="true"></i><span class="text">Profile</span>
+                        <i class="fa fa-fw fa-user" aria-hidden="true" title="Profile"></i><span class="text">Profile
+                    </span>
                     </g:link>
                 </li>
                 <li>
                     <g:link controller="question" action="index">
-                        <i class="fa fa-fw fa-book" aria-hidden="true"></i><span class="text">Interview</span>
+                        <i class="fa fa-fw fa-book" aria-hidden="true" title="Interview"></i><span class="text">
+                        Interview</span>
                     </g:link>
                 </li>
                 <li>
                     <g:link controller="discuss" action="index">
-                        <i class="fa fa-fw fa-comment" aria-hidden="true"></i><span class="text">Discussion</span>
+                        <i class="fa fa-fw fa-comment" aria-hidden="true" title="Discussion"></i><span class="text">
+                        Discussion</span>
                     </g:link>
                 </li>
                 <li>
                     <g:link controller="settings" action="index">
-                        <i class="fa fa-fw fa-cog" aria-hidden="true"></i><span class="text">Settings</span>
+                        <i class="fa fa-fw fa-cog" aria-hidden="true" title="Settings"></i><span class="text">Settings
+                    </span>
                     </g:link>
                 </li>
             </ul>
@@ -79,7 +130,64 @@
     </div>
     <!-- /#wrapper -->
 
-    <script>
+<div id="newDiscModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Create Discussion</h4>
+            </div>
+            <div class="modal-body">
+                <g:form controller="discuss" action="save" method="post" class="form-horizontal">
+                    <div class="row">
+                        <div class="form-group">
+                            <div class="col-sm-8 col-md-12">
+                                <g:textField name="newtitle" class="form-control"
+                                             placeholder="Title of your Discussion" required="required"/>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-sm-8 col-md-12">
+                                <g:textArea name="newbody" style="height: 300px"/>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-sm-8 col-md-12">
+                                <g:textField name="newlink" class="form-control"
+                                             placeholder="Paste URL here.." required="required"/>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-sm-8 col-md-12">
+                                <g:textField name="newtag" class="form-control" placeholder="Enter tags.." required="required"/>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-sm-8 col-md-12">
+                                <input type="file" name="newfile" class="form-control" id="newfile" required="required"/>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-sm-8 col-md-12">
+                                <g:submitButton name="Submit" class="btn btn-lg btn-success pull-right"
+                                                id="sub"/>
+                            </div>
+                        </div>
+                    </div>
+                </g:form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script>
         $("#collapse-sidebar").on("click", function() {
             $('body').toggleClass("sidebar-collapsed");
             $(this).find(".fa").toggleClass("fa-angle-double-left fa-angle-double-right");
