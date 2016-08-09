@@ -57,7 +57,8 @@
 
                                 <div class="col-sm-8 col-md-8">
                                     %{--<button type="button" class="btn delete">popup</button>--}%
-                                    <p>Posted by: ${forumInstanceModel.author}</p>
+                                    <p>Posted by: ${userNameModel.firstName +" "+
+                                        userNameModel.lastName}</p>
                                 </div>
 
                                     <div class="col-sm-1 col-md-1">
@@ -88,11 +89,23 @@
                             <div class="comments bg-success">
                                 <div class="row">
                                     <div class="col-sm-12">
-                                        <p>${raw(comment.body)}</p>
+                                        <div class="media">
+                                            <div class="media-left">
+                                                <a href="#">
+                                                    <asset:image class="media-class img-circle" src="dp.png"
+                                                                 width="64px"/>
+                                                </a>
+                                            </div>
+                                            <div class="media-body">
+                                                <h4 class="media-heading"> ${userNameModel.firstName +" "+
+                                                userNameModel.lastName}</h4>
+                                                <p>${raw(comment.body)}</p>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-
+                            <hr/>
                         </div>
                     </div>
                 </g:each>
@@ -104,10 +117,10 @@
 
                     </div>
                     <div class="col-sm-10 col-md-10">
-                        <div class="comments bg-success">
+                        <div class="comment">
                             <div class="row">
                                 <div class="col-sm-12">
-                                    No Comments.
+                                    <p>Post a comment.</p>
                                 </div>
                             </div>
                         </div>
