@@ -121,6 +121,19 @@
                                                 <h4 class="media-heading"> ${userNameModel.firstName +" "+
                                                 userNameModel.lastName}</h4>
                                                 <p>${raw(comment.body)}</p>
+
+                                                <div class="col-sm-1 col-md-1">
+                                                    <a href="/discuss/commentUpVote/${comment.id}"
+                                                       class="btn btn-default"><span
+                                                            class="badge">${comment.upVotes}</span><i
+                                                            class="fa fa-thumbs-up" aria-hidden="true"></i></a>
+                                                </div>
+                                                <div class="col-sm-1 col-md-1">
+                                                    <a href="/discuss/commentDownVote/${comment.id}"
+                                                       class="btn btn-default"><span
+                                                            class="badge">${comment.downVotes}</span><i
+                                                            class="fa fa-thumbs-down" aria-hidden="true"></i></a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

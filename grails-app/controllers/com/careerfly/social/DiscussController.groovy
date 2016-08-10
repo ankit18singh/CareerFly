@@ -25,6 +25,7 @@ class DiscussController {
     def forum(Long id) {
         //println "id -->$id"
         Discussion forumInstance = Discussion.get(params.id)
+
         User loggedInUserInstance = User.get(session.loggedInUser)
         println "author name -> $loggedInUserInstance.firstName"
         //println "comment --> ${commentInstance.body}"
@@ -191,8 +192,89 @@ class DiscussController {
         commentInstance.save()
         println "conclusion--> $commentInstance"
 
-        redirect(action: "forum", id: discussionInstance.id)
+        redirect(action: "forum", id: commentInstance.id)
+    }
+    def commentUpVote() {
+
+        Comment commentUpVoteInstance = Comment.get(params.id)
+        println ("comment vote "+ commentUpVoteInstance.id)
+        if(!commentUpVoteInstance) {
+            flash.message = "No comment found"
+            redirect(action: "index")
+            return
+        }
+        User loggedInUserInstance1 = User.get(session.loggedInUser)
+
+        Vote voteInstance = Vote.createCriteria().get {
+            eq("author", loggedInUserInstance1)
+            eq("entity", VoteEntity.COMMENT)
+            eq("entityID", commentUpVoteInstance.id)
+            eq("type", VoteType.UP)
+        }
+        if(voteInstance) {
+            voteInstance.delete()
+            commentUpVoteInstance.upVotes--
+            commentUpVoteInstance.downVotes++
+        }
+        else {
+            voteInstance = new Vote()
+            voteInstance.author = loggedInUserInstance1
+            voteInstance.entity = VoteEntity.COMMENT
+            voteInstance.type = VoteType.UP
+            voteInstance.entityID = commentUpVoteInstance.id
+            voteInstance.save()
+
+            commentUpVoteInstance.upVotes++
+            if(commentUpVoteInstance.downVotes!=0) {
+                commentUpVoteInstance.downVotes--
+            }
+        }
+        println commentUpVoteInstance.upVotes
+        commentUpVoteInstance.save()
+        redirect(action: "forum", id: commentUpVoteInstance.id)
+
     }
 
+    def commentDownVote() {
+        Comment commentInstance = Comment.get(params.id)
+        if (!commentInstance) {
+            flash.message = "No discussion found"
+            redirect(action: "index")
+            return
+        }
+
+        User loggedInUserInstance1 = User.get(session.loggedInUser)
+
+        Vote voteInstance = Vote.createCriteria().get {
+            eq("author", loggedInUserInstance1)
+            eq("entity", VoteEntity.COMMENT)
+            eq("entityID", commentInstance.id)
+            eq("type", VoteType.DOWN)
+        }
+        if(voteInstance) {
+            voteInstance.delete()
+
+            commentInstance.downVotes--
+            commentInstance.upVotes++
+        }
+
+        else {
+            voteInstance = new Vote()
+            voteInstance.author = loggedInUserInstance1
+            voteInstance.entity = VoteEntity.COMMENT
+            voteInstance.type = VoteType.DOWN
+            voteInstance.entityID = commentInstance.id
+            voteInstance.save()
+
+            commentInstance.downVotes++
+            if(commentInstance.upVotes!=0) {
+                commentInstance.upVotes--
+            }
+        }
+        println commentInstance.downVotes
+        commentInstance.save()
+        redirect(action: "forum", id: commentInstance.id)
+
+    }
 }
 
