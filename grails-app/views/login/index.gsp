@@ -23,12 +23,12 @@
                 </g:if>
                 <g:form controller="login" action="save">
                     <div class="form-group ${hasErrors(bean: myUser, field: 'email', 'has-error')}">
-                        <g:textField name="email" placeholder="Email" class="form-control" value="${myUser.email}">
+                        <g:textField name="email" placeholder="Email" class="form-control" autofocus="email">
                         </g:textField>
                         <g:renderErrors bean="${myUser}" field="email" />
                     </div>
                     <div class="form-group ${hasErrors(bean: myUser, field: 'password', 'has-error')}">
-                        <g:passwordField name="password" placeholder="Password" class="form-control" value="${myUser.password}">
+                        <g:passwordField name="password" placeholder="Password" class="form-control">
                         </g:passwordField>
                         <g:renderErrors bean="${myUser}" field="password" />
                     </div>
@@ -37,7 +37,8 @@
 
                         </g:submitButton>
                     </div>
-                    <a class="anchor" href="#">Forget  ?</a>
+                    <br>
+                    <a class="anchor" href="#">Forget id or password  ?</a>
                 </g:form>
                 </div>
             </div>

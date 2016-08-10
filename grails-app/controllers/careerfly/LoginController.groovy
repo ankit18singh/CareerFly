@@ -1,5 +1,4 @@
 
-
 package careerfly
 
 import com.careerfly.user.User
@@ -8,9 +7,9 @@ class LoginController {
 
     def beforeInterceptor = {
 
-        if(session.loggedInUser){
+        if (session.loggedInUser) {
 
-            redirect(controller: "Profile" , action: "index")
+            redirect(controller: "Profile", action: "index")
 
             return false
 
@@ -20,33 +19,32 @@ class LoginController {
 
     def index() {
 
+
     }
 
     def save() {
 
         User u
 
-        if(params.email && params.password) {
+        if (params.email && params.password) {
 
             u = User.findByEmailAndPassword("${params.email}", "${params.password}")
 
-            if(u) {
+            if (u) {
 
                 session.loggedInUser = u.id
 
-                redirect(controller: "Profile", action: "index" )
+                redirect(controller: "Profile", action: "index")
 
             } else {
 
-                flash.message="Invalid user id or password"
+                flash.message = "Invalid user id or password"
 
-                redirect( action: "index")
+                redirect(action: "index")
 
             }
 
-        }
-
-        else {
+        } else {
 
             if (u.hasErrors()) {
 
@@ -59,6 +57,8 @@ class LoginController {
         }
 
     }
-
 }
+
+
+
 
