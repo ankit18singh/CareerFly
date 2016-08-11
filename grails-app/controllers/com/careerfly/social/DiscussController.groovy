@@ -8,7 +8,16 @@ class DiscussController {
 
     def index() {
 
+        int value = params.int("newsFeeds")
+        if(value == 1) {
         [viewAll: Discussion.list()]
+        }
+        else if(value == 2) {
+            [viewAll: Discussion.listOrderByDateCreated(order: "desc")]
+        }
+        else if(value == 3) {
+            [viewAll: Discussion.listOrderByUpVotes(order:"desc")]
+        }
     }
 
     def save(String newtitle, String newbody, String newlink) {
