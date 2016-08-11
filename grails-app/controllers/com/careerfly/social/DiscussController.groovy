@@ -23,27 +23,28 @@ class DiscussController {
     }
 
     def forum(Long id) {
-        //println "id -->$id"
-        Discussion forumInstance = Discussion.get(params.id)
+        println "FORUM id -->$id"
+               
+                    Discussion forumInstance = Discussion.get(params.id)
 
-        User loggedInUserInstance = User.get(session.loggedInUser)
-        println "author name -> $loggedInUserInstance.firstName"
-        //println "comment --> ${commentInstance.body}"
-        println "author id--> $forumInstance.id"
-        List commentInstance1 = Comment.createCriteria().list {
-            eq("entityID", forumInstance.id)
-            order("dateCreated","desc")
-        }
-        println "comment author-- > $commentInstance1.author"
-        if(!commentInstance1){
-            println "empty"
-            render(view: 'forum', model:[forumInstanceModel: forumInstance, userNameModel: loggedInUserInstance])
-        }
-        else{
-            println "fetched--> $commentInstance1.body"
-            render(view:"forum", model:[forumInstanceModel: forumInstance,userNameModel: loggedInUserInstance,
-                                        CommentInstanceModel: commentInstance1])
-        }
+                    User loggedInUserInstance = User.get(session.loggedInUser)
+                    println "author name -> $loggedInUserInstance.firstName"
+                    //println "comment --> ${commentInstance.body}"
+                    println "author id--> $forumInstance.id"
+                    List commentInstance1 = Comment.createCriteria().list {
+                        eq("entityID", forumInstance.id)
+                        order("dateCreated", "desc")
+                    }
+                    println "comment author-- > $commentInstance1.author"
+                    if (!commentInstance1) {
+                        println "empty"
+                        render(view: 'forum', model: [forumInstanceModel: forumInstance, userNameModel: loggedInUserInstance])
+                    } else {
+                        println "fetched--> $commentInstance1.body"
+                        render(view: "forum", model: [forumInstanceModel  : forumInstance, userNameModel: loggedInUserInstance,
+                                                      CommentInstanceModel: commentInstance1])
+                    }
+
 
     }
 
@@ -196,9 +197,9 @@ class DiscussController {
     }
     def commentUpVote() {
 
-        Comment commentUpVoteInstance = Comment.get(params.id)
-        println ("comment vote "+ commentUpVoteInstance.id)
-        if(!commentUpVoteInstance) {
+        Comment commentInstance = Comment.get(params.id)
+      //  println ("comment vote "+ commentInstance.id)
+        if(!commentInstance) {
             flash.message = "No comment found"
             redirect(action: "index")
             return
@@ -208,30 +209,31 @@ class DiscussController {
         Vote voteInstance = Vote.createCriteria().get {
             eq("author", loggedInUserInstance1)
             eq("entity", VoteEntity.COMMENT)
-            eq("entityID", commentUpVoteInstance.id)
+            eq("entityID", commentInstance.id)
             eq("type", VoteType.UP)
         }
         if(voteInstance) {
             voteInstance.delete()
-            commentUpVoteInstance.upVotes--
-            commentUpVoteInstance.downVotes++
+            commentInstance.upVotes--
+            commentInstance.downVotes++
         }
         else {
             voteInstance = new Vote()
             voteInstance.author = loggedInUserInstance1
             voteInstance.entity = VoteEntity.COMMENT
             voteInstance.type = VoteType.UP
-            voteInstance.entityID = commentUpVoteInstance.id
+            voteInstance.entityID = commentInstance.id
             voteInstance.save()
 
-            commentUpVoteInstance.upVotes++
-            if(commentUpVoteInstance.downVotes!=0) {
-                commentUpVoteInstance.downVotes--
+            commentInstance.upVotes++
+            println ("upvote")
+            if(commentInstance.downVotes!=0) {
+                commentInstance.downVotes--
             }
         }
-        println commentUpVoteInstance.upVotes
-        commentUpVoteInstance.save()
-        redirect(action: "forum", id: commentUpVoteInstance.id)
+        println ("COMMENT UP"+commentInstance.upVotes)
+        commentInstance.save()
+        redirect(action: "forum", id: commentInstance.id)
 
     }
 
@@ -271,7 +273,7 @@ class DiscussController {
                 commentInstance.upVotes--
             }
         }
-        println commentInstance.downVotes
+        println ("COMMENT DOWN"+commentInstance.downVotes)
         commentInstance.save()
         redirect(action: "forum", id: commentInstance.id)
 
