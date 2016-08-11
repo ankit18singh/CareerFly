@@ -57,8 +57,8 @@
 
                                 <div class="col-sm-8 col-md-8">
                                     %{--<button type="button" class="btn delete">popup</button>--}%
-                                    <p>Posted by: ${userNameModel.firstName +" "+
-                                        userNameModel.lastName}</p>
+                                    <p>Posted by: ${forumInstanceModel.author.firstName +" "+
+                                        forumInstanceModel.author.lastName}</p>
                                 </div>
 
                                     <div class="col-sm-1 col-md-1">
@@ -118,21 +118,16 @@
                                                 </a>
                                             </div>
                                             <div class="media-body">
-                                                <h4 class="media-heading"> ${userNameModel.firstName +" "+
-                                                userNameModel.lastName}</h4>
-                                                <p>${raw(comment.body)}</p>
+                                                <h4 class="media-heading"> ${comment.author.firstName + " "+comment.author.lastName
+                                                }</h4><p>${raw(comment.body)}</p>
 
                                                 <div class="col-sm-1 col-md-1">
-                                                    <a href="/discuss/commentUpVote/${comment.id}"
-                                                       class="btn btn-default"><span
-                                                            class="badge">${comment.upVotes}</span><i
-                                                            class="fa fa-thumbs-up" aria-hidden="true"></i></a>
+                                                    <a href="/discuss/commentUpVote/${comment.id}" class="btn btn-default"><span
+                                                            class="badge">${comment.upVotes}</span><i class="fa fa-thumbs-up" aria-hidden="true"></i></a>
                                                 </div>
                                                 <div class="col-sm-1 col-md-1">
-                                                    <a href="/discuss/commentDownVote/${comment.id}"
-                                                       class="btn btn-default"><span
-                                                            class="badge">${comment.downVotes}</span><i
-                                                            class="fa fa-thumbs-down" aria-hidden="true"></i></a>
+                                                    <a href="/discuss/commentDownVote/${comment.id}" class="btn btn-default"><span
+                                                            class="badge">${comment.downVotes}</span><i class="fa fa-thumbs-down" aria-hidden="true"></i></a>
                                                 </div>
                                             </div>
                                         </div>

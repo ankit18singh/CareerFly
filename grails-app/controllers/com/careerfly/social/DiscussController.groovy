@@ -2,7 +2,7 @@ package com.careerfly.social
 
 import com.careerfly.user.User
 
-import java.text.SimpleDateFormat
+
 
 class DiscussController {
 
@@ -24,26 +24,32 @@ class DiscussController {
 
     def forum(Long id) {
         println "FORUM id -->$id"
-               
-                    Discussion forumInstance = Discussion.get(params.id)
 
-                    User loggedInUserInstance = User.get(session.loggedInUser)
-                    println "author name -> $loggedInUserInstance.firstName"
-                    //println "comment --> ${commentInstance.body}"
-                    println "author id--> $forumInstance.id"
-                    List commentInstance1 = Comment.createCriteria().list {
-                        eq("entityID", forumInstance.id)
-                        order("dateCreated", "desc")
-                    }
-                    println "comment author-- > $commentInstance1.author"
-                    if (!commentInstance1) {
-                        println "empty"
-                        render(view: 'forum', model: [forumInstanceModel: forumInstance, userNameModel: loggedInUserInstance])
-                    } else {
-                        println "fetched--> $commentInstance1.body"
-                        render(view: "forum", model: [forumInstanceModel  : forumInstance, userNameModel: loggedInUserInstance,
-                                                      CommentInstanceModel: commentInstance1])
-                    }
+
+            Discussion forumInstance = Discussion.get(params.id)
+
+            User loggedInUserInstance = User.get(session.loggedInUser)
+            println "author name -> $loggedInUserInstance.firstName"
+            //println "comment --> ${commentInstance.body}"
+            println "author id--> $forumInstance.id"
+            List commentInstance1 = Comment.createCriteria().list {
+                eq("entityID", forumInstance.id)
+                order("dateCreated", "desc")
+            }
+            println "Comment Instance -> ${commentInstance1}"
+//            User authorInstance = User.get(commentInstance1.author)
+            println "comment author asdjk-- > $commentInstance1.author"
+  //          println "author of comment -> ${authorInstance.firstName}"
+            //User authorNameInstance = User.get(author)
+            //println "author of the comment ____--=> ${authorNameInstance}"
+            if (!commentInstance1) {
+                println "empty"
+                render(view: 'forum', model: [forumInstanceModel: forumInstance])
+            } else {
+                println "fetched--> $commentInstance1.body"
+                render(view: "forum", model: [forumInstanceModel  : forumInstance,
+                                              CommentInstanceModel: commentInstance1])
+            }
 
 
     }
@@ -193,7 +199,7 @@ class DiscussController {
         commentInstance.save()
         println "conclusion--> $commentInstance"
 
-        redirect(action: "forum", id: commentInstance.id)
+        redirect(action: "forum", id: discussionInstance.id)
     }
     def commentUpVote() {
 
@@ -232,8 +238,12 @@ class DiscussController {
             }
         }
         println ("COMMENT UP"+commentInstance.upVotes)
+        println("comment id :"+commentInstance.id)
         commentInstance.save()
-        redirect(action: "forum", id: commentInstance.id)
+
+        println "Comment - discussion - id : ---- ${commentInstance.entityID}"
+        redirect(action: "forum",  id: commentInstance.entityID)
+
 
     }
 
@@ -275,7 +285,7 @@ class DiscussController {
         }
         println ("COMMENT DOWN"+commentInstance.downVotes)
         commentInstance.save()
-        redirect(action: "forum", id: commentInstance.id)
+        redirect(action: "forum", id: commentInstance.entityID)
 
     }
 }
