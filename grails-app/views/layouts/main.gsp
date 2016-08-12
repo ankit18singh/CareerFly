@@ -60,6 +60,11 @@
                         <i class="fa fa-fw fa-cog" aria-hidden="true"></i><span class="text">Settings</span>
                     </g:link>
                 </li>
+                <li>
+                    <g:link controller="profile" action="logout">
+                        <i class="fa fa-sign-out" aria-hidden="true"></i><span class="text"> Sign Out</span>
+                    </g:link>
+                </li>
             </ul>
         </div>
         <!-- /#sidebar-wrapper -->

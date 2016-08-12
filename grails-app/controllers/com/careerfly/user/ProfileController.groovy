@@ -29,4 +29,8 @@ class ProfileController {
         flash.message = "updated successfully"
         redirect(action: 'index')
     }
+    def logout() {
+        session.loggedInUser=null
+        redirect(action:'index',controller: 'Login')
+    }
 }
