@@ -120,16 +120,35 @@
                                             <div class="media-body">
                                                 <h4 class="media-heading"> ${comment.author.firstName + " "+comment.author.lastName
                                                 }</h4><p>${raw(comment.body)}</p>
+                                                <div class="row">
+                                                    <div class="col-sm-1 col-md-1">
+                                                        <a href="/discuss/commentUpVote/${comment.id}" class="btn btn-default"><span
+                                                                class="badge">${comment.upVotes}</span><i class="fa fa-thumbs-up" aria-hidden="true"></i></a>
+                                                    </div>
+                                                    <div class="col-sm-1 col-md-1">
+                                                        <a href="/discuss/commentDownVote/${comment.id}" class="btn btn-default"><span
+                                                                class="badge">${comment.downVotes}</span><i class="fa fa-thumbs-down" aria-hidden="true"></i></a>
+                                                    </div>
+                                                </div>
 
-                                                <div class="col-sm-1 col-md-1">
-                                                    <a href="/discuss/commentUpVote/${comment.id}" class="btn btn-default"><span
-                                                            class="badge">${comment.upVotes}</span><i class="fa fa-thumbs-up" aria-hidden="true"></i></a>
+                                                <hr/>
+                                                <div>
+                                                    <g:form controller="discuss" action="subComment" method="post" id="${comment.id}">
+                                                        <div class="row">
+                                                            <div class="col-sm-12 col-md-12">
+                                                                <g:textArea name="replyBox"/>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-sm-12 col-md-12">
+                                                                <g:submitButton name="reply" class="btn btn-success pull-right"/>
+                                                            </div>
+                                                        </div>
+                                                    </g:form>
                                                 </div>
-                                                <div class="col-sm-1 col-md-1">
-                                                    <a href="/discuss/commentDownVote/${comment.id}" class="btn btn-default"><span
-                                                            class="badge">${comment.downVotes}</span><i class="fa fa-thumbs-down" aria-hidden="true"></i></a>
-                                                </div>
+
                                             </div>
+
                                         </div>
                                     </div>
                                 </div>
