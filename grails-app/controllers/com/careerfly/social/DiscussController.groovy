@@ -24,7 +24,7 @@ class DiscussController {
 
     def forum(Long id) {
         println "FORUM id -->$id"
-
+            println "Parent comment Instance in Forum -- > ${id}"
 
             Discussion forumInstance = Discussion.get(params.id)
 
@@ -40,6 +40,7 @@ class DiscussController {
 //            User authorInstance = User.get(commentInstance1.author)
             println "comment author asdjk-- > $commentInstance1.author"
   //          println "author of comment -> ${authorInstance.firstName}"
+            println "comment entity id-- > ${commentInstance1.entityID}"
             //User authorNameInstance = User.get(author)
             //println "author of the comment ____--=> ${authorNameInstance}"
             if (!commentInstance1) {
@@ -286,7 +287,24 @@ class DiscussController {
         println ("COMMENT DOWN"+commentInstance.downVotes)
         commentInstance.save()
         redirect(action: "forum", id: commentInstance.entityID)
+    }
 
+    def subComment() {
+
+        User loggedInUserInstance = User.get(session.loggedInUser)
+        Comment parentCommentIdInstance = Comment.get(params.id)
+        println "parent id--> ${parentCommentIdInstance}"
+
+        Comment subCommentInstance = new Comment()
+        subCommentInstance.author = loggedInUserInstance
+        subCommentInstance.body = params.replyBox
+        subCommentInstance.downVotes = 0l
+        subCommentInstance.upVotes = 0l
+        subCommentInstance.entity = CommentEntity.COMMENT
+        subCommentInstance.entityID = parentCommentIdInstance.id
+        subCommentInstance.save()
+
+        redirect(action: "forum", id: parentCommentIdInstance.entityID)
     }
 }
 
