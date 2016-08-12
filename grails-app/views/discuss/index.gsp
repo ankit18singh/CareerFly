@@ -31,9 +31,6 @@
             <div class="viewFeeds">
                 <g:each in="${viewAll}" var="feeds" status="i">
                     <div class="row">
-                        <div class="col-sm-1"><i class="fa fa-bookmark fa-4x" aria-hidden="true"><span
-                                class="badge">${i+1}</span></i>
-                        </div>
                         <div class="col-sm-7">
                             <div class="media">
                                 <div class="media-left">
@@ -52,6 +49,9 @@
                             </div>
                         </div>
 
+                        <div class="col-sm-1"><i class="fa fa-bookmark fa-4x" aria-hidden="true"><span
+                                class="badge">${i+1}</span></i>
+                        </div>
 
                     </div>
 
