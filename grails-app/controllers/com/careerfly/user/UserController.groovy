@@ -22,7 +22,7 @@ class UserController {
             userInstance.save()
 
             if (userInstance.hasErrors()) {
-                render(view: 'index', model: [user: userInstance]) 
+                render(view: 'index', model: [user: userInstance])
             } else if (params.password == params.confirmpassword) {
                 flash.message = "You are Successfully Registered"
                 redirect(action: "index", controller: "Login")
