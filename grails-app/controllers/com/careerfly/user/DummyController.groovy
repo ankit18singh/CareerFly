@@ -5,6 +5,6 @@ import com.careerfly.user.User
 class DummyController {
 
     def index() {
-        session.loggedInUser = 4
+        session.loggedInUser = 42
     }
 }
