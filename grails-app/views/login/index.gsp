@@ -1,89 +1,47 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: praveen
-  Date: 21/7/16
-  Time: 6:09 PM
---%>
-
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
-
     <title>Login</title>
     <meta name="layouts" content="main">
     <asset:stylesheet href="bootstrap.min.css"/>
     <asset:stylesheet href="font-awesome.min.css"/>
     <asset:stylesheet src="jquery.min.css"/>
     <asset:stylesheet src="bootstrap.min.js"/>
-    <style>
-
-
-    h1{
-        padding-top: 30px;
-        margin-bottom:26px;
-        text-align: center;
-    }
-    .col-md-3{
-        background-color: #f5f5f5;
-        height:300px;
-        border-radius: 4px;
-        border: 1px solid #000000;
-
-    }
-    .col-md-offset-5{
-        margin-left: 37.667%;
-    }
-    h3{
-        text-align: center;
-    }
-    h6{
-        text-align: center;
-        font-size: small;
-
-    }
-    .form-horizontal .form-group{
-        padding-top:5px;
-        margin-left: 17px;
-        text-align: center;
-        margin-right: -277px;
-    }
-    .form-control{
-        width: 50%;
-
-    }
-    .form-group{
-    }
-    .button{
-        margin-left: 105px;
-    }
-    </style>
+    <asset:stylesheet src="login.css"/>
 </head>
-
 <body>
-<div class="container-fluid">
-    <h1>CareerFly</h1>
-        <div class="col-md-offset-5 col-md-3 col-xs-4">
+    <div class="container-fluid well1">
+        <h1 align="center">CareerFly</h1>
+    </div>
+    <div class="box-model">
+        <div class="col-md-offset-3 col-md-3 col-xs-offset-2 col-xs-11 well">
             <div>
                 <h3>Login</h3>
-                <h6>Access Your Account</h6>
+                <h5>Access Your Account</h5>
                 <g:if test="${flash.message}">
-                    <div class="alert alert-info">
-                        <p>${flash.message}</p></div>
+                    <div class="alert alert-error danger" style="display: block">${flash.message}</div>
                 </g:if>
-                <g:form class="form-horizontal" action="register" controller="signup">
-                    <div class="form-group">
-                        <g:textField name="emailid" placeholder="Email" class="form-control"></g:textField>
+                <g:form controller="login" action="save">
+                    <div class="form-group ${hasErrors(bean: myUser, field: 'email', 'has-error')}">
+                        <g:textField name="email" placeholder="Email" class="form-control" autofocus="email">
+                        </g:textField>
+                        <g:renderErrors bean="${myUser}" field="email" />
                     </div>
-                    <div class="form-group">
-                        <g:passwordField name="password" placeholder="Password" class="form-control"></g:passwordField>
+                    <div class="form-group ${hasErrors(bean: myUser, field: 'password', 'has-error')}">
+                        <g:passwordField name="password" placeholder="Password" class="form-control">
+                        </g:passwordField>
+                        <g:renderErrors bean="${myUser}" field="password" />
                     </div>
-                    <div class="button">
-                        <g:submitButton name="Login" class="btn btn-danger btn-sm"></g:submitButton>
-                        <a href="">Forget ?</a>
+                    <div class="d1">
+                        <g:submitButton name="Login" class="btn btn-md">
+
+                        </g:submitButton>
                     </div>
+                    <br>
+                    <a class="anchor" href="#">Forget id or password  ?</a>
                 </g:form>
+                </div>
             </div>
         </div>
-</div>
-</body>
+    </body>
 </html>
