@@ -10,7 +10,7 @@ class ProfileController {
         }
     }
     def index() {
-        //User usr=User.findById(session.loggedInUser)
+
         [userData : User.get(session.loggedInUser)]
     }
 
@@ -28,6 +28,19 @@ class ProfileController {
 
         flash.message = "updated successfully"
         redirect(action: 'index')
+    }
+    def Socialprofile() {
+        [usersocial : SocialProfile.get(session.loggedInUser)]
+
+    }
+    def savesocialprofile() {
+        SocialProfile socialInstance = new SocialProfile([fb:params.fb,skype:params.skype,gplus:params.gplus,
+                user:User.get(session.loggedInUser)])
+
+        socialInstance.save()
+        flash.message = "Save Social Profile"
+        render(view: "Socialprofile",model: [usersocial: socialInstance])
+
     }
     def logout() {
         session.loggedInUser=null

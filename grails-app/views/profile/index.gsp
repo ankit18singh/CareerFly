@@ -20,9 +20,14 @@
     </head>
     <body>
         <content tag="body">
-            <h3>Edit your profile
+            <a href="index.gsp" style="padding-right: 25px">Edit your profile
                 <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-            </h3>
+            </a>
+
+            <a href="Socialprofile.gsp">Social Profile
+                <i class="fa fa-facebook" aria-hidden="true"></i>
+            </a>
+
             <hr>
             <div class="well">
                 <form name="update" class="form-horizontal" method="post" action="/Profile/update">
