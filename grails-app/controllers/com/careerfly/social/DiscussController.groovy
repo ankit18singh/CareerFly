@@ -28,48 +28,7 @@ class DiscussController {
 
             Discussion forumInstance = Discussion.get(params.id)
 
-            User loggedInUserInstance = User.get(session.loggedInUser)
-            println "author name -> $loggedInUserInstance.firstName"
-            //println "comment --> ${commentInstance.body}"
-            println "author id--> $forumInstance.id"
-            List commentInstance1 = Comment.createCriteria().list {
-                eq("entityID", forumInstance.id)
-                order("dateCreated", "desc")
-            }
-            List addComment = []
-            println "Comment Instance -> ${commentInstance1}"
-//            User authorInstance = User.get(commentInstance1.author)
-            println "comment author asdjk-- > $commentInstance1.author"
-  //          println "author of comment -> ${authorInstance.firstName}"
-            println "comment entity id-- > ${commentInstance1.entityID}"
-            //User authorNameInstance = User.get(author)
-            //println "author of the comment ____--=> ${authorNameInstance}"
-            if (!commentInstance1) {
-                println "empty"
-                render(view: 'forum', model: [forumInstanceModel: forumInstance])
-            } else {
-                println "fetched--> $commentInstance1.body"
-                int sizelist = commentInstance1.id.size()
-                for(int i=0; i< sizelist; i++){
-                    List subCommentsInstance = Comment.createCriteria().list {
-                        eq("entityID", commentInstance1[i].id)
-                    }
-                    if(!subCommentsInstance){
-                        println "no subcomment for comment id ${commentInstance1[i].id}"
-
-                    }
-                    else{
-                        println "subcomment found for comment id ${commentInstance1[i].id}!"
-                        render(view: "forum", model: [forumInstanceModel  : forumInstance,
-                                                      CommentInstanceModel: commentInstance1, subCommentModel:
-                                subCommentsInstance])
-                    }
-
-                }
-
-            }
-
-
+            render(view: 'forum', model: [forumInstanceModel: forumInstance])
     }
 
     def edit() {

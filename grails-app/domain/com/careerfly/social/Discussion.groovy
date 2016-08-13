@@ -25,4 +25,11 @@ class Discussion {
         downVotes (min: 0l)
     }
 
+        List getImmediateChildComments() {
+            return Comment.createCriteria().list {
+                eq("entity", CommentEntity.DISCUSSION)
+                eq("entityID", this.id)
+                order("dateCreated", "desc")
+            }
+        }
 }
