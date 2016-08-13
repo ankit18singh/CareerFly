@@ -38,9 +38,6 @@
             <div class="viewFeeds">
                 <g:each in="${viewAll}" var="feeds" status="i">
                     <div class="row">
-                        <div class="col-sm-1"><i class="fa fa-bookmark fa-4x" aria-hidden="true"><span
-                                class="badge">${i+1}</span></i>
-                        </div>
                         <div class="col-sm-7">
                             <div class="media">
                                 <div class="media-left">
@@ -59,23 +56,26 @@
                             </div>
                         </div>
 
+                        <div class="col-sm-1"><i class="fa fa-bookmark fa-4x" aria-hidden="true"><span
+                                class="badge">${i+1}</span></i>
+                        </div>
 
                     </div>
 
                     <hr id="hrCol">
                 </g:each>
-                <g:paginate  next="Forward" prev="Back" maxsteps="3" controller="discuss" action= "index"
-                             total="${discussionCount}"/>
+                %{--<g:paginate  next="Forward" prev="Back" maxsteps="3" controller="discuss" action= "index"
+                             total="${discussionCount}"/>--}%
             </div>
 
 
-
-                %{--<ul class="pager">
+            <nav>
+                <ul class="pager">
 
                     <li><a href="#">Previous</a></li>
                     <li><a href="#">Next</a></li>
-                </ul>--}%
-
+                </ul>
+            </nav>
         </content>
     </body>
 </html>

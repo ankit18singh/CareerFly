@@ -11,6 +11,7 @@ class DiscussController {
         Integer value = params.int('newsFeeds')
 
 
+
         if(value == 1) {
             [viewAll: Discussion.list(), discussionCount: Discussion.count()]
         }
@@ -19,7 +20,7 @@ class DiscussController {
         }
         else if(value == 3) {
             [viewAll: Discussion.listOrderByUpVotes(order:"desc"), discussionCount: Discussion.count()]
-        }
+
 
     }
 
@@ -37,34 +38,11 @@ class DiscussController {
 
     def forum(Long id) {
         println "FORUM id -->$id"
-
+            println "Parent comment Instance in Forum -- > ${id}"
 
             Discussion forumInstance = Discussion.get(params.id)
 
-            User loggedInUserInstance = User.get(session.loggedInUser)
-            println "author name -> $loggedInUserInstance.firstName"
-            //println "comment --> ${commentInstance.body}"
-            println "author id--> $forumInstance.id"
-            List commentInstance1 = Comment.createCriteria().list {
-                eq("entityID", forumInstance.id)
-                order("dateCreated", "desc")
-            }
-            println "Comment Instance -> ${commentInstance1}"
-//            User authorInstance = User.get(commentInstance1.author)
-            println "comment author asdjk-- > $commentInstance1.author"
-  //          println "author of comment -> ${authorInstance.firstName}"
-            //User authorNameInstance = User.get(author)
-            //println "author of the comment ____--=> ${authorNameInstance}"
-            if (!commentInstance1) {
-                println "empty"
-                render(view: 'forum', model: [forumInstanceModel: forumInstance])
-            } else {
-                println "fetched--> $commentInstance1.body"
-                render(view: "forum", model: [forumInstanceModel  : forumInstance,
-                                              CommentInstanceModel: commentInstance1])
-            }
-
-
+            render(view: 'forum', model: [forumInstanceModel: forumInstance])
     }
 
     def edit() {
@@ -299,7 +277,25 @@ class DiscussController {
         println ("COMMENT DOWN"+commentInstance.downVotes)
         commentInstance.save()
         redirect(action: "forum", id: commentInstance.entityID)
+    }
 
+    def subComment() {
+
+        User loggedInUserInstance = User.get(session.loggedInUser)
+        Comment parentCommentIdInstance = Comment.get(params.id)
+        println "parent id--> ${parentCommentIdInstance}"
+
+        Comment subCommentInstance = new Comment()
+        subCommentInstance.author = loggedInUserInstance
+        subCommentInstance.body = params.replyBox
+        subCommentInstance.downVotes = 0l
+        subCommentInstance.upVotes = 0l
+        subCommentInstance.entity = CommentEntity.COMMENT
+        subCommentInstance.entityID = parentCommentIdInstance.id
+        subCommentInstance.save()
+        println "success!"
+
+        redirect(action: "forum", id: parentCommentIdInstance.entityID)
     }
 }
 

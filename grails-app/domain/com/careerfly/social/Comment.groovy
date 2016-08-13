@@ -17,6 +17,14 @@ class Comment {
         upVotes (min: 0l)
         downVotes (min: 0l)
     }
+
+    List getImmediateChildComments() {
+        return Comment.createCriteria().list {
+            eq("entity", CommentEntity.COMMENT)
+            eq("entityID", this.id)
+            order("dateCreated", "desc")
+        }
+    }
 }
 enum CommentEntity {
 
