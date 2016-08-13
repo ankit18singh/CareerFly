@@ -24,7 +24,7 @@
                 <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
             </a>
 
-            <a href="Socialprofile.gsp">Social Profile
+            <a href="check">Social Profile
                 <i class="fa fa-facebook" aria-hidden="true"></i>
             </a>
 

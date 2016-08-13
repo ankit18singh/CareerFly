@@ -30,18 +30,50 @@ class ProfileController {
         redirect(action: 'index')
     }
     def Socialprofile() {
-        [usersocial : SocialProfile.get(session.loggedInUser)]
+    }
+
+    def check() {
+        SocialProfile socialInstance = SocialProfile.findByUser(User.get(session.loggedInUser))
+
+        println socialInstance
+
+        if (!socialInstance) {
+            redirect(action: "Socialprofile")
+
+        } else {
+            render(view: "Social",model: [usersocial:socialInstance] )
+        }
 
     }
     def savesocialprofile() {
+
         SocialProfile socialInstance = new SocialProfile([fb:params.fb,skype:params.skype,gplus:params.gplus,
-                user:User.get(session.loggedInUser)])
+                                                          user:User.get(session.loggedInUser)])
 
         socialInstance.save()
         flash.message = "Save Social Profile"
-        render(view: "Socialprofile",model: [usersocial: socialInstance])
+        render(view:"Socialprofile")
 
     }
+    def updatesocial() {
+
+        SocialProfile updatesocial= SocialProfile.findByUser(User.get(session.loggedInUser))
+        updatesocial.fb = params.fb
+        updatesocial.skype = params.skype
+        updatesocial.gplus = params.gplus
+        updatesocial.save(flush: true)
+
+        if (updatesocial.hasErrors()) {
+            render(view: 'Social', model: [usersocial: updatesocial])
+            flash.message = 'Invalid Fields'
+            return
+        }
+
+        flash.message = "updated successfully"
+        render(view: 'Social',model: [usersocial: updatesocial])
+        
+    }
+
     def logout() {
         session.loggedInUser=null
         redirect(action:'index',controller: 'Login')

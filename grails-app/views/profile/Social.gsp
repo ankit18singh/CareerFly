@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: praveen
-  Date: 12/8/16
-  Time: 4:48 PM
+  Date: 13/8/16
+  Time: 4:33 PM
 --%>
 
 %@ page contentType="text/html;charset=UTF-8" %>
@@ -29,33 +29,33 @@
     </a>
     <hr>
     <div class="well">
-        <form name="update" class="form-horizontal" method="post" action="savesocialprofile">
+        <form name="update" class="form-horizontal" method="post" action="updatesocial">
             <div class="form-group ${hasErrors(bean: usersocial, field: 'fb', 'has-error')}">
                 <label for="fb" class="col-lg-4 control-label">FaceBook Username </label>
                 <div class="col-lg-5">
-                    <input type="text" class="form-control" name="fb" id="fb" autofocus="fb">
-                    <g:renderErrors bean="${usersocial}" field="fb" />
+                    <input type="text" class="form-control" name="fb" value="${usersocial.fb}" id="fb" autofocus="fb">
+                    <g:renderErrors bean="${usersocial.fb}" field="fb" />
                 </div>
             </div>
 
             <div class="form-group ${hasErrors(bean: usersocial, field: 'skype', 'has-error')}">
                 <label for="skype" class="col-lg-4 control-label"> Skype Username </label>
                 <div class="col-lg-5">
-                    <input type="text" class="form-control" name="skype" id="skype" >
-                    <g:renderErrors bean="${usersocial}" field="skype" />
+                    <input type="text" class="form-control" name="skype" value="${usersocial.skype}" id="skype" >
+                    <g:renderErrors bean="${usersocial.skype}" field="skype" />
                 </div>
             </div>
 
             <div class="form-group ${hasErrors(bean: usersocial, field: 'gplus', 'has-error')}">
                 <label for="gplus" class="col-lg-4 control-label"> Google+</label>
                 <div class="col-lg-5">
-                    <input type="text" class="form-control" name="gplus" id="gplus">
-                    <g:renderErrors bean="${usersocial}" field="gplus" />
+                    <input type="text" class="form-control" name="gplus" value="${usersocial.gplus}" id="gplus">
+                    <g:renderErrors bean="${usersocial.gplus}" field="gplus" />
                 </div>
             </div>
 
             <div align="center">
-                <button class="btn btn-info">SAVE</button>
+                <button class="btn btn-info">Update</button>
                 <button type="reset" class="btn btn-default">CANCEL</button>
             </div>
 
@@ -70,4 +70,3 @@
 </content>
 </body>
 </html>
-
