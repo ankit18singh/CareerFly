@@ -292,6 +292,7 @@ class DiscussController {
         subCommentInstance.entity = CommentEntity.COMMENT
         subCommentInstance.entityID = parentCommentIdInstance.id
         subCommentInstance.save()
+        println "success!"
 
         redirect(action: "forum", id: parentCommentIdInstance.entityID)
     }
