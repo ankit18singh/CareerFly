@@ -10,14 +10,15 @@ class DiscussController {
         println(params.int('newsFeeds'))
         Integer value = params.int('newsFeeds')
 
+
         if(value == 1) {
-            [viewAll: Discussion.list()]
+            [viewAll: Discussion.list(), discussionCount: Discussion.count()]
         }
         else if(value == 2) {
-            [viewAll: Discussion.listOrderByLastUpdated(order:"desc")]
+            [viewAll: Discussion.listOrderByLastUpdated(order:"desc"), discussionCount: Discussion.count()]
         }
         else if(value == 3) {
-            [viewAll: Discussion.listOrderByUpVotes(order:"desc")]
+            [viewAll: Discussion.listOrderByUpVotes(order:"desc"), discussionCount: Discussion.count()]
         }
 
     }
