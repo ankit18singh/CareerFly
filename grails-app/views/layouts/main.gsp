@@ -120,6 +120,7 @@
             <div class="container-fluid">
                 <div class="container-fluid">
                     <div id="body">
+
                         <g:pageProperty name="page.body"/>
                     </div>
                 </div>

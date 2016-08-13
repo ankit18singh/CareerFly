@@ -15,18 +15,22 @@
         <content tag="body">
 
             <div class="row">
-                <div class="form-group">
-                    <div class="col-sm-3" >
-                       %{-- <select name="newsFeeds" class="form-control">
-                            <option value="interest" id=1>Intrest</option>
-                            <option value="latest" id=2>Latest</option>
-                            <option value="toprated" id=3>Top Rated</option>
-                        </select>--}%
-                        <g:select name = "newsFeeds" class="form-control" from ="${[[abc: "Interest",xyz:1],[abc:"Latest",xyz:2],[abc : "TopRated", xyz : 3]]}"
-                                  noSelection="['':'SELECT' ]" onchange="${remoteFunction(params : 'this.value')}"
-                                  optionValue="abc" optionKey="xyz"  style="padding:2px; margin:2px;"/>
+                <g:form controller="discuss" action="index" method="post">
+                    <div class="form-group">
+                        <div class="col-sm-3">
+                            %{-- <select name="newsFeeds" class="form-control">
+                                 <option value="interest" id=1>Interest</option>
+                                 <option value="latest" id=2>Latest</option>
+                                 <option value="toprated" id=3>Top Rated</option>
+                             </select>--}%
+                            <g:select name = "newsFeeds" class="form-control" from ="${[[abc:"Interest",xyz:1], [abc:"Latest",xyz:2],[abc :"TopRated", xyz:3]]}"
+                                      value="this.value" onchange="${remoteFunction(params : 'this.value')}"
+                                      optionValue="abc" optionKey="xyz"  />
+                            <g:submitButton name="submit"/>
+                        </div>
                     </div>
-                </div>
+
+                </g:form>
             </div>
 
             <hr id="hrCol">

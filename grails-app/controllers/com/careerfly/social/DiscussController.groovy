@@ -2,23 +2,26 @@ package com.careerfly.social
 
 import com.careerfly.user.User
 
-
-
 class DiscussController {
 
     def index() {
 
-        int value = params.int("newsFeeds")
+        //[viewAll: Discussion.list()]
+        println(params.int('newsFeeds'))
+        Integer value = params.int('newsFeeds')
+
         if(value == 1) {
-        [viewAll: Discussion.list()]
+            [viewAll: Discussion.list()]
         }
         else if(value == 2) {
-            [viewAll: Discussion.listOrderByDateCreated(order: "desc")]
+            [viewAll: Discussion.listOrderByLastUpdated(order:"desc")]
         }
         else if(value == 3) {
             [viewAll: Discussion.listOrderByUpVotes(order:"desc")]
         }
+
     }
+
 
     def save(String newtitle, String newbody, String newlink) {
 
