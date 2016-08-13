@@ -146,9 +146,26 @@
                                                         </div>
                                                     </g:form>
                                                 </div>
-
+                                                <hr/>
                                             </div>
+                                            <g:if test="${subCommentModel}">
+                                                <g:each in="${subCommentModel}" var="reply">
+                                                    <div class="media">
+                                                        <a class="pull-left" href="#">
+                                                            <asset:image class="media-class img-circle" src="dp.png"
+                                                                         width="44px"/>
+                                                        </a>
+                                                    </div>
+                                                    <div class="media-body">
+                                                        <h3 class="media-heading"> ${reply.author.firstName + " "+reply.author.lastName
+                                                }</h3><p>${raw(reply.body)}</p>
+                                                    </div
+                                                </g:each>
 
+                                            </g:if>
+                                            <g:else>
+                                                <p>none.</p>
+                                            </g:else>
                                         </div>
                                     </div>
                                 </div>
