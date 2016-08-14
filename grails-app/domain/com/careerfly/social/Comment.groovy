@@ -16,6 +16,7 @@ class Comment {
     static constraints = {
         upVotes (min: 0l)
         downVotes (min: 0l)
+
     }
 
     List getImmediateChildComments() {

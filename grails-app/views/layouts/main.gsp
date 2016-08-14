@@ -19,8 +19,7 @@
         <asset:javascript src="tinymce/tinymce.min.js"/>
         <script>
             tinymce.init({ selector:'textarea',
-                menubar: false,
-                statusbar: false
+                menubar: false
             });
         </script>
         <meta charset="utf-8">
@@ -59,8 +58,10 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-1 text-center pull-right">
-                                    <i class="fa fa-plus-square-o fa-3x" aria-hidden="true" title="Create New Discussion"
-                                       data-toggle="modal" data-target="#newDiscModal"></i>
+                                    <g:link controller="discuss" action="create">
+                                        <i class="fa fa-plus-square-o fa-3x" aria-hidden="true" title="Create New Discussion"></i>
+                                    </g:link>
+
                                 </div>
                             </div>
                         </form>
@@ -130,6 +131,7 @@
     </div>
     <!-- /#wrapper -->
 
+%{--
 <div id="newDiscModal" class="modal fade" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -138,12 +140,17 @@
                 <h4 class="modal-title">Create Discussion</h4>
             </div>
             <div class="modal-body">
+                <g:if test="${flash.error}">
+                    <div class="alert alert-danger" style="display: block">${flash.error}</div>
+                </g:if>
+
                 <g:form controller="discuss" action="save" method="post" class="form-horizontal">
                     <div class="row">
-                        <div class="form-group">
+                        <div class="form-group ${hasErrors(field:"newtitle", "has-error")}" >
                             <div class="col-sm-8 col-md-12">
                                 <g:textField name="newtitle" class="form-control"
-                                             placeholder="Title of your Discussion" required="required"/>
+                                             placeholder="Title of your Discussion"/>
+                                <g:renderErrors field="newtitle"/>
                             </div>
                         </div>
 
@@ -184,6 +191,7 @@
         </div>
     </div>
 </div>
+--}%
 
 
 

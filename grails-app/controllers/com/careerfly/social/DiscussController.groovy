@@ -30,9 +30,23 @@ class DiscussController {
 
         Discussion discussionInstance= new Discussion([title: newtitle, body: newbody, link: newlink, author: userInstance,
                                                        file: 1])
-        discussionInstance.save()/*
+        println "discussion body-- > ${discussionInstance.body}"
+        discussionInstance.save()
+        if(discussionInstance.hasErrors()){
+            println "error caught!!"
+            flash.error = "Please Enter Discussion Correctly"
+            render(view: "create", model:[reloadSaveCreateInstance: discussionInstance])
+            return
+        }/*
         println "author id--> $discussionInstance.author"*/
-        redirect(action: 'forum', id: discussionInstance.id, author: discussionInstance.author)
+        else{
+            redirect(action: 'forum', id: discussionInstance.id, author: discussionInstance.author)
+        }
+
+    }
+
+    def create() {
+        [reloadSave: new Discussion()]
     }
 
     def forum(Long id) {
@@ -46,9 +60,7 @@ class DiscussController {
 
     def edit() {
 
-       /* Discussion discussionInstance = Discussion.get(params.author)
-        println "author id--> ${discussionInstance}"
-       */ [discussionEdit: Discussion.get(params.id)]
+        [discussionEdit: Discussion.get(params.id)]
     }
 
     def update(String newtitle, String newbody, String newlink) {
@@ -63,6 +75,11 @@ class DiscussController {
         //updatedInstance.tags = newtag
 
         updatedInstance.save(flush: true)
+        if(updatedInstance.hasErrors()){
+            flash.error = "Please Enter Values Correctly!"
+            render(view: "edit", model:[reloadSaveUpdateInstance: updatedInstance])
+            return
+        }
         redirect(action: "forum", id: updatedInstance.id)
     }
 
@@ -173,11 +190,15 @@ class DiscussController {
         println "user --> $session.loggedInUser"
         User loggedInUserInstance3 = User.get(session.loggedInUser)
 
-        Comment commentInstance = new Comment()
-        commentInstance.author = loggedInUserInstance3
+        Comment commentInstance = new Comment(author: loggedInUserInstance3, body: params.discussionComment, entity:
+                CommentEntity.DISCUSSION, entityID: discussionInstance.id, downVotes: 0l, upVotes: 0l)
+        /*commentInstance.author = loggedInUserInstance3
         println "author--> $commentInstance.author"
-        commentInstance.body = params.discussionComment
+        commentInstance.body = discussionComment
         println "cmmnt --> $commentInstance.body"
+        if(commentInstance.body == ""){
+            println "blank space"
+        }
         commentInstance.entity = CommentEntity.DISCUSSION
         println "entity--> $commentInstance.entity"
         commentInstance.entityID = discussionInstance.id
@@ -186,9 +207,18 @@ class DiscussController {
         println "upvote--> $commentInstance.upVotes"
         commentInstance.downVotes = 0l
         println "downvote--> $commentInstance.downVotes"
-        commentInstance.save()
+        */
         println "conclusion--> $commentInstance"
+        commentInstance.save()
 
+        if(commentInstance.hasErrors())
+        {
+            println "error caught for commetn"
+            flash.error = "Blank Comment Cannot be posted!"
+            render(view: "forum", model:[reloadCommentInstanceModel: commentInstance])
+            return
+        }
+        
         redirect(action: "forum", id: discussionInstance.id)
     }
     def commentUpVote() {
