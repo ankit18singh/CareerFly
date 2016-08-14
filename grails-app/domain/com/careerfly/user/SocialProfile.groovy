@@ -7,8 +7,8 @@ class SocialProfile {
     User user
 
     static constraints = {
-        gplus(blank: false, matches: "[a-zA-Z]+")
-        skype(blank: false, matches: "[a-zA-Z]+")
-        fb(blank: false, matches: "[a-zA-Z]+")
+        gplus(nullable: true, matches: "[a-zA-Z]+[0-9]]")
+        skype(nullable: true, matches: "[a-zA-Z]+[0-9]")
+        fb(nullable: true, matches: "[a-zA-Z]+[0-9]")
     }
 }
