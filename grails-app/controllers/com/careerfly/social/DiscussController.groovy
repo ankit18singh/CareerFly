@@ -12,7 +12,10 @@ class DiscussController {
         println(params.int('newsFeeds'))
         Integer value = params.int('newsFeeds')
 
-        if(value == 1) {
+        if(value == null) {
+            [viewAll: Discussion.list()]
+        }
+        else if(value == 1){
             [viewAll: Discussion.list()]
         }
         else if(value == 2) {
@@ -218,7 +221,7 @@ class DiscussController {
             render(view: "forum", model:[reloadCommentInstanceModel: commentInstance])
             return
         }
-        
+
         redirect(action: "forum", id: discussionInstance.id)
     }
     def commentUpVote() {
