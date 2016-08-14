@@ -24,7 +24,7 @@
                                  <option value="toprated" id=3>Top Rated</option>
                              </select>--}%
                             <g:select name = "newsFeeds" class="form-control" from ="${[[abc:"Interest",xyz:1], [abc:"Latest",xyz:2],[abc :"TopRated", xyz:3]]}"
-                                      value= "" onchange="${remoteFunction(params : 'this.value')}"
+                                       onchange="${remoteFunction(params : 'this.value')}"
                                       optionValue="abc" optionKey="xyz"  />
                             <g:submitButton name="submit"/>
                         </div>
@@ -64,18 +64,11 @@
 
                     <hr id="hrCol">
                 </g:each>
-                %{--<g:paginate  next="Forward" prev="Back" maxsteps="3" controller="discuss" action= "index"
+                %{--<g:paginate  next="Forward" prev="Back" maxsteps="10" controller="discuss" action= "index"
                              total="${discussionCount}"/>--}%
+
             </div>
 
-
-            <nav>
-                <ul class="pager">
-
-                    <li><a href="#">Previous</a></li>
-                    <li><a href="#">Next</a></li>
-                </ul>
-            </nav>
         </content>
     </body>
 </html>
