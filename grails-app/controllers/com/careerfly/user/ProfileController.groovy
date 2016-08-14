@@ -3,15 +3,16 @@ package com.careerfly.user
 class ProfileController {
 
     def beforeInterceptor = {
-        if(!session.loggedInUser){
-            flash.message= ">>To continue further, You first need to login >>"
-            redirect(controller: "login" , action: "index")
+        if (!session.loggedInUser) {
+            flash.message = ">>To continue further, You first need to login >>"
+            redirect(controller: "login", action: "index")
             return false
         }
     }
+
     def index() {
 
-        [userData : User.get(session.loggedInUser)]
+        [userData: User.get(session.loggedInUser)]
     }
 
     def update() {
@@ -29,35 +30,44 @@ class ProfileController {
         flash.message = "updated successfully"
         redirect(action: 'index')
     }
+
     def Socialprofile() {
     }
 
     def check() {
         SocialProfile socialInstance = SocialProfile.findByUser(User.get(session.loggedInUser))
 
-        println socialInstance
 
         if (!socialInstance) {
             redirect(action: "Socialprofile")
 
         } else {
-            render(view: "Social",model: [usersocial:socialInstance] )
+            render(view: "Social", model: [usersocial: socialInstance])
         }
 
     }
+
     def savesocialprofile() {
 
-        SocialProfile socialInstance = new SocialProfile([fb:params.fb,skype:params.skype,gplus:params.gplus,
-                                                          user:User.get(session.loggedInUser)])
+        SocialProfile socialInstance = new SocialProfile([fb  : params.fb, skype: params.skype, gplus: params.gplus,
+                                                          user: User.get(session.loggedInUser)])
 
         socialInstance.save()
-        flash.message = "Save Social Profile"
-        render(view:"Socialprofile")
+
+        if (socialInstance.hasErrors()) {
+            render(view: 'Socialprofile', model: [usersocial: socialInstance])
+            return
+        } else {
+            flash.message = "Social Profile Saved"
+            render(view: "Social", model: [usersocial: socialInstance])
+        }
+
 
     }
+
     def updatesocial() {
 
-        SocialProfile updatesocial= SocialProfile.findByUser(User.get(session.loggedInUser))
+        SocialProfile updatesocial = SocialProfile.findByUser(User.get(session.loggedInUser))
         updatesocial.fb = params.fb
         updatesocial.skype = params.skype
         updatesocial.gplus = params.gplus
@@ -70,12 +80,8 @@ class ProfileController {
         }
 
         flash.message = "updated successfully"
-        render(view: 'Social',model: [usersocial: updatesocial])
-        
+        render(view: 'Social', model: [usersocial: updatesocial])
+
     }
 
-    def logout() {
-        session.loggedInUser=null
-        redirect(action:'index',controller: 'Login')
-    }
 }
