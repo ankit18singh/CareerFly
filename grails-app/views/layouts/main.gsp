@@ -19,7 +19,8 @@
         <asset:javascript src="tinymce/tinymce.min.js"/>
         <script>
             tinymce.init({ selector:'textarea',
-                menubar: false
+                menubar: false,
+                statusbar: false
             });
         </script>
         <meta charset="utf-8">
@@ -45,18 +46,22 @@
             <div class="collapse navbar-collapse" id="search">
                 <ul class="nav navbar-nav pull-right">
                     <li>
-                        <form class="navbar-form navbar-right">
+                        <g:form class="navbar-form navbar-right" method="get" controller="discuss" action="search">
                             <div class="row">
                                 <div class="form-group col-sm-10 col-md-10">
                                     <div class="input-group col-md-12">
-                                        <input type="text" class="  search-query form-control" placeholder="Search" />
+                                        <input type="search" class="search-query form-control" placeholder="Search"
+                                               name="searchBox"/>
                                         <span class="input-group-btn">
                                             <button class="btn btn-danger search" type="button">
                                                 <i class="fa fa-search" aria-hidden="true"></i>
                                             </button>
                                         </span>
                                     </div>
-                                </div>
+                                </div>%{--
+                                <div class="form-group">
+                                    <button type="submit">Search</button>
+                                </div>--}%
                                 <div class="col-sm-1 text-center pull-right">
                                     <g:link controller="discuss" action="create">
                                         <i class="fa fa-plus-square-o fa-3x" aria-hidden="true" title="Create New Discussion"></i>
@@ -64,7 +69,7 @@
 
                                 </div>
                             </div>
-                        </form>
+                        </g:form>
                     </li>
                 </ul>
             </div>

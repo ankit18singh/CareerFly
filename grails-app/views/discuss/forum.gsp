@@ -138,6 +138,7 @@
                 <div class="col-sm-10 col-md-10">
                     <g:each in="${forumInstanceModel.getImmediateChildComments()}" var="comment">
                         <g:render template="comment" model="[commentInstance: comment]"></g:render>
+                        <br>
                     </g:each>
                 </div>
             </div>

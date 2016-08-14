@@ -186,18 +186,19 @@ class DiscussController {
 
     }
 
-    def comment(Long id) {
+    def comment(Long id, String discussionComment) {
 
         Discussion discussionInstance = Discussion.get(params.id)
         println "id--> ${discussionInstance.id}"
         println "user --> $session.loggedInUser"
         User loggedInUserInstance3 = User.get(session.loggedInUser)
 
-        Comment commentInstance = new Comment(author: loggedInUserInstance3, body: params.discussionComment, entity:
+       /* Comment commentInstance = new Comment(author: loggedInUserInstance3, body: params.discussionComment, entity:
                 CommentEntity.DISCUSSION, entityID: discussionInstance.id, downVotes: 0l, upVotes: 0l)
-        /*commentInstance.author = loggedInUserInstance3
+       */
+        Comment commentInstance = new Comment(body: discussionComment)
+        commentInstance.author = loggedInUserInstance3
         println "author--> $commentInstance.author"
-        commentInstance.body = discussionComment
         println "cmmnt --> $commentInstance.body"
         if(commentInstance.body == ""){
             println "blank space"
@@ -210,9 +211,8 @@ class DiscussController {
         println "upvote--> $commentInstance.upVotes"
         commentInstance.downVotes = 0l
         println "downvote--> $commentInstance.downVotes"
-        */
         println "conclusion--> $commentInstance"
-        commentInstance.save()
+        commentInstance.save(flush: true)
 
         if(commentInstance.hasErrors())
         {
@@ -224,6 +224,7 @@ class DiscussController {
 
         redirect(action: "forum", id: discussionInstance.id)
     }
+
     def commentUpVote() {
 
         Comment commentInstance = Comment.get(params.id)
@@ -328,6 +329,31 @@ class DiscussController {
         println "success!"
 
         redirect(action: "forum", id: parentCommentIdInstance.entityID)
+    }
+
+    def search() {
+        println "$params.searchBox"
+        List searchInstance = Discussion.createCriteria().list {
+            like("title", "%${params.searchBox}%")
+        }
+        println "searched id = ${searchInstance.id[0]}"
+
+        if(searchInstance){
+            //render ("found ${searchInstance.size()}")/*
+/*            if(searchInstance.size() == 1){
+                int searchedId = searchInstance.id[0]
+                println "searched id inside = ${searchedId}"
+            }*/
+            println "search result= ${searchInstance}"
+            render(view: "searchResult", model:[searchInstanceModel: searchInstance])
+        }
+        else{
+            render("none")
+        }
+    }
+
+    def searchResult() {
+
     }
 }
 

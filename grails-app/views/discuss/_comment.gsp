@@ -1,4 +1,4 @@
-<div class="comments bg-success">
+<div class="comments">
     <div class="media">
         <div class="media-left">
             <a href="#">
