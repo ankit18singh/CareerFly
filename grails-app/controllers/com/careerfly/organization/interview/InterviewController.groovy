@@ -5,7 +5,6 @@ import com.careerfly.geo.City
 import com.careerfly.organization.Company
 import com.careerfly.organization.interview.Interview
 import com.careerfly.organization.interview.InterviewRound
-import com.careerfly.organization.interview.Result
 import com.careerfly.taggable.Tag
 import com.careerfly.user.User
 

@@ -5,7 +5,7 @@
   Date: 21/7/16
   Time: 12:46 PM
 --%>
-<%@ page import="com.careerfly.organization.interview.Result" contentType="text/html;charset=UTF-8" %>
+<%@ page import="com.careerfly.organization.interview.Interview" contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
     <title></title>
@@ -61,7 +61,7 @@
 
             <div class="form-group">
                 <label for="result">Your Placement:</label>
-                <g:select name="result" id="result" from="${Result.values()}" value="${fieldValue(field: 'result')}"
+                <g:select name="result" id="result" from="${com.careerfly.organization.interview.Interview.Result.values()}" value="${fieldValue(field: 'result')}"
                           noSelection="['':'Select the Status of Placement']" class="form-control"/>
             </div>
 

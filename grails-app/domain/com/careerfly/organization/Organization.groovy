@@ -11,6 +11,5 @@ abstract class Organization {
 
     static constraints = {
         name (blank: false)
-        address (blank: false)
     }
 }

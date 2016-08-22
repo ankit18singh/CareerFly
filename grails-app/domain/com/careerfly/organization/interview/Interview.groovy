@@ -18,6 +18,14 @@ class Interview {
     static hasMany = [workExperience: String, technologies: Tag, tools: Tag, skills: Tag, rounds: InterviewRound]
 
     static constraints = {
+
+        jobPosition(blank: false, matches: "[a-zA-Z]+")
+        qualification(blank: false, matches: "[a-zA-Z0-9]+")
+        workExperience(nullable: false)
+        rounds(nullable: false, matches: "[0-9]+")
+        technologies(nullable: false)
+        tools(nullable: false)
+        skills(nullable: false)
     }
 
     enum Result {
