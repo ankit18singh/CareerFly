@@ -27,7 +27,8 @@
 
             <div class="form-group">
                 <label for="address">Headquarter:</label>
-                <g:textField name="address" placeholder="Enter City of the Company" class="form-control"/>
+                <g:textField name="address" placeholder="Enter the Head-Office City of the Company"
+                             class="form-control"/>
             </div>
 
             <g:submitButton name="next" value="Next" class="btn btn-primary btnProp"></g:submitButton>

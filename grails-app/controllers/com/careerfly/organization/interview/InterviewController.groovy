@@ -3,11 +3,7 @@ package com.careerfly.organization.interview
 import com.careerfly.geo.Address
 import com.careerfly.geo.City
 import com.careerfly.organization.Company
-import com.careerfly.organization.interview.Interview
-import com.careerfly.organization.interview.InterviewRound
-import com.careerfly.organization.interview.Result
 import com.careerfly.taggable.Tag
-import com.careerfly.user.User
 
 class InterviewController {
 
@@ -71,7 +67,7 @@ class InterviewController {
         Map getDetails = [company: companyInstance, candidate: session.loggedInUser, jobPosition: params.jobPosition,
                           qualification: params.qualification, result:params.result, workExperience: workExperience,
                           technologies: interviewInstance.technologies, tools: interviewInstance.tools,
-                          skills: interviewInstance.skills, rounds: params.rounds]
+                          skills: interviewInstance.skills]
 
         println getDetails
 
@@ -111,70 +107,61 @@ class InterviewController {
             return
         }
 
+        City cityInstance = City.get(params.cityID)
+        cityInstance.name = params.companyAddress
+        cityInstance.save(flush: true)
 
-        println "here 1111"
-        println params.cityID
-        City updateCity = City.get(params.cityID)
-        updateCity.name = params.companyAddress
-        updateCity.save(flush: true)
-        println updateCity
-        println updateCity.errors
-        println "here 2222"
-        println params.companyID
-        Company updateOrg = Company.get(params.companyID)
-        updateOrg.name = params.companyName
-        updateOrg.save(flush: true)
-        println updateOrg
-        println updateOrg.errors
-        println "here 3333"
+        Company companyInstance = Company.get(params.companyID)
+        companyInstance.name = params.companyName
+        companyInstance.save(flush: true)
+
         interviewInstance.jobPosition = params.jobPosition
-        println "here 4444"
+
         interviewInstance.qualification = params.qualification
-        println "here 5555"
-        interviewInstance.result = params.result
-        println "here 6666"
+
         interviewInstance.workExperience = params.workExperience.split(";")
-        println "here 7777"
-        interviewInstance.addToRounds([rounds: params.rounds])
-        println "here 8888"
-        interviewInstance.save(flush: true)
-        println interviewInstance.errors
-        println "here 9999"
-        println interviewInstance
-        println "here 0000"
+
         Set tech = params.technologies.split(";")
-        println tech + "!!!!!!!!!!!!!!!!!!"
         Set tools = params.tools.split(";")
-        println tools + "@@@@@@@@@@@@@@@@@"
         Set skills = params.skills.split(";")
-        println skills + "################"
-        /*tech.each {
-            Tag techInstance = Tag.findByName(it)
+
+        int i = 0
+        interviewInstance.technologies.id.each {
+            Tag techInstance = Tag.findByName(tech[i])
             if (!techInstance) {
-                techInstance = Tag.get(interviewInstance.technologies.id)
+                techInstance = Tag.get(it)
+                techInstance.name = tech[i]
                 techInstance.save(flush: true)
             }
-            println techInstance
-            println techInstance.errors
+            i++
         }
-        println "here!!!!!!!!!!"
-        tools.each {
-            Tag toolInstance = Tag.findByName(it)
+
+        i = 0
+        interviewInstance.tools.id.each {
+            Tag toolInstance = Tag.findByName(tools[i])
             if (!toolInstance) {
-                toolInstance = Tag.get(interviewInstance.tools.id)
+                toolInstance = Tag.get(it)
+                toolInstance.name = tools[i]
                 toolInstance.save(flush: true)
             }
+            i++
         }
-        println "here!!!!!!!!!!"
-        skills.each {
-            Tag skillInstance = Tag.findByName(it)
+
+        i = 0
+        interviewInstance.skills.id.each {
+            Tag skillInstance = Tag.findByName(skills[i])
             if (!skillInstance) {
-                skillInstance = Tag.get(interviewInstance.skills.id)
+                skillInstance = Tag.get(it)
+                skillInstance.name = skills[i]
                 skillInstance.save(flush: true)
             }
-        }*/
-        println "here!!!!!!!!!!"
+            i++
+        }
 
+        interviewInstance.save(flush: true)
+        println "updated"
+
+        redirect(action: 'show', id: interviewInstance.id)
     }
 
     def delete() {

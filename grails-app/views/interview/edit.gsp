@@ -80,13 +80,6 @@
 
             </g:each>
 
-
-            <div class="form-group">
-                <label for="rounds">Rounds:</label>
-                <g:textField name="rounds" placeholder="Enter the Number of Round" class="form-control"
-                             value="${interviewInstance.rounds.id}"/>
-            </div>
-
             <div class="form-group">
                 <label for="result">Your Placement:</label>
                 <g:select name="result" id="result" from="${com.careerfly.organization.interview.Result.values()}"
