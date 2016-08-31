@@ -1,9 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: shubham
-  Date: 19/7/16
-  Time: 10:42 PM
---%>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
@@ -27,7 +21,8 @@
 
             <div class="form-group">
                 <label for="address">Headquarter:</label>
-                <g:textField name="address" placeholder="Enter Head Office City of the Company" class="form-control"/>
+                <g:textField name="address" placeholder="Enter the Head-Office City of the Company"
+                             class="form-control"/>
             </div>
 
             <g:submitButton name="next" value="Next" class="btn btn-primary btnProp"></g:submitButton>
