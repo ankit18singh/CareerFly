@@ -10,6 +10,6 @@ abstract class Organization {
     Date lastUpdated
 
     static constraints = {
-        name (blank: false)
+        name(blank: false)
     }
 }

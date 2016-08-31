@@ -28,6 +28,6 @@ enum Result {
     int id
 
     Result(int id) {
-        this.id =id
+        this.id = id
     }
 }

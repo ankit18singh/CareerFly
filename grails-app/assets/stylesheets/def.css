@@ -4,9 +4,9 @@
  * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap/blob/gh-pages/LICENSE)
  */
 
- body {
+body {
     overflow-x: hidden;
- }
+}
 
 /* Toggle Styles */
 
@@ -100,7 +100,7 @@
     background: none;
 }
 
-@media(min-width:768px) {
+@media (min-width: 768px) {
     #wrapper {
         padding-left: 250px;
     }
@@ -127,35 +127,42 @@
         margin-right: 0;
     }
 }
+
 body.sidebar-collapsed #sidebar-wrapper {
     width: 60px;
 }
+
 body.sidebar-collapsed #sidebar-wrapper .text {
     display: none;
 }
+
 body.sidebar-collapsed #sidebar-wrapper .fa {
     font-size: 25px;
 }
+
 body.sidebar-collapsed #sidebar-wrapper img {
     height: 30px;
 }
+
 body.sidebar-collapsed #wrapper {
-   padding-left: 60px;
+    padding-left: 60px;
 }
 
-.top-pad,button {
+.top-pad, button {
     padding-top: 4%;
 }
+
 .try {
     position: absolute;
     right: 0;
     top: 0;
 }
-body.sidebar-collapsed .sidebar-nav > li{
+
+body.sidebar-collapsed .sidebar-nav > li {
     width: 30px;
 }
 
-.navbar{
+.navbar {
     margin-bottom: 0;
 }
 
@@ -172,7 +179,7 @@ body.sidebar-collapsed .sidebar-nav > li{
     border-radius: 3px;
 }
 
-.row .search{
+.row .search {
     border: 0;
     background: none;
     /** belows styles are working good */
@@ -191,61 +198,91 @@ body.sidebar-collapsed .sidebar-nav > li{
 .search-query:focus + button {
     z-index: 3;
 }
-.badge{
-    position:absolute;
+
+.badge {
+    position: absolute;
     left: 10px;
 }
-#hrCol{
+
+#hrCol {
     border-color: transparent;
 }
+
 a:link {
     text-decoration: none;
 }
-.modal .row{
+
+.modal .row {
     margin: 0;
 }
-.btn .badge{
+
+.btn .badge {
     position: relative;
     left: -5px;
 }
-.fa-pencil{
+
+.fa-pencil {
     align: right;
 
 }
-.fa-trash-o{
-    align:right;
+
+.fa-trash-o {
+    align: right;
 }
 
-.dp{
-    padding:0;
+.dp {
+    padding: 0;
 }
 
-.dp #dp{
+.dp #dp {
     height: 100px;
     margin-top: 20px;
 }
-.fa-bookmark{
+
+.fa-bookmark {
     color: #f4d817;
 }
-.fa-plus-square-o{
+
+.fa-plus-square-o {
     color: #86B73D;
 }
-.viewFeeds{
+
+.viewFeeds {
     padding: 30px;
 }
-a{
-    color:#86B73D;
+
+a {
+    color: #86B73D;
 }
-.navbar-form{
+
+.navbar-form {
     width: 1050px;
 }
-#page-content-wrapper > .container-fluid{
+
+#page-content-wrapper > .container-fluid {
     margin-top: 100px;
 }
-.navbar{
+
+.navbar {
     background: #282B32;
 }
 
-.dummy{
-    margin-top:50px;
+.dummy {
+    margin-top: 50px;
+}
+
+.viewFeeds > .row {
+    background: #f5f5f5;
+    padding: 30px;
+    border-radius: 10px;
+}
+
+.btn-success {
+    float: right;
+}
+
+.comments > .media {
+    background: #f5f5f5;
+    padding: 40px;
+    border-radius: 10px;
 }

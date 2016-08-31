@@ -12,21 +12,23 @@ class Vote {
 
     }
 }
+
 enum VoteType {
 
     UP(1), DOWN(2)
     int id
 
-    VoteType(int id){
+    VoteType(int id) {
         this.id = id
     }
 }
+
 enum VoteEntity {
 
     DISCUSSION(1), COMMENT(2)
     int id
 
-    VoteEntity(int id){
+    VoteEntity(int id) {
         this.id = id
     }
 }

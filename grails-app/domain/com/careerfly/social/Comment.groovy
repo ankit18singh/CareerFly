@@ -14,8 +14,9 @@ class Comment {
     Date lastUpdated
 
     static constraints = {
-        upVotes (min: 0l)
-        downVotes (min: 0l)
+        upVotes(min: 0l)
+        downVotes(min: 0l)
+
     }
 
     List getImmediateChildComments() {
@@ -26,12 +27,13 @@ class Comment {
         }
     }
 }
+
 enum CommentEntity {
 
     DISCUSSION(1), COMMENT(2), QUESTION(3)
     int id
 
-    CommentEntity(int id){
+    CommentEntity(int id) {
         this.id = id
     }
 }

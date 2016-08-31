@@ -8,7 +8,7 @@ class StoredFile {
     Date lastUpdated
 
     static constraints = {
-        name (blank: false)
-        path (blank: false)
+        name(blank: false)
+        path(blank: false)
     }
 }

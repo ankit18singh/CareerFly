@@ -10,7 +10,7 @@ class Certification {
     Date lastUpdated
 
     static constraints = {
-        title (blank: false)
-        certificationDate (nullable: false)
+        title(blank: false)
+        certificationDate(nullable: false)
     }
 }

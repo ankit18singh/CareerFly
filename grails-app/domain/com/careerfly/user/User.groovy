@@ -11,10 +11,10 @@ class User {
     Date lastUpdated
 
     static constraints = {
-        firstName (blank: false, matches: "[a-zA-Z]+")
-        lastName (blank: false, matches: "[a-zA-Z]+")
-        email (email: true, unique: true)
-        password (blank: false)
+        firstName(blank: false, matches: "[a-zA-Z]+")
+        lastName(blank: false, matches: "[a-zA-Z]+")
+        email(email: true, unique: true)
+        password(blank: false)
     }
 }
 

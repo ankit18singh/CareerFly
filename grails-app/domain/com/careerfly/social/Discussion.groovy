@@ -21,15 +21,15 @@ class Discussion {
     static hasMany = [tags: Tag]
 
     static constraints = {
-        upVotes (min: 0l)
-        downVotes (min: 0l)
+        upVotes(min: 0l)
+        downVotes(min: 0l)
     }
 
-        List getImmediateChildComments() {
-            return Comment.createCriteria().list {
-                eq("entity", CommentEntity.DISCUSSION)
-                eq("entityID", this.id)
-                order("dateCreated", "desc")
-            }
+    List getImmediateChildComments() {
+        return Comment.createCriteria().list {
+            eq("entity", CommentEntity.DISCUSSION)
+            eq("entityID", this.id)
+            order("dateCreated", "desc")
         }
+    }
 }

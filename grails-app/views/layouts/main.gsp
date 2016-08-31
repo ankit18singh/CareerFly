@@ -46,24 +46,30 @@
             <div class="collapse navbar-collapse" id="search">
                 <ul class="nav navbar-nav pull-right">
                     <li>
-                        <form class="navbar-form navbar-right">
+                        <g:form class="navbar-form navbar-right" method="get" controller="discuss" action="search">
                             <div class="row">
                                 <div class="form-group col-sm-10 col-md-10">
                                     <div class="input-group col-md-12">
-                                        <input type="text" class="  search-query form-control" placeholder="Search" />
+                                        <input type="search" class="search-query form-control" placeholder="Search"
+                                               name="searchBox"/>
                                         <span class="input-group-btn">
                                             <button class="btn btn-danger search" type="button">
                                                 <i class="fa fa-search" aria-hidden="true"></i>
                                             </button>
                                         </span>
                                     </div>
-                                </div>
+                                </div>%{--
+                                <div class="form-group">
+                                    <button type="submit">Search</button>
+                                </div>--}%
                                 <div class="col-sm-1 text-center pull-right">
-                                    <i class="fa fa-plus-square-o fa-3x" aria-hidden="true" title="Create New Discussion"
-                                       data-toggle="modal" data-target="#newDiscModal"></i>
+                                    <g:link controller="discuss" action="create">
+                                        <i class="fa fa-plus-square-o fa-3x" aria-hidden="true" title="Create New Discussion"></i>
+                                    </g:link>
+
                                 </div>
                             </div>
-                        </form>
+                        </g:form>
                     </li>
                 </ul>
             </div>
@@ -131,6 +137,7 @@
     </div>
     <!-- /#wrapper -->
 
+%{--
 <div id="newDiscModal" class="modal fade" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -139,12 +146,17 @@
                 <h4 class="modal-title">Create Discussion</h4>
             </div>
             <div class="modal-body">
+                <g:if test="${flash.error}">
+                    <div class="alert alert-danger" style="display: block">${flash.error}</div>
+                </g:if>
+
                 <g:form controller="discuss" action="save" method="post" class="form-horizontal">
                     <div class="row">
-                        <div class="form-group">
+                        <div class="form-group ${hasErrors(field:"newtitle", "has-error")}" >
                             <div class="col-sm-8 col-md-12">
                                 <g:textField name="newtitle" class="form-control"
-                                             placeholder="Title of your Discussion" required="required"/>
+                                             placeholder="Title of your Discussion"/>
+                                <g:renderErrors field="newtitle"/>
                             </div>
                         </div>
 
@@ -185,6 +197,7 @@
         </div>
     </div>
 </div>
+--}%
 
 
 

@@ -15,7 +15,7 @@ class Profile {
     College postGraduation
     Date dateCreated
     Date lastUpdated
-    static hasMany = [skills : Tag, interests : Tag]
+    static hasMany = [skills: Tag, interests: Tag]
 
     static constraints = {
     }

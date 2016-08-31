@@ -12,12 +12,12 @@ class Project {
     Set technologies
     Date dateCreated
     Date lastUpdated
-    static hasMany = [technologies : Tag]
+    static hasMany = [technologies: Tag]
 
     static constraints = {
-        title (blank: false)
-        certificateDate (blank: false)
-        discription (blank: false)
+        title(blank: false)
+        certificateDate(blank: false)
+        discription(blank: false)
         technologies minSize: 1
     }
 }
