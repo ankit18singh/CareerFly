@@ -142,3 +142,12 @@ body.sidebar-collapsed #sidebar-wrapper img {
 body.sidebar-collapsed #wrapper {
    padding-left: 60px;
 }
+
+.top-pad,button {
+    padding-top: 4%;
+}
+.try {
+    position:absolute;
+    right:0;
+    top:0;
+}
