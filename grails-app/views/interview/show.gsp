@@ -66,9 +66,6 @@
             <g:each in="${interviewInstance}" var="show" id="${show.id}">
                 <dt>Result:</dt>
                 <dd>${show.result}</dd>
-                <br>
-                <dt>Rounds:</dt>
-                <dd>${show.rounds.id}</dd>
             </g:each>
         </dl><br>
 

@@ -1,24 +1,23 @@
 package com.careerfly.organization.interview
 
-import com.careerfly.organization.interview.Interview
-import com.careerfly.organization.interview.InterviewRound
-import com.careerfly.user.User
-
 class InterviewRoundController {
 
     def index() {
 
-        def roundCount = InterviewRound.executeQuery("select count(id) from InterviewRound where candidate = ${session.loggedInUser}")
+        Interview interviewInstance = Interview.get(params.id)
+        int roundCount = interviewInstance.rounds.size()
+        println roundCount
+
+        /*def roundCount = InterviewRound.executeQuery("select count(id) from InterviewRound where candidate = ${session.loggedInUser}")*/
 
         if(roundCount == 0) {
             roundCount = 1
         }
         else {
-            roundCount = roundCount.get(0) + 1
+            roundCount = roundCount + 1
         }
 
-        session.rc = roundCount
-        [roundCount: roundCount, interviewInstance: params.id, errUser: new InterviewRound()]
+        [roundCount: roundCount, interviewInstance: interviewInstance.id, errUser: new InterviewRound()]
     }
 
     def save() {
@@ -34,6 +33,11 @@ class InterviewRoundController {
         InterviewRound roundInstance = new InterviewRound(getDetails)
         roundInstance.save(flush: true)
         println roundInstance
+        println roundInstance.errors
+
+        Interview interviewInstance = Interview.get(params.id)
+        interviewInstance.rounds.add(roundInstance)
+        interviewInstance.save(flush: true)
 
         if(roundInstance.hasErrors()) {
             render (view: "index", model:[errUser: roundInstance])
@@ -45,7 +49,14 @@ class InterviewRoundController {
 
     def show() {
 
-        InterviewRound roundInstance = InterviewRound.get(params.id)
+        println params
+
+        Interview interviewInstance = Interview.get(params.id)
+        println interviewInstance.rounds
+
+        InterviewRound roundInstance = InterviewRound.get(interviewInstance.rounds.id)
+        println roundInstance
+
         [roundInstance: roundInstance]
     }
 

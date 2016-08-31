@@ -196,23 +196,6 @@ class DiscussController {
         redirect(action: "forum", id: discussionInstance.id)
     }
 
-    def comment(Long id) {
-
-        Discussion discussionInstance = Discussion.get(params.id)
-        User loggedInUserInstance3 = User.get(session.loggedInUser)
-
-        Comment commentInstance = new Comment()
-        commentInstance.author = loggedInUserInstance3
-        commentInstance.body = params.discussionComment
-        commentInstance.entity = CommentEntity.DISCUSSION
-        commentInstance.entityID = discussionInstance.id
-        commentInstance.upVotes = 0l
-        commentInstance.downVotes = 0l
-        commentInstance.save()
-
-        redirect(action: "forum", id: discussionInstance.id)
-    }
-
     def commentUpVote() {
 
         Comment commentInstance = Comment.get(params.id)

@@ -61,10 +61,8 @@
                                                 </button>
                                             </span>
                                         </div>
-                                    </div>%{--
-                                <div class="form-group">
-                                    <button type="submit">Search</button>
-                                </div>--}%
+                                    </div>
+
                                     <div class="col-sm-1 text-center pull-right">
                                         <g:link controller="discuss" action="create">
                                             <i class="fa fa-plus-square-o fa-3x" aria-hidden="true"
@@ -83,7 +81,6 @@
 
     <div id="wrapper">
 
-        <!-- Sidebar -->
         <div id="sidebar-wrapper">
             <ul class="sidebar-nav">
                 <li class="dummy">
@@ -94,55 +91,48 @@
                 </li>
                 <li>
                     <g:link controller="home" action="index">
-                        <i class="fa fa-fw fa-home" aria-hidden="true" title="Home"></i><span class="text">Home</span>
+                        <i class="fa fa-fw fa-home" aria-hidden="true" title="Home"></i> <span class="text">Home</span>
                     </g:link>
                 </li>
                 <li>
                     <g:link controller="profile" action="index">
-                        <i class="fa fa-fw fa-user" aria-hidden="true" title="Profile"></i><span class="text">Profile
+                        <i class="fa fa-fw fa-user" aria-hidden="true" title="Profile"></i> <span class="text">Profile
                     </span>
                     </g:link>
                 </li>
                 <li>
                     <g:link controller="question" action="index">
-                        <i class="fa fa-fw fa-book" aria-hidden="true" title="Interview"></i><span class="text">
+                        <i class="fa fa-fw fa-book" aria-hidden="true" title="Interview"></i> <span class="text">
                         Interview</span>
                     </g:link>
                 </li>
                 <li>
                     <g:link controller="discuss" action="index">
-                        <i class="fa fa-fw fa-comment" aria-hidden="true" title="Discussion"></i><span class="text">
+                        <i class="fa fa-fw fa-comment" aria-hidden="true" title="Discussion"></i> <span class="text">
                         Discussion</span>
                     </g:link>
                 </li>
                 <li>
                     <g:link controller="settings" action="index">
-                        <i class="fa fa-fw fa-cog" aria-hidden="true" title="Settings"></i><span class="text">Settings
+                        <i class="fa fa-fw fa-cog" aria-hidden="true" title="Settings"></i> <span class="text">Settings
                     </span>
                     </g:link>
                 </li>
                 <li>
                     <g:link controller="Signout" action="index">
-                        <i class="fa fa-sign-out" aria-hidden="true"></i><span class="text">Sign Out</span>
+                        <i class="fa fa-sign-out" aria-hidden="true"></i> <span class="text">Sign Out</span>
                     </g:link>
                 </li>
             </ul>
         </div>
-        <!-- /#sidebar-wrapper -->
 
-        <!-- Page Content -->
         <div id="page-content-wrapper">
-            <div class="container-fluid">
-                <div class="container-fluid">
-                    <div class="page-header">
-                        <g:pageProperty name="page.heading"/>
-                    </div>
+            <div class="page-header">
+                <g:pageProperty name="page.heading"/>
+            </div>
 
-                    <div id="body">
-
-                        <g:pageProperty name="page.body"/>
-                    </div>
-                </div>
+            <div id="body">
+                <g:pageProperty name="page.body"/>
             </div>
         </div>
     </div>
@@ -151,7 +141,6 @@
         $("#collapse-sidebar").on("click", function () {
             $('body').toggleClass("sidebar-collapsed");
             $(this).find(".fa").toggleClass("fa-angle-double-left fa-angle-double-right");
-            // $(this).toggleClass("text-right text-center")
         });
     </script>
 

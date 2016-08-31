@@ -55,11 +55,6 @@
             </div>
 
             <div class="form-group">
-                <label for="rounds">Rounds:</label>
-                <g:textField name="rounds" placeholder="Enter the Number of Round" class="form-control"/>
-            </div>
-
-            <div class="form-group">
                 <label for="result">Your Placement:</label>
                 <g:select name="result" id="result" from="${com.careerfly.organization.interview.Interview.Result.values()}" value="${fieldValue(field: 'result')}"
                           noSelection="['':'Select the Status of Placement']" class="form-control"/>
