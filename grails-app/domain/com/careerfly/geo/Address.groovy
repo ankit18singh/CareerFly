@@ -10,8 +10,8 @@ class Address {
     Date lastUpdated
 
     static constraints = {
-        lineOne(blank: false)
-        lineTwo(blank: false)
-        phoneNumber(blank: false, matches: "[0-9]+")
+        lineOne(nullable: true)
+        lineTwo(nullable: true)
+        phoneNumber(matches: "[0-9]+", nullable: true)
     }
 }

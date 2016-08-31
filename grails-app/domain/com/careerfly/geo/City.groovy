@@ -11,9 +11,8 @@ class City {
 
     static constraints = {
         name(blank: false, matches: "[a-zA-Z]+")
-        state(blank: false, matches: "[a-zA-Z]+")
-        //for us zip code format
-        // zipcode (blank: false, matches: "[0-9]+")
-        country(blank: false, matches: "[a-zA-Z]+")
+        state(blank: true, matches: "[a-zA-Z]+", nullable: true)
+        country(matches: "[a-zA-Z]+", nullable: true)
+        zipcode(nullable: true)
     }
 }
