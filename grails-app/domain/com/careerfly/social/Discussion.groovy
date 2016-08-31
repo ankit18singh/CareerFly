@@ -11,8 +11,8 @@ class Discussion {
     String title
     String body
     String link
-    Long upVotes
-    Long downVotes
+    Long upVotes = 0
+    Long downVotes = 0
     User author
     Set tags
     StoredFile file
@@ -25,4 +25,11 @@ class Discussion {
         downVotes (min: 0l)
     }
 
+        List getImmediateChildComments() {
+            return Comment.createCriteria().list {
+                eq("entity", CommentEntity.DISCUSSION)
+                eq("entityID", this.id)
+                order("dateCreated", "desc")
+            }
+        }
 }
