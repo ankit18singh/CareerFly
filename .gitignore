@@ -11,3 +11,4 @@ wrapper/
 grails-app/conf/LocalConfig.groovy
 grails-app/controllers/com/careerfly/DummyController.groovy
 test/
+*.log

@@ -117,6 +117,11 @@
                     </span>
                     </g:link>
                 </li>
+                <li>
+                    <g:link controller="Signout" action="index">
+                        <i class="fa fa-sign-out" aria-hidden="true"></i><span class="text"> Sign Out</span>
+                    </g:link>
+                </li>
             </ul>
         </div>
         <!-- /#sidebar-wrapper -->
