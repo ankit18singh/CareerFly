@@ -1,5 +1,6 @@
 package com.careerfly.social
 
+import com.careerfly.taggable.Tag
 import com.careerfly.user.User
 
 class DiscussController {
@@ -21,14 +22,69 @@ class DiscussController {
         }
     }
 
-    def save(String newtitle, String newbody, String newlink) {
+    def save(String newtitle, String newbody, String newlink , String token) {
 
         User userInstance = User.get(session.loggedInUser)
+        int i,j;
+        Set discussTag = token.split(", ");
+        //Discussion discussionInstance = new Discussion()
+        Discussion discussionInstance = new Discussion()
+        println discussionInstance
+        println discussionInstance.errors
+        println "!!!!!!!!!!!"
+        /*if (!discussTag[0]) {
+           //empty input
+           print("field is empty")
+           flash.error = "Tag Field should not be Empty....! "
+           redirect(view: "create" ,model : [LastValue : params.token] )
+           return
+       }
 
-        Discussion discussionInstance = new Discussion([title: newtitle, body: newbody, link: newlink, author: userInstance,
-                                                        file : 1])
+       for (i =0; i < discussTag.length; i++) {
+           for (j = i+1; j < discussTag.length; j++) {
+               if(discussTag[i].equalsIgnoreCase(discussTag[j])) {
+                   //repeated values are found
+                   print("repeated ")
+                   flash.error = "${discussTag[j]} is repeated in tag. please use once ...!"
+                   render(view: "create", model:[reloadSaveCreateInstance: discussionInstance])
+                   return
+               }
+           }
+       }
+
+       Date date = new Date()
+
+      /* for(i=0; i<discussTag.length; i++){
+           if(Tag.findByName(discussTag[i])){
+               //discussion_tag mapping
+           }
+           else{
+               Tag tagging = new Tag([dateCreated: date, lastUpdated: date, name: discussTag[i]]);
+               tagging.save();
+               //discussion_tag mapping
+           }
+       }*/
+        Tag tagInstance
+        discussTag.each {
+            tagInstance = Tag.findByName(it)
+            println(tagInstance)
+            println "!@#######"
+            if(!tagInstance){
+                println "here at tag!"
+                tagInstance = new Tag([name:it]);
+                tagInstance.save();
+                println tagInstance
+                println "@!@!@s"
+            }
+            println tagInstance
+            println discussionInstance
+            discussionInstance.tags.add(tagInstance)
+        }
+        Map discussMap = [title: newtitle, body: newbody, link: newlink, tags :discussionInstance.tags, author: userInstance,
+                          file : 1]
+        discussionInstance = new Discussion(discussMap)
         println "discussion body-- > ${discussionInstance.body}"
-        discussionInstance.save()
+        discussionInstance.save(flush: true)
         if (discussionInstance.hasErrors()) {
             println "error caught!!"
             flash.error = "Please Enter Discussion Correctly"

@@ -13,6 +13,8 @@
     <asset:stylesheet src="def.css"/>
     <asset:stylesheet src="font-awesome/css/font-awesome.min.css"/>
     <asset:stylesheet src="sweetalert.css"/>
+    <asset:stylesheet href="bootstrap-tokenfield.min.css"/>
+    <asset:stylesheet href="tokenfield-typeahead.min.css"/>
     <asset:javascript src="jquery.min.js"/>
     <asset:javascript src="sweetalert.min.js"/>
     <asset:javascript src="bootstrap.min.js"/>

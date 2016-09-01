@@ -46,8 +46,19 @@
 
                         <div class="form-group ${hasErrors(bean: reloadSaveCreateInstance, field: "newtag", "has-error")}">
                             <div class="col-sm-10 col-md-10">
-                                <g:textField name="newtag" class="form-control" placeholder="Enter tags.." required="required"/>
+                                <g:textField name="token" class="form-control"
+                                             placeholder="Enter discussion tags.......!" required="required" id="tokenfield"/>
                                 <g:renderErrors bean="${reloadSaveCreateInstance}" field="newtitle"/>
+                                <asset:javascript src="bootstrap-tokenfield.min.js"/>
+                                <script>
+                                    $('#tokenfield').tokenfield({
+                                        autocomplete: {
+                                            source: ['red','blue','green','yellow','violet','brown','purple','black','white'],
+                                            delay: 100
+                                        },
+                                        showAutocompleteOnFocus: true
+                                    })
+                                </script>
                             </div>
                         </div>
 

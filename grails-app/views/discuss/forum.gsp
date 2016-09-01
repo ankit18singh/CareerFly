@@ -35,7 +35,9 @@
 
                             <div class="row">
                                 <div class="col-sm-12 col-md-12">
-                                    <small>${forumInstanceModel.tags}</small>
+                                    <g:each in="${forumInstanceModel.tags}">
+                                     <kbd>${it.name}</kbd>
+                                    </g:each>
                                 </div>
                             </div>
 
