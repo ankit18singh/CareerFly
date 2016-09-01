@@ -20,26 +20,31 @@ Time: 1:59 PM
     <content tag="body">
 
         <g:form name="edit" controller="interviewRound" action="update" method="post" class="form-group">
-            <h3>Round: ${session.rc}</h3>
-            <input type="hidden" name="id" value="${roundInstance.id}">
+
+            <h3>Round: ${roundCount}</h3>
+
             <g:each in="${roundInstance}" var="edit" id="edit.id">
-                <div class="form-group">
-                    <input type="hidden" name="id" value="${edit.id}">
+                <div class="form-group ${hasErrors(bean: errRound, field: 'title', 'has-error')}">
+                    <input type="hidden" name="id" value="${roundInstance.id}">
+                    <input type="hidden" name="interviewID" value="${interviewInstance}">
                     <label for="title">Round Name:</label>
                     <g:textField name="title" placeholder="Enter the Name of Round" class="form-control"
                                  value="${edit.title}"></g:textField>
+                    <g:renderErrors bean="${errRound}" field="title"/>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group  ${hasErrors(bean: errRound, field: 'experience', 'has-error')}">
                     <label for="experience">Share your Experience:</label>
                     <g:textField name="experience" placeholder="Enter your Experience" class="form-control"
                                  value="${edit.experience}"></g:textField>
+                    <g:renderErrors bean="${errRound}" field="experience"/>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group ${hasErrors(bean: errRound, field: 'duration', 'has-error')}">
                     <label for="duration">Time Duration</label>
                     <g:textField name="duration" placeholder="Enter the duration of the Round (in minutes)"
                                  class="form-control" value="${edit.duration}"></g:textField>
+                    <g:renderErrors bean="${errRound}" field="duration"/>
                 </div>
 
                 <div class="form-group">

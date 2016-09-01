@@ -20,48 +20,69 @@
 
     <content tag="body">
 
-        <g:each in="${roundInstance}" var="show" id="${show.id}">
-            <dl class="list-group-item dl-horizontal">
-                <dt>Round Number:</dt>
-                <dd>1</dd><br>
-                <dt>Round Name:</dt>
-                <dd>${show.title}</dd><br>
-                <dt>Experience:</dt>
-                <dd>${show.experience}</dd><br>
-                <dt>Time Duration:</dt>
+        <g:if test="${!roundInstance}">
+            <g:if test="${flash.message}">
+                <div class="alert alert-info">
+                    <p>
+                        ${flash.message}
+                        Click <g:link name="roundClick" controller="interviewRound" action="index" id="${interviewInstance.id}"
+                    ><u>here</u></g:link> to
+                        create.
+                    </p>
+                </div>
+            </g:if>
+        </g:if>
 
-                <dd>
-                    <g:if test="${(show.duration / 60).toInteger() > 0} && ${(show.duration % 60).toInteger() > 0}">
-                        ${(show.duration / 60).toInteger()} hour(s) & ${(show.duration % 60).toInteger()} minutes(s)
-                    </g:if>
-                    <g:elseif test="${(show.duration / 60).toInteger() == 0} && ${(show.duration % 60).toInteger() >= 0}">
-                        ${(show.duration / 60).toInteger()} minutes(s)
-                    </g:elseif>
-                </dd><br>
+        <g:else>
+            <g:each in="${roundInstance}" var="show" id="${show.id}">
+                <dl class="list-group-item dl-horizontal">
+                    <dt>Round Number:</dt>
+                    <dd>${roundCount}</dd><br>
+                    <dt>Round Name:</dt>
+                    <dd>${show.title}</dd><br>
+                    <dt>Experience:</dt>
+                    <dd>${show.experience}</dd><br>
+                    <dt>Time Duration:</dt>
 
-                <dt>Do's:</dt>
-                <g:each in="${show.dos}">
                     <dd>
-                        <li class="fa-list-ol list-inline">${it}</li>
-                    </dd>
-                </g:each><br>
-                <dt>dont's:</dt>
-                <g:each in="${show.donts}">
+                        <g:if test="${(show.duration / 60).toInteger() > 0} && ${(show.duration % 60).toInteger() > 0}">
+                            ${(show.duration / 60).toInteger()} hour(s) & ${(show.duration % 60).toInteger()} minutes(s)
+                        </g:if>
+                        <g:elseif test="${(show.duration / 60).toInteger() == 0} && ${(show.duration % 60).toInteger() >= 0}">
+                            ${(show.duration / 60).toInteger()} minutes(s)
+                        </g:elseif>
+                    </dd><br>
+
+                    <dt>Do's:</dt>
+                    <g:each in="${show.dos}">
                         <dd>
                             <li class="fa-list-ol list-inline">${it}</li>
                         </dd>
-                </g:each>
-            </dl>
-        </g:each>
-        <br>
+                    </g:each><br>
+                    <dt>dont's:</dt>
+                    <g:each in="${show.donts}">
+                            <dd>
+                                <li class="fa-list-ol list-inline">${it}</li>
+                            </dd>
+                    </g:each>
+                </dl>
+            </g:each>
+            <br>
+%{--
+            <g:link name="btnEdit" controller="interviewRound" action="edit" class="btn btn-primary "
+                    id="${roundInstance.id}">Edit</g:link>--}%
+            <g:form name="edit" controller="interviewRound" action="edit" class="form-group">
+                <input type="hidden" name="rc" value="${roundCount}">
+                <input type="hidden" name="roundID" value="${roundInstance.id}">
+                <input type="hidden" name="interviewID" value="${interviewInstance.id}">
+                <g:submitButton name="btnEdit" class="btn btn-primary" value="Edit" height="18px"/>
+            </g:form>
 
-        <g:link name="btnEdit" controller="interviewRound" action="edit" class="btn btn-primary "
-                id="${roundInstance.id}">Edit</g:link>
+            <g:link name="btnDelete" controller="interviewRound" action="delete" class="btn btn-primary"
+                    id="${roundInstance.id}">Delete</g:link>
+        </g:else>
 
-        <g:link name="btnDelete" controller="interviewRound" action="delete" class="btn btn-primary"
-                id="${roundInstance.id}">Delete</g:link>
-
-        <g:link name="btnCancel" controller="interviewListing" action="index" class="btn btn-primary">Cancel</g:link>
+            <g:link name="btnCancel" controller="interviewListing" action="index" class="btn btn-primary">Cancel</g:link>
 
     </content>
 

@@ -8,16 +8,13 @@ class InterviewRoundController {
         int roundCount = interviewInstance.rounds.size()
         println roundCount
 
-        /*def roundCount = InterviewRound.executeQuery("select count(id) from InterviewRound where candidate = ${session.loggedInUser}")*/
-
         if(roundCount == 0) {
             roundCount = 1
-        }
-        else {
+        } else {
             roundCount = roundCount + 1
         }
 
-        [roundCount: roundCount, interviewInstance: interviewInstance.id, errUser: new InterviewRound()]
+        [roundCount: roundCount, interviewInstance: interviewInstance.id, errRound: new InterviewRound()]
     }
 
     def save() {
@@ -35,34 +32,48 @@ class InterviewRoundController {
         println roundInstance
         println roundInstance.errors
 
+        if (roundInstance.hasErrors()) {
+            render(view: "index", model: [errRound: roundInstance, roundCount: params.rc])
+            return
+        }
+
         Interview interviewInstance = Interview.get(params.id)
         interviewInstance.rounds.add(roundInstance)
         interviewInstance.save(flush: true)
 
-        if(roundInstance.hasErrors()) {
-            render (view: "index", model:[errUser: roundInstance])
-            return
-        }
-
-        redirect(action: "show", id: roundInstance.id)
+        redirect(action: "show", id: interviewInstance.id, roundCount: params.rc)
     }
 
     def show() {
 
         println params
+        println params.roundCount
+        println params.interviewID
+        println "122222"
 
         Interview interviewInstance = Interview.get(params.id)
         println interviewInstance.rounds
 
+        int roundCount = interviewInstance.rounds.size()
+        println roundCount
+
         InterviewRound roundInstance = InterviewRound.get(interviewInstance.rounds.id)
         println roundInstance
 
-        [roundInstance: roundInstance]
+        if (!roundInstance) {
+            flash.message = "Currently there is no Interview Round for this company."
+            render(view: "show", model: [interviewInstance: interviewInstance])
+            return
+        }
+
+        [roundInstance: roundInstance, roundCount: roundCount, interviewInstance: interviewInstance]
     }
 
     def edit() {
 
-        InterviewRound roundInstance = InterviewRound.get(params.id)
+        println params
+
+        InterviewRound roundInstance = InterviewRound.get(params.roundID)
 
         if (roundInstance.candidate.id != session.loggedInUser) {
             flash.message = "You are not allowed to edit this interview"
@@ -70,15 +81,20 @@ class InterviewRoundController {
             return
         }
 
-        [roundInstance: roundInstance]
+        [roundInstance: roundInstance, errRound: new InterviewRound(), roundCount: params.rc, interviewInstance:
+                params.interviewID]
     }
 
     def update() {
 
+        println params
+
         InterviewRound roundInstance = InterviewRound.get(params.id)
-        
+        println roundInstance.candidate.id
+
         if (roundInstance.candidate.id != session.loggedInUser) {
-            redirect(action: 'index')
+            flash.message = "Your session is expired! You cannot edit that round."
+            redirect(controller: 'interviewListing', action: 'index')
             return
         }
 
@@ -93,9 +109,16 @@ class InterviewRoundController {
 
         roundInstance.save(flush: true)
         println roundInstance
+        println roundInstance.errors
+
+        if (roundInstance.hasErrors()) {
+            render(view: "edit", model: [errRound: roundInstance, id: params.interviewID, roundInstance: roundInstance] )
+            return
+        }
+
         println "updated"
 
-        redirect(action: 'show', id: roundInstance.id)
+        redirect(action: 'show', id: params.interviewID)
     }
 
     def delete() {

@@ -14,8 +14,11 @@ class InterviewRound {
     static hasMany = [dos: String, donts: String]
 
     static constraints = {
-        title(blank: false)
-        duration(minSize: 0, nullable: false)
+        title (blank: false)
+        experience (blank: false)
+        duration (minSize: 0, nullable: false)
+        dos (nullable: false)
+        donts (nullable: false)
     }
 
     static mapping = {

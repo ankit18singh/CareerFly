@@ -18,6 +18,13 @@ class Interview {
     static hasMany = [workExperience: String, technologies: Tag, tools: Tag, skills: Tag, rounds: InterviewRound]
 
     static constraints = {
+        jobPosition (blank: false)
+        qualification (blank: false)
+        workExperience (nullable: false, blank: false)
+        result (nullable: false)
+        technologies (nullable: false, blank: false)
+        tools (nullable: false)
+        skills (nullable: false)
     }
 
 }

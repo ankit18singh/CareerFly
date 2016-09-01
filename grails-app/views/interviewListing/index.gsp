@@ -22,8 +22,15 @@
     </content>
 
     <content tag="body">
-        <div class="container">
 
+        %{--<g:if test="${flash.message}">
+            <div class="alert alert-info">
+                <p>
+                    ${flash.message}
+                </p>
+            </div>
+        </g:if>--}%
+        <div class="container">
             <h3>Uploaded by You:</h3>
             <br>
             <g:each in="${interview}" var="show">
@@ -82,8 +89,8 @@
                                     <dd>${disp.result}</dd>
                                 </g:each>
                             </dl>
-                            ${show.id}
-                            ${show.company.id}
+                            <g:link name="edit" controller="interview" action="edit" id="${show.id}">Edit this
+                            Interview</g:link>&nbsp;&nbsp;
                             <g:link name="interviewRound" controller="interviewRound" action="show"
                                     id="${show.id}">See Interview Round</g:link>
                         </p>
