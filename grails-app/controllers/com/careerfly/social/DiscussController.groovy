@@ -1,5 +1,6 @@
 package com.careerfly.social
 
+import com.careerfly.taggable.Tag
 import com.careerfly.user.User
 
 class DiscussController {
@@ -21,12 +22,45 @@ class DiscussController {
         }
     }
 
-    def save(String newtitle, String newbody, String newlink) {
+    def save(String newtitle, String newbody, String newlink , String token) {
 
         User userInstance = User.get(session.loggedInUser)
-
+        int i,j;
+        String[] tagInstance = token.split(", ");
         Discussion discussionInstance = new Discussion([title: newtitle, body: newbody, link: newlink, author: userInstance,
                                                         file : 1])
+        if (!tagInstance[0]) {
+            //empty input
+            print("field is empty")
+            flash.error = "Tag Field should not be Empty....! "
+            redirect(view: "create" ,model : [LastValue : params.token] )
+            return
+        }
+
+        for (i =0; i < tagInstance.length; i++) {
+            for (j = i+1; j < tagInstance.length; j++) {
+                if(tagInstance[i].equalsIgnoreCase(tagInstance[j])) {
+                    //repeated values are found
+                    print("repeated ")
+                    flash.error = "${tagInstance[j]} is repeated in tag. please use once ...!"
+                    render(view: "create", model:[reloadSaveCreateInstance: discussionInstance])
+                    return
+                }
+            }
+        }
+
+        Date date = new Date()
+
+        for(i=0; i<tagInstance.length; i++){
+            if(Tag.findByName(tagInstance[i])){
+                //discussion_tag mapping
+            }
+            else{
+                Tag tagging = new Tag([dateCreated: date, lastUpdated: date, name: tagInstance[i]]);
+                tagging.save();
+                //discussion_tag mapping
+            }
+        }
         println "discussion body-- > ${discussionInstance.body}"
         discussionInstance.save()
         if (discussionInstance.hasErrors()) {
