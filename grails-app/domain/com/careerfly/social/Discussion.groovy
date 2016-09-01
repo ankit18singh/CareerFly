@@ -14,7 +14,7 @@ class Discussion {
     Long upVotes = 0
     Long downVotes = 0
     User author
-    Set tags
+    Set<Tag> tags = []
     StoredFile file
     Date dateCreated
     Date lastUpdated

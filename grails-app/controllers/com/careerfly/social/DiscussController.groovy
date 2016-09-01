@@ -26,43 +26,65 @@ class DiscussController {
 
         User userInstance = User.get(session.loggedInUser)
         int i,j;
-        String[] tagInstance = token.split(", ");
-        Discussion discussionInstance = new Discussion([title: newtitle, body: newbody, link: newlink, author: userInstance,
-                                                        file : 1])
-        if (!tagInstance[0]) {
-            //empty input
-            print("field is empty")
-            flash.error = "Tag Field should not be Empty....! "
-            redirect(view: "create" ,model : [LastValue : params.token] )
-            return
-        }
+        Set discussTag = token.split(", ");
+        //Discussion discussionInstance = new Discussion()
+        Discussion discussionInstance = new Discussion()
+        println discussionInstance
+        println discussionInstance.errors
+        println "!!!!!!!!!!!"
+        /*if (!discussTag[0]) {
+           //empty input
+           print("field is empty")
+           flash.error = "Tag Field should not be Empty....! "
+           redirect(view: "create" ,model : [LastValue : params.token] )
+           return
+       }
 
-        for (i =0; i < tagInstance.length; i++) {
-            for (j = i+1; j < tagInstance.length; j++) {
-                if(tagInstance[i].equalsIgnoreCase(tagInstance[j])) {
-                    //repeated values are found
-                    print("repeated ")
-                    flash.error = "${tagInstance[j]} is repeated in tag. please use once ...!"
-                    render(view: "create", model:[reloadSaveCreateInstance: discussionInstance])
-                    return
-                }
-            }
-        }
+       for (i =0; i < discussTag.length; i++) {
+           for (j = i+1; j < discussTag.length; j++) {
+               if(discussTag[i].equalsIgnoreCase(discussTag[j])) {
+                   //repeated values are found
+                   print("repeated ")
+                   flash.error = "${discussTag[j]} is repeated in tag. please use once ...!"
+                   render(view: "create", model:[reloadSaveCreateInstance: discussionInstance])
+                   return
+               }
+           }
+       }
 
-        Date date = new Date()
+       Date date = new Date()
 
-        for(i=0; i<tagInstance.length; i++){
-            if(Tag.findByName(tagInstance[i])){
-                //discussion_tag mapping
+      /* for(i=0; i<discussTag.length; i++){
+           if(Tag.findByName(discussTag[i])){
+               //discussion_tag mapping
+           }
+           else{
+               Tag tagging = new Tag([dateCreated: date, lastUpdated: date, name: discussTag[i]]);
+               tagging.save();
+               //discussion_tag mapping
+           }
+       }*/
+        Tag tagInstance
+        discussTag.each {
+            tagInstance = Tag.findByName(it)
+            println(tagInstance)
+            println "!@#######"
+            if(!tagInstance){
+                println "here at tag!"
+                tagInstance = new Tag([name:it]);
+                tagInstance.save();
+                println tagInstance
+                println "@!@!@s"
             }
-            else{
-                Tag tagging = new Tag([dateCreated: date, lastUpdated: date, name: tagInstance[i]]);
-                tagging.save();
-                //discussion_tag mapping
-            }
+            println tagInstance
+            println discussionInstance
+            discussionInstance.tags.add(tagInstance)
         }
+        Map discussMap = [title: newtitle, body: newbody, link: newlink, tags :discussionInstance.tags, author: userInstance,
+                          file : 1]
+        discussionInstance = new Discussion(discussMap)
         println "discussion body-- > ${discussionInstance.body}"
-        discussionInstance.save()
+        discussionInstance.save(flush: true)
         if (discussionInstance.hasErrors()) {
             println "error caught!!"
             flash.error = "Please Enter Discussion Correctly"
