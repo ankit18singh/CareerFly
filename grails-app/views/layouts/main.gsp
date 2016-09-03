@@ -101,7 +101,7 @@
                     </g:link>
                 </li>
                 <li>
-                    <g:link controller="question" action="index">
+                    <g:link controller="dummy" action="index">
                         <i class="fa fa-fw fa-book" aria-hidden="true" title="Interview"></i> <span class="text">
                         Interview</span>
                     </g:link>
