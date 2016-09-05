@@ -10,6 +10,11 @@
 <head>
     <title>Interview Round-Saved</title>
     <meta name="layout" content="main">
+    <style>
+        .form {
+            display: inline;
+        }
+    </style>
 </head>
 
 <body>
@@ -71,7 +76,7 @@
                     </g:each>
                     <br>
 
-                    <g:form name="edit" controller="interviewRound" action="edit" class="form-group">
+                    <g:form name="edit" controller="interviewRound" action="edit" class="form-group form">
                         <input type="hidden" name="rc" value="${roundCount}">
                         <input type="hidden" name="roundID" value="${roundInstance.id}">
                         <input type="hidden" name="interviewID" value="${interviewInstance.id}">

@@ -50,56 +50,63 @@
                                 ${userInstance.lastName}, on: ${show.dateCreated}</i></small></h4>
                             <p>
                                 <input type="hidden" name="id" value="${show}">
-                            <dl class="list-group-item dl-horizontal">
-                                <dt>Job Position:</dt>
-                                <dd>${show.jobPosition}</dd><br>
+                                <dl class="list-group-item dl-horizontal">
+                                    <dt>Job Position:</dt>
+                                    <dd>${show.jobPosition}</dd><br>
 
-                                <dt>Qualification:</dt>
-                                <dd>${show.qualification}</dd><br>
+                                    <dt>Qualification:</dt>
+                                    <dd>${show.qualification}</dd><br>
 
-                                <dt>Work Experience:</dt>
-                                <g:each in="${show.workExperience}">
-                                    <dd>
-                                        <li>${it}</li>
-                                    </dd>
-                                </g:each>
-                                <br>
+                                    <dt>Work Experience:</dt>
+                                    <g:each in="${show.workExperience}">
+                                        <dd>
+                                            <li>${it}</li>
+                                        </dd>
+                                    </g:each>
+                                    <br>
 
-                                <dt>Technologies:</dt>
-                                <g:each in="${show.technologies}">
-                                    <dd>
-                                        <li>${it.name}</li>
-                                    </dd>
-                                </g:each>
-                                <br>
+                                    <dt>Technologies:</dt>
+                                    <g:each in="${show.technologies}">
+                                        <dd>
+                                            <li>${it.name}</li>
+                                        </dd>
+                                    </g:each>
+                                    <br>
 
-                                <dt>Tools:</dt>
-                                <g:each in="${show.tools}">
-                                    <dd>
-                                        <li>${it.name}</li>
-                                    </dd>
-                                </g:each>
-                                <br>
+                                    <dt>Tools:</dt>
+                                    <g:each in="${show.tools}">
+                                        <dd>
+                                            <li>${it.name}</li>
+                                        </dd>
+                                    </g:each>
+                                    <br>
 
-                                <dt>Skills:</dt>
-                                <g:each in="${show.skills}">
-                                    <dd>
-                                        <li>${it.name}</li>
-                                    </dd>
-                                </g:each>
-                                <br>
+                                    <dt>Skills:</dt>
+                                    <g:each in="${show.skills}">
+                                        <dd>
+                                            <li>${it.name}</li>
+                                        </dd>
+                                    </g:each>
+                                    <br>
 
-                                <g:each in="${show}" var="disp" id="${disp.id}">
-                                    <dt>Result:</dt>
-                                    <dd>${disp.result}</dd>
-                                </g:each>
-                            </dl>
-                            <g:link name="edit" controller="interview" action="edit" id="${show.id}">Edit this
-                            Interview</g:link>&nbsp;&nbsp;
-                            <g:link name="interviewRound" controller="interviewRound" action="show"
-                                    id="${show.id}">See Interview Round</g:link>
-                        </p>
+                                    <g:each in="${show}" var="disp" id="${disp.id}">
+                                        <dt>Result:</dt>
+                                        <dd>${disp.result}</dd>
+                                    </g:each>
+                                </dl>
+                            </p>
                         </div>
+                    </div>
+                    <div class="dropdown" style="margin-left: 60px">
+                        <g:link type="link" id="dropdown_link" class="dropdown-toggle" data-toggle="dropdown">
+                            Actions<span class="caret"></span></g:link>
+                        <ul class=" dropdown-menu">
+                            <li><g:link name="edit" controller="interview" action="show" id="${show.id}">
+                                See Full Interview</g:link>
+                            <li><g:link name="interviewRound" controller="interviewRound" action="show"
+                                        id="${show.id}">See Interview Round</g:link>
+                            </li>
+                        </ul>
                     </div>
                     <hr>
                 </g:each>

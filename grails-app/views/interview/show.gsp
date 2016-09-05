@@ -74,10 +74,10 @@
                 <g:link name="btnEdit" controller="interview" action="edit" class="btn btn-primary btnProp"
                         id="${interviewInstance.id}">Edit</g:link>
 
-                <g:link name="btnDelete" controller="interview" action="delete" class="btn btn-primary btnProp"
+                <g:link name="btnDelete" controller="interview" action="delete" class="btn btn-primary"
                         id="${interviewInstance.id}">Delete</g:link>
 
-                <g:link name="btnRound" controller="interviewRound" action="index" class="btn btn-primary btnRound"
+                <g:link name="btnRound" controller="interviewRound" action="index" class="btn btn-primary"
                         id="${interviewInstance.id}">Interview Round</g:link>
                 <br>
             </div>
