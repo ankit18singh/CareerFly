@@ -19,13 +19,13 @@ class Interview {
 
     static constraints = {
 
-        jobPosition(blank: false, matches: "[a-zA-Z]+")
-        qualification(blank: false, matches: "[a-zA-Z0-9]+")
-        workExperience(nullable: false)
-        rounds(nullable: false, matches: "[0-9]+")
-        technologies(nullable: false)
-        tools(nullable: false)
-        skills(nullable: false)
+        jobPosition (blank: false)
+        qualification (blank: false)
+        workExperience (nullable: false, blank: false)
+        result (nullable: false)
+        technologies (nullable: false, blank: false)
+        tools (nullable: false)
+        skills (nullable: false)
     }
 
     enum Result {
